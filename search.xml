@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>勇敢一点</title>
+    <url>/b822f9c7.html</url>
+    <content><![CDATA[<p>“Your time and energy are scarce resources. Do not waste them on trivial people or things. Do not answer unjustified questions, or reply curious comments. Ignore them all. Spend more time with wise peers. Read sparkling thoughts on books. Stay sharp, stay alone. “</p>
+]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>提权</title>
     <url>/e2181504.html</url>
     <content><![CDATA[<h2 id="u63D0_u6743_u9014_u5F84"><a href="#u63D0_u6743_u9014_u5F84" class="headerlink" title="提权途径"></a>提权途径</h2><blockquote>
@@ -146,14 +155,5 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
         <tag>水平越权</tag>
         <tag>SSH爆破</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>勇敢一点</title>
-    <url>/b822f9c7.html</url>
-    <content><![CDATA[<p>“Your time and energy are scarce resources. Do not waste them on trivial people or things. Do not answer unjustified questions, or reply curious comments. Ignore them all. Spend more time with wise peers. Read sparkling thoughts on books. Stay sharp, stay alone. “</p>
-]]></content>
-      <categories>
-        <category>随记</category>
-      </categories>
   </entry>
 </search>
