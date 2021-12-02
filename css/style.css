@@ -878,7 +878,7 @@ body {
   height: 100%;
 }
 html {
-  font-size: 62.5%;
+  font-size: 70%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
@@ -888,7 +888,7 @@ body {
   position: relative;
   background-color: #fff;
   font-family: "Raleway-Medium", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   line-height: 1.7;
   color: #1e3e3f;
   padding: 0;
@@ -1141,12 +1141,12 @@ img {
   }
   .wrap,
   .outer {
-    width: 70rem;
+    width: 100rem;
     padding-right: 0;
     padding-left: 0;
   }
   .local-search {
-    width: 70rem;
+    width: 100rem;
   }
   .card-quote {
     grid-template-columns: repeat(3, 1fr);
@@ -2191,7 +2191,7 @@ pre .javascript .function {
 }
 .gitalk,
 .markdown-body {
-  font-size: 1.4rem !important;
+  font-size: 1.5rem !important;
 }
 .gt-container .gt-avatar.gt-comment-avatar img {
   -webkit-border-radius: 50%;
