@@ -485,7 +485,7 @@ pre[class*='highlight'] {
   font-size: 1rem;
 }
 .author-message {
-  margin-top: 1.2rem;
+  margin-top: 0.7rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -509,7 +509,7 @@ pre[class*='highlight'] {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 .author-card-society .author-card-society-icon {
   padding: 0 7px;
@@ -617,7 +617,7 @@ pre[class*='highlight'] {
 }
 .card +.card,
 .card +.archive-timeline {
-  margin-top: 1.5rem;
+  margin-top: 0.85rem;
 }
 .card-content,
 .card-author {
@@ -627,15 +627,15 @@ pre[class*='highlight'] {
 }
 .post-title,
 .card-excerpt {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.7rem;
 }
 .post-title {
   font-size: 1.85rem;
-  font-weight: 500;
-  margin: 0.5rem 0;
+  font-weight: 800;
+  margin: 0rem 0;
   padding-bottom: 0.4rem;
   color: var(--title-color);
-  line-height: 1.125;
+  line-height: 1.2;
 }
 .card-post-footer {
   display: flex;
@@ -662,20 +662,22 @@ pre[class*='highlight'] {
   width: 100%;
 }
 .categories-header {
-  margin-bottom: 6px;
-  font-size: 16px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .categories-header .iconfont {
   font-size: 16px;
 }
 .categories-list-item {
   color: var(--text-color);
-  padding: 6px 8px;
+  padding: 3px 8px;
   font-size: 1.15rem;
+  font-weight: 550;
   transition: all 0.4s;
 }
 .categories-list-item:hover {
-  padding: 6px 12px;
+  padding: 3px 12px;
   cursor: pointer;
   border-radius: 0.3rem;
   background-color: var(--badge-background-color);
@@ -878,7 +880,7 @@ pre[class*='highlight'] {
   width: 33.33333333333333%;
   padding: 6px 12px;
   float: left;
-  margin: 8px 0;
+  margin: 0px 0;
 }
 .friend-item:hover {
   border-radius: 0.3rem;
@@ -908,6 +910,7 @@ pre[class*='highlight'] {
   white-space: nowrap;
   color: var(--text-strong-color);
   font-size: 1.15rem;
+  font-weight: 500;
   max-height: 24.8px;
 }
 .friend-dsc {
@@ -1200,7 +1203,8 @@ mjx-container svg:focus {
 }
 .recent-posts-header {
   margin-bottom: 16px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .recent-posts-header .iconfont {
   font-size: 16px;
@@ -1212,17 +1216,19 @@ mjx-container svg:focus {
   display: none;
 }
 .recent-posts-item + .recent-posts-item {
-  margin-top: 10px;
+  margin-bottom: 3px;
 }
 .recent-posts-item-title {
   font-size: 0.9rem;
+  font-weight: 600;
 }
 .recent-posts-item-content {
   color: var(--text-color);
-  margin-top: 6px;
+  margin-bottom: 10px;
   font-size: 1.15rem;
-  padding: 6px 0;
-  padding-left: 8px;
+  font-weight: 550;
+  padding: 2px 0;
+  padding-left: 0px;
   transition: all 0.4s;
 }
 .recent-posts-item-content:hover {
@@ -1320,7 +1326,8 @@ mjx-container svg:focus {
 }
 .tags-header {
   margin-bottom: 16px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .tags-header .iconfont {
   font-size: 16px;
@@ -1337,6 +1344,7 @@ mjx-container svg:focus {
   float: left;
   margin: 0 7px 8px 7px;
   font-size: 1rem;
+  font-weight: 600;
   background-color: var(--badge-background-color);
   transition: background-color 0.3s;
   padding: 3px 7px;
@@ -1361,7 +1369,8 @@ mjx-container svg:focus {
 }
 .toc-header {
   margin-bottom: 6px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .toc-header .iconfont {
   font-size: 1.15rem;
@@ -1404,6 +1413,7 @@ mjx-container svg:focus {
 .toc-item {
   margin-bottom: 0;
   margin-top: 0;
+  font-weight: 550;
 }
 #mobiletoc {
   display: none;
