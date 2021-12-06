@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="CBear.Blog">
+  <link 
+    rel="icon" 
+    href="/img/logo.png">
+  <title>命令</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="命令">
+    
+    
+      <meta 
+        property="og:url" 
+        content="https://chen-299.github.io/8c54db8b.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="/img/logo.png">
+    
+    
+      <meta 
+        property="og:img" 
+        content="服务器&amp;数据库和命令相关的测评项">
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2021-12-06">
+      <meta 
+        property="og:article:modified_time" 
+        content="2021-12-06">
+      <meta 
+        property="og:article:author" 
+        content="CBear">
+      
+        
+      
+    
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+      
+      
+      
+      
+        
+        
+        
+        <script>
+          function prismThemeChange() {
+            if(document.getElementById('theme-color').dataset.mode === 'dark') {
+              if(document.querySelector('[data-prism]')) {
+                changeCSS('/js/lib/prism/prism-tomorrow.min.css', '[data-prism]', 'prism-tomorrow');
+              } else {
+                loadCSS('/js/lib/prism/prism-tomorrow.min.css', 'prism', 'prism-tomorrow');
+              }
+            } else {
+              if(document.querySelector('[data-prism]')) {
+                changeCSS('/js/lib/prism/prism.min.css', '[data-prism]', 'prism');
+              } else {
+                loadCSS('/js/lib/prism/prism.min.css', 'prism', 'prism');
+              }
+            }
+          }
+          prismThemeChange()
+        </script>
+      
+      
+        
+        <link rel="stylesheet" href="/js/lib/prism/prism-line-numbers.min.css">
+      
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+        prismThemeChange();
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+        prismThemeChange();
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+        prismThemeChange();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="/img/logo.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">CBear.Blog</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          Home
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          Archive
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          Tags
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          Categories
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          About
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          Friends
+        
+      </a>
+    
+    <a 
+      class="navbar-menu-item darknavbar" 
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </a>
+    <a 
+      class="navbar-menu-item searchnavbar" 
+      id="search">
+      <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i>
+    </a>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      命令
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-12-06T06:24:06.822Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2021-12-06</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E7%AD%89%E4%BF%9D%E6%B5%8B%E8%AF%84-%E5%88%9D%E7%BA%A7%E8%80%83%E8%AF%95/" 
+          class="post-meta-link">
+          等保测评/初级考试
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>3.1k words</span>
+    
+  </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h2 id="u670D_u52A1_u5668"><a href="#u670D_u52A1_u5668" class="headerlink" title="服务器"></a>服务器</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><h4 id="1-_u8EAB_u4EFD_u9274_u522B"><a href="#1-_u8EAB_u4EFD_u9274_u522B" class="headerlink" title="1.身份鉴别"></a>1.身份鉴别</h4><blockquote>
+<p><strong>1.1 应对登录的用户进行身份标识和鉴别，身份标识具有唯一性，身份鉴别信息具有复杂度要求并定期更换。</strong>    </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/passwd</td>
+<td style="text-align:left">记录用户属性，包括用户名、密码、用户标识、组标识等</td>
+<td style="text-align:left">无空口令用户</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/shadow</td>
+<td style="text-align:left">passwd中不再直接记录口令，将shadow作为真正的口令文件(需root权限)</td>
+<td style="text-align:left">无空口令用户</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/login.defs</td>
+<td style="text-align:left">(默认)登陆程序的配置文件,可配置密码参数</td>
+<td style="text-align:left">存在密码的设置</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/pam.d/system-auth  (Redhat、CentOS和Fedora)</td>
+<td style="text-align:left"><strong>优先级高于</strong>login.defs</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/pam.d/common-passwd  (Debian、Ubuntu和LinuxMint)</td>
+<td style="text-align:left"><strong>优先级高于</strong>login.defs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.2 应具有登陆失败处理功能，应配置并启用结束会话、限制非法登录次数和当登录连接超时自动退出等相关措施。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/login.defs</td>
+<td style="text-align:left">(默认)登陆程序的配置文件,可配置密码参数</td>
+<td style="text-align:left">本地登陆失败处理：<code>%auth required pam_tally2.so onerr=fail deny=5 unlock_time=300 even_deny_root root_unlock_time=10%</code>;远程登陆失败处理：<code>%auth required pam_tally2.so onerr=fail deny=5 unlock_time=300 even_deny_root root_unlock_time=10%</code></td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/pam.d/system-auth  (Redhat、CentOS和Fedora)</td>
+<td style="text-align:left"><strong>优先级高于</strong>login.defs</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/pam.d/common-passwd  (Debian、Ubuntu和LinuxMint)</td>
+<td style="text-align:left"><strong>优先级高于</strong>login.defs</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/profile</td>
+<td style="text-align:left">配置了超时锁定参数</td>
+<td style="text-align:left">TIMEOUT=300s</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.3 当进行远程管理时，应采取必要措施防止鉴别信息在网络传输过程中被窃听。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">service -status-all &#124; grep sshd</td>
+<td style="text-align:left">查看是否运行了sshd服务</td>
+<td style="text-align:left">应运行</td>
+</tr>
+<tr>
+<td style="text-align:left">netstat -an &#124; grep 22</td>
+<td style="text-align:left">查看相关端口是否已打开</td>
+<td style="text-align:left">应打开</td>
+</tr>
+<tr>
+<td style="text-align:left">service –status-all &#124; grep running</td>
+<td style="text-align:left">查看是否使用Telnet</td>
+<td style="text-align:left">应未使用Telnet</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.4 应采用双因子认证。</strong>  </p>
+</blockquote>
+<h4 id="2-_u8BBF_u95EE_u63A7_u5236"><a href="#2-_u8BBF_u95EE_u63A7_u5236" class="headerlink" title="2.访问控制"></a>2.访问控制</h4><blockquote>
+<p><strong>2.1 应对登录的用户分配账户的权限。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ls -a &lt;目录名或文件名&gt;</td>
+<td style="text-align:left">(r,4)(w,2)(x,1)(-,0)</td>
+<td style="text-align:left">配置文件≤644；可执行文件≤755</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.2 应重命名或删除默认账户，修改默认账户的默认口令。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/shadow</td>
+<td style="text-align:left">查看是否存在adm、lp、shutdown、halt、mail、uucp、games、ftp等默认无用账户</td>
+<td style="text-align:left">应不存在</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/ssh/sshd_config</td>
+<td style="text-align:left">参数PermitRootLogin是否为no</td>
+<td style="text-align:left">应为no，表示不允许root远程登陆</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.3 应及时删除或停用多余的、过期的账户，避免共享账户的存在。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/shadow</td>
+<td style="text-align:left">查看是否存在adm、lp、shutdown、halt、mail、uucp、games、ftp等默认无用账户</td>
+<td style="text-align:left">应不存在</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.4 管理用户权限分离&amp;最小权限原则。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/passwd</td>
+<td style="text-align:left">查看非默认账户</td>
+<td style="text-align:left">管理用户权限分离，权限应符合最小权限原则</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/sudoers</td>
+<td style="text-align:left">查看有哪些用户能够使用sudo命令授予其他用户root权限</td>
+<td style="text-align:left">应只有root</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.5 应由授权主体配置访问控制策略，访问控制策略规定主体对客体的访问规则。</strong><br><strong>2.6 访问控制的粒度达到主体为用户级或进程级，客体为文件、数据库表级。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ls -a &lt;目录名或文件名&gt;</td>
+<td style="text-align:left">(r,4)(w,2)(x,1)(-,0)</td>
+<td style="text-align:left">配置文件≤644；可执行文件≤755</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.7 应对重要主体和客体设置安全标记，并控制主体对有安全标记信息资源的访问。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/selinux/config</td>
+<td style="text-align:left">参数SELinux(enforcing/permissive/disabled)</td>
+<td style="text-align:left">Linux默认关闭SELinux，或者已使用第三方主机加固系统或对系统内核进行了二次开发加固(需实际查看系统可视化界面)</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h4 id="3-_u5B89_u5168_u5BA1_u8BA1"><a href="#3-_u5B89_u5168_u5BA1_u8BA1" class="headerlink" title="3.安全审计"></a>3.安全审计</h4><blockquote>
+<p><strong>3.1 应启用安全审计功能，审计覆盖到每个用户，对重要的用户行为和重要安全事件进行审计。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">service auditd status</td>
+<td style="text-align:left">是否开启审计进程</td>
+<td style="text-align:left">应开启，若无则应部署了第三方安全审计工具</td>
+</tr>
+<tr>
+<td style="text-align:left">ps -ef &#124; grep auditd</td>
+<td style="text-align:left">是否开启安全审计的守护进程</td>
+<td style="text-align:left">应开启</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/audit/audit.rules</td>
+<td style="text-align:left">安全审计配置文件</td>
+<td style="text-align:left">记录了文件和底层调用信息，记录的安全事件较为全面</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.2 审计记录应包括事件的日期和时间、用户、事件类型、时间是否成功及其他与审计相关的信息。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ausearch -ts today</td>
+<td style="text-align:left">查看今天以后的日志</td>
+<td style="text-align:left">审计记录包括事件的日期、时间、类型、主体标识、客体标识和结果</td>
+</tr>
+<tr>
+<td style="text-align:left">tail -20 /var/log/audit/audit.log</td>
+<td style="text-align:left">查看审计日志</td>
+<td style="text-align:left">审计记录包括事件的日期、时间、类型、主体标识、客体标识和结果</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.3 应对审计记录进行保护，定期备份，避免受到未预期的删除、修改或覆盖等。</strong><br><strong>3.4 应对审计进程进行保护，防止未经授权的中断。</strong>  </p>
+</blockquote>
+<h4 id="4-_u5165_u4FB5_u9632_u8303"><a href="#4-_u5165_u4FB5_u9632_u8303" class="headerlink" title="4.入侵防范"></a>4.入侵防范</h4><blockquote>
+<p><strong>4.1 应遵循最小安装的原则，仅安装需要的组件和应用程序。</strong>   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">yum list installed</td>
+<td style="text-align:left">查看已安装的程序包</td>
+<td style="text-align:left">其中应无当前不需要使用的组件和应用程序</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.2 应关闭不需要的系统服务、默认共享和高危端口。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">service –status-all &#124; grep running</td>
+<td style="text-align:left">查看多余的网络服务是否关闭</td>
+<td style="text-align:left">应关闭</td>
+</tr>
+<tr>
+<td style="text-align:left">netstat -ntlp</td>
+<td style="text-align:left">查看是否关闭非必须的端口</td>
+<td style="text-align:left">应关闭</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.3 应通过设定终端接入方式或网络地址范围对通过网络进行管理的管理终端进行限制。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/etc/hosts.deny</td>
+<td style="text-align:left">访问本机ip黑名单</td>
+<td style="text-align:left">应有”ALL:ALL”</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/hosts.allow</td>
+<td style="text-align:left">访问本机ip白名单</td>
+<td style="text-align:left">应有”sshd:192.168.xxx.xxx/255.255.255.0”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.4 应能发现可能存在的已知漏洞，并在经过充分测试评估后，及时修补漏洞。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">rpm -qa &#124; grep patch</td>
+<td style="text-align:left">查看补丁安装情况</td>
+<td style="text-align:left">补丁更新时间为最近。已对补丁进行控制和管理。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.5 应能够检测到对重要节点进行入侵的行为，并在发生严重入侵事件时提供报警。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">find /-name <daemon name>-print</td>
+<td style="text-align:left">查看是否安装了主机入侵检测软件</td>
+<td style="text-align:left">应有安装</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h4 id="5-_u6076_u610F_u4EE3_u7801_u9632_u8303"><a href="#5-_u6076_u610F_u4EE3_u7801_u9632_u8303" class="headerlink" title="5.恶意代码防范"></a>5.恶意代码防范</h4><blockquote>
+<p><strong>5.1 应采用免受恶意代码攻击的技术措施或主动免疫可信验证机制及时识别入侵和病毒行为，并将其有效阻断。</strong>  </p>
+</blockquote>
+<h4 id="6-_u53EF_u4FE1_u9A8C_u8BC1"><a href="#6-_u53EF_u4FE1_u9A8C_u8BC1" class="headerlink" title="6.可信验证"></a>6.可信验证</h4><blockquote>
+<p><strong>6.1 可基于可信根对通信设备的系统引导程序、系统程序、重要配置参数和应用程序等进行可信验证，并在应用程序的关键执行环节进行动态可信验证，在检测到其可信性受到破坏后进行报警，并将验证结果形成审计记录送至安全管理中心。</strong>  </p>
+</blockquote>
+<h2 id="u6570_u636E_u5E93"><a href="#u6570_u636E_u5E93" class="headerlink" title="数据库"></a>数据库</h2><h3 id="Oracle"><a href="#Oracle" class="headerlink" title="Oracle"></a>Oracle</h3><h4 id="1-_u8EAB_u4EFD_u9274_u522B-1"><a href="#1-_u8EAB_u4EFD_u9274_u522B-1" class="headerlink" title="1.身份鉴别"></a>1.身份鉴别</h4><blockquote>
+<p><strong>1.1 应对登录的用户进行身份标识和鉴别，身份标识具有唯一性，身份鉴别信息具有复杂度要求并定期更换。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“PASSWORD_VERIFY_FUNCTION”</td>
+<td style="text-align:left">口令复杂度函数</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+<tr>
+<td style="text-align:left">utlpwdmg.sql文件的“–Check for the minimum length of the password”部分</td>
+<td style="text-align:left">口令最小长度规则</td>
+<td style="text-align:left">”length(password)&lt;”后的值≥8</td>
+</tr>
+<tr>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“PASSWORD_LIFE_TIME”</td>
+<td style="text-align:left">口令过期时限</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.2 应具有登录失败处理功能，应配置并启用结束会话、限制非法登录次数和当登录连接超时自动退出等相关措施。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“FAILED_LOGIN_ATTEMPTS”</td>
+<td style="text-align:left">登陆失败次数</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+<tr>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“FAILED_LOCK_TIME”</td>
+<td style="text-align:left">登陆失败口令锁定时间</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+<tr>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“IDLE_TIME”</td>
+<td style="text-align:left">登陆超时退出时长</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.3 当进行远程管理时，应采取必要的措施防止鉴别信息在网络传输过程中被窃听。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">执行lsnrctl status &lt;监听器名&gt; 或 查看文件$ORACLE_HOME/network/admin/listener.ora中LISTERENR的PROTOCAL和PORT</td>
+<td style="text-align:left">服务端Oracle监听器监听的网络协议，应启用SSL加密</td>
+<td style="text-align:left">protocol(TCPS);port(2484)</td>
+</tr>
+<tr>
+<td style="text-align:left">查看文件$ORACLE_HOME/network/admin/tnsnames.ora中LISTERENR的PROTOCAL和PORT</td>
+<td style="text-align:left">客户端应启用SSL加密</td>
+<td style="text-align:left">protocol(TCPS);port(2484)</td>
+</tr>
+<tr>
+<td style="text-align:left">查看文件$ORACLE_HOME/network/admin/sqlnet.ora中WALLET_LOCATION、SQLNET.AUTHENTICATION_SERVERS、SSL的相关配置</td>
+<td style="text-align:left">服务端和客户端的配置文件</td>
+<td style="text-align:left">应有SSL的相关配置</td>
+</tr>
+<tr>
+<td style="text-align:left">查看文件$ORACLE_HOME/network/admin/sqlnet.ora中SQLNET.ENCRYPTION_SERVER;SQLNET.ENCRYPTION_TYPES_SERVER。SQLNET.CRYPTO_CHECKSUM_SERVER;SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER</td>
+<td style="text-align:left">SQLNET.ENCRYPTION_SERVER–required；SQLNET.ENCRYPTION_TYPES_SERVER–此处指定的加密算法应不为已被证明不安全的算法，如DES、3DES。  SQLNET.CRYPTO_CHECKSUM_SERVER–required；SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER–此处指定的加密算法应不为已被证明不安全的算法，如DES、3DES。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.4 双因子认证。</strong>  </p>
+</blockquote>
+<h4 id="2-_u8BBF_u95EE_u63A7_u5236-1"><a href="#2-_u8BBF_u95EE_u63A7_u5236-1" class="headerlink" title="2.访问控制"></a>2.访问控制</h4><blockquote>
+<p><strong>2.1 应对登录的用户分配账户和权限。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select * from dba_users</td>
+<td style="text-align:left">dba_users策略</td>
+<td style="text-align:left">MGMT_UIEW、SYS、SYSTEM、DBSNMP、SYSMAN为启用状态，其他均为锁定状态</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.2 应重命名或删除默认账户，修改默认账户的默认口令。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select * from dba_users</td>
+<td style="text-align:left">dba_users策略</td>
+<td style="text-align:left">SYS口令应不为CHANGE_ON_INSTALL;SYSTEM口令应不为MANAGER;DBSNMP口令应不为DBSNMP</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.3 应及时删除或停用多余的、过期的账户，避免共享账户的存在。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select username,account_status from dba_users</td>
+<td style="text-align:left">dba_users策略</td>
+<td style="text-align:left">返回结果应不存在范例账号scott、outln、ordsys,过期账户account_status=expired,返回结果应一一对应</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.4 应授予管理用户所需的最小权限，实现管理用户的权限分离。</strong><br><strong>2.5 应由授权主题配置访问控制策略，访问控制策略规定主体对客体的访问控制规则。</strong><br><strong>2.6 访问控制的粒度应达到主体为用户级或进程级，客体为文件、数据库表级。</strong><br><strong>2.7 应对重要主体和客体设置安全标记，并控制主体对有安全标记信息资源的访问。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select username from dba_users</td>
+<td style="text-align:left">dba_users策略</td>
+<td style="text-align:left">应安装Oracle Label Security模块：返回用户中存在LBACSYS</td>
+</tr>
+<tr>
+<td style="text-align:left">select policy_name,status from DBA_SA_POLICIES</td>
+<td style="text-align:left">策略创建情况</td>
+<td style="text-align:left">存在status=enable的标签策略</td>
+</tr>
+<tr>
+<td style="text-align:left">select * from dba_sa_levels ORDER BY level_num</td>
+<td style="text-align:left">级别创建情况</td>
+<td style="text-align:left">查询结果不为空</td>
+</tr>
+<tr>
+<td style="text-align:left">select * from dba_sa_labels</td>
+<td style="text-align:left">标签创建情况</td>
+<td style="text-align:left">查询结果不为空</td>
+</tr>
+<tr>
+<td style="text-align:left">select * from dba_sa_tables_policies</td>
+<td style="text-align:left">了解用于存储重要数据的表的名称</td>
+<td style="text-align:left">查询结果不为空，且包含重要数据所在表的名称</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h4 id="3-_u5B89_u5168_u5BA1_u8BA1-1"><a href="#3-_u5B89_u5168_u5BA1_u8BA1-1" class="headerlink" title="3.安全审计"></a>3.安全审计</h4><blockquote>
+<p><strong>3.1 应启用安全审计功能，审计覆盖到每个用户，对重要用户行为和重要安全事件进行审计。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">select value from v$parameter where name=’audit_trail’</td>
+<td style="text-align:left">查看是否开启审计功能</td>
+<td style="text-align:left">audit_trail 不为 none</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.2 审计记录应包括事件的日期和时间、用户、事件类型、事件是否成功及其他与审计相关的信息。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">SQL&gt;show parameter background_dump_dest</td>
+<td style="text-align:left">查询日志文件位置</td>
+<td style="text-align:left">（默认）$ORACLE/rdbms/log</td>
+</tr>
+<tr>
+<td style="text-align:left">SQL&gt;select log_mode,force_logging from v$database;</td>
+<td style="text-align:left">查询数据库的日志记录模式</td>
+<td style="text-align:left">不全为NO，存在记录某一级别的日志</td>
+</tr>
+<tr>
+<td style="text-align:left">SQL&gt;select tablespace_name,logging,force_logging from db_tablespaces;</td>
+<td style="text-align:left">查询表空间的日志记录模式</td>
+<td style="text-align:left">不全为NO，存在记录某一级别的日志</td>
+</tr>
+<tr>
+<td style="text-align:left">SQL&gt;select table_name,logging from user_tables;</td>
+<td style="text-align:left">查询对象的日志记录模式</td>
+<td style="text-align:left">不全为NO，存在记录某一级别的日志</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.3 应对审计记录进行保护，定期备份，避免受到未预期的删除、修改或覆盖等。</strong><br><strong>3.4 应对审计进程进行保护，防止未经授权的中断。</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">alter system set audit_trail=none</td>
+<td style="text-align:left">关闭审计进程</td>
+<td style="text-align:left">除审计人员外，其他人无法对审计进程进行开启关闭</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h4 id="4-_u5165_u4FB5_u9632_u8303-1"><a href="#4-_u5165_u4FB5_u9632_u8303-1" class="headerlink" title="4.入侵防范"></a>4.入侵防范</h4><blockquote>
+<p><strong>4.1 最小安装原则。</strong><br><strong>4.2 应通过设定终端接入方式或网络地址范围对通过网络进行管理的管理终端进行限制。</strong>   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">查看sqlnet.ora文件中tcp.validnode_checking和tcp.invited_nodes</td>
+<td style="text-align:left">启用相应配置</td>
+<td style="text-align:left">tcp.validnode_checking=yes；tcp.invited_nodes参数已配置IP地址列表</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.3 应提供数据有效性校验功能，保证通过人机接口输入或通过通信接口输入的内容符合系统设定要求。</strong>   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注释</th>
+<th style="text-align:left">预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">–cd $ORACLE_HOME/Opatch opatch lsinventory</td>
+<td style="text-align:left">了解Oracle数据库的补丁升级机制</td>
+<td style="text-align:left">OPatch和OUI的版本较新</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            CBear
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://chen-299.github.io/8c54db8b.html">
+            https://chen-299.github.io/8c54db8b.html
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span><a target="_blank" rel="noopener">转载请注明出处！</a></p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/d4ec2f86.html" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">Next</div>
+          
+            <div class="nav-title">Vulnhub|SickOs1.2 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u670D_u52A1_u5668"><span class="toc-text">服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_u8EAB_u4EFD_u9274_u522B"><span class="toc-text">1.身份鉴别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_u8BBF_u95EE_u63A7_u5236"><span class="toc-text">2.访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_u5B89_u5168_u5BA1_u8BA1"><span class="toc-text">3.安全审计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_u5165_u4FB5_u9632_u8303"><span class="toc-text">4.入侵防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_u6076_u610F_u4EE3_u7801_u9632_u8303"><span class="toc-text">5.恶意代码防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_u53EF_u4FE1_u9A8C_u8BC1"><span class="toc-text">6.可信验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6570_u636E_u5E93"><span class="toc-text">数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle"><span class="toc-text">Oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_u8EAB_u4EFD_u9274_u522B-1"><span class="toc-text">1.身份鉴别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_u8BBF_u95EE_u63A7_u5236-1"><span class="toc-text">2.访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_u5B89_u5168_u5BA1_u8BA1-1"><span class="toc-text">3.安全审计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_u5165_u4FB5_u9632_u8303-1"><span class="toc-text">4.入侵防范</span></a></li></ol></li></ol></li></ol>
+</div></main>
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="/img/logo.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">CBear</p>
+<p class="author-description">Stay sharp, stay alone.</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>11</span>
+    <span>Posts</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>3</span>
+    <span>Categories</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>9</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/chen-299">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+      <div class="author-card-society-icon">
+        <a href="mailto:13530567672@163.com">
+          <i class="iconfont icon-mail society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u670D_u52A1_u5668"><span class="toc-text">服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_u8EAB_u4EFD_u9274_u522B"><span class="toc-text">1.身份鉴别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_u8BBF_u95EE_u63A7_u5236"><span class="toc-text">2.访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_u5B89_u5168_u5BA1_u8BA1"><span class="toc-text">3.安全审计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_u5165_u4FB5_u9632_u8303"><span class="toc-text">4.入侵防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_u6076_u610F_u4EE3_u7801_u9632_u8303"><span class="toc-text">5.恶意代码防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_u53EF_u4FE1_u9A8C_u8BC1"><span class="toc-text">6.可信验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6570_u636E_u5E93"><span class="toc-text">数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle"><span class="toc-text">Oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_u8EAB_u4EFD_u9274_u522B-1"><span class="toc-text">1.身份鉴别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_u8BBF_u95EE_u63A7_u5236-1"><span class="toc-text">2.访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_u5B89_u5168_u5BA1_u8BA1-1"><span class="toc-text">3.安全审计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_u5165_u4FB5_u9632_u8303-1"><span class="toc-text">4.入侵防范</span></a></li></ol></li></ol></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>Categories
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+        <div class="categories-list-item">
+          渗透测试
+          <span class="categories-list-item-badge">7</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E9%9A%8F%E8%AE%B0/">
+        <div class="categories-list-item">
+          随记
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E7%AD%89%E4%BF%9D%E6%B5%8B%E8%AF%84-%E5%88%9D%E7%BA%A7%E8%80%83%E8%AF%95/">
+        <div class="categories-list-item">
+          等保测评-初级考试
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>hot tags
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E6%8F%90%E6%9D%83/" 
+        title="提权">
+        <div class="tags-list-item">提权</div>
+      </a>
+    
+      <a 
+        href="/tags/Vulnhub/" 
+        title="Vulnhub">
+        <div class="tags-list-item">Vulnhub</div>
+      </a>
+    
+      <a 
+        href="/tags/Metasoploit/" 
+        title="Metasoploit">
+        <div class="tags-list-item">Metasoploit</div>
+      </a>
+    
+      <a 
+        href="/tags/Msfvenom/" 
+        title="Msfvenom">
+        <div class="tags-list-item">Msfvenom</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%8F%8D%E5%BC%B9shell/" 
+        title="反弹shell">
+        <div class="tags-list-item">反弹shell</div>
+      </a>
+    
+      <a 
+        href="/tags/http-methods/" 
+        title="http-methods">
+        <div class="tags-list-item">http-methods</div>
+      </a>
+    
+      <a 
+        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
+        title="SSH爆破">
+        <div class="tags-list-item">SSH爆破</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/" 
+        title="水平越权">
+        <div class="tags-list-item">水平越权</div>
+      </a>
+    
+      <a 
+        href="/tags/getshell/" 
+        title="getshell">
+        <div class="tags-list-item">getshell</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u670D_u52A1_u5668"><span class="toc-text">服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux"><span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_u8EAB_u4EFD_u9274_u522B"><span class="toc-text">1.身份鉴别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_u8BBF_u95EE_u63A7_u5236"><span class="toc-text">2.访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_u5B89_u5168_u5BA1_u8BA1"><span class="toc-text">3.安全审计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_u5165_u4FB5_u9632_u8303"><span class="toc-text">4.入侵防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_u6076_u610F_u4EE3_u7801_u9632_u8303"><span class="toc-text">5.恶意代码防范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_u53EF_u4FE1_u9A8C_u8BC1"><span class="toc-text">6.可信验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6570_u636E_u5E93"><span class="toc-text">数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle"><span class="toc-text">Oracle</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_u8EAB_u4EFD_u9274_u522B-1"><span class="toc-text">1.身份鉴别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_u8BBF_u95EE_u63A7_u5236-1"><span class="toc-text">2.访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_u5B89_u5168_u5BA1_u8BA1-1"><span class="toc-text">3.安全审计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_u5165_u4FB5_u9632_u8303-1"><span class="toc-text">4.入侵防范</span></a></li></ol></li></ol></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>Recent Posts
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-06</div>
+        <a href="/8c54db8b.html"><div class="recent-posts-item-content">命令</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-06</div>
+        <a href="/d4ec2f86.html"><div class="recent-posts-item-content">Vulnhub|SickOs1.2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-06</div>
+        <a href="/238e957d.html"><div class="recent-posts-item-content">Vulnhub|Questions</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-06</div>
+        <a href="/9c45f9e.html"><div class="recent-posts-item-content">Vulnhub|Os-Hax</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+          2021
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          CBear.Blog
+        </a>
+      </div>
+    </div>
+
+    
+    
+    
+    
+      <div class="footer-dsc">
+        
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          本站总访客数<span id="busuanzi_value_site_uv"></span>次
+        
+      </div>
+      
+    
+</footer> 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+    
+      <script> 
+        loadScript('/js/lib/busuanzi.min.js') 
+      </script>
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+     
+    
+    
+      <script>
+        setTimeout(() => {localSearch("search.json")}, 0)
+      </script>
+    
+  </body>
+</html>
