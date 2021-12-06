@@ -423,8 +423,9 @@ pre[class*='highlight'] {
   width: 100%;
 }
 .archive-card-header {
-  margin-bottom: 6px;
-  font-size: 16px;
+  margin-bottom: 3px;
+  font-size: 18px;
+  font-weight: 700;
 }
 .archive-card-header .iconfont {
   font-size: 16px;
@@ -433,11 +434,12 @@ pre[class*='highlight'] {
   display: block;
   color: var(--text-color);
   font-size: 1.15rem;
-  padding: 6px 8px;
+  font-weight: 600;
+  padding: 3px 8px;
   transition: all 0.4s;
 }
 .archive-card-list-item:hover {
-  padding: 6px 12px;
+  padding: 3px 12px;
   cursor: pointer;
   border-radius: 0.3rem;
   background-color: var(--badge-background-color);
@@ -450,7 +452,7 @@ pre[class*='highlight'] {
   transition: all 0.4s;
 }
 .archive-card-list-item + .archive-card-list-item {
-  margin-top: 3px;
+  margin-top: 0px;
 }
 .archive-card-list-item-badge {
   float: right;
@@ -947,7 +949,7 @@ pre[class*='highlight'] {
 }
 .navbar-logo {
   display: inline-block;
-  margin-left: 96px;
+  margin-left: 32px;
 }
 .navbar-logo-main {
   display: flex;
@@ -957,12 +959,14 @@ pre[class*='highlight'] {
 }
 .navbar-logo-dsc {
   font-size: 1.3rem;
+  font-weight: 600;
 }
 .navbar-logo-img {
   margin-right: 10px;
 }
 .navbar-menu {
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
 }
@@ -970,7 +974,7 @@ pre[class*='highlight'] {
   display: inline-block;
   color: var(--text-color);
   cursor: pointer;
-  padding: 0.7rem 0.6rem;
+  padding: 0.8rem 1rem;
 }
 .navbar-menu a:hover {
   color: var(--link-hover-color);
