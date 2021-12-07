@@ -964,7 +964,7 @@ pre[class*='highlight'] {
   margin-right: 10px;
 }
 .navbar-menu {
-  font-size: 1rem;
+  font-size: 15px;
   display: flex;
   align-items: center;
 }
