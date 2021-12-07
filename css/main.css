@@ -1466,6 +1466,7 @@ mjx-container svg:focus {
 .archive-timeline-post-content {
   margin-top: 12px;
   font-size: 1.15rem;
+  font-weight: 700;
 }
 .archive-timeline-post-item {
   color: var(--text-font-color);
