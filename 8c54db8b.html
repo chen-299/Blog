@@ -49,7 +49,7 @@
         content="2021-12-06">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-06">
+        content="2021-12-07">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -321,7 +321,7 @@
     
     
       <span class="dot"></span>
-      <span>3.1k words</span>
+      <span>3.2k words</span>
     
   </div>
   
@@ -348,7 +348,7 @@
 <tr>
 <td style="text-align:left">/etc/shadow</td>
 <td style="text-align:left">passwd中不再直接记录口令，将shadow作为真正的口令文件(需root权限)</td>
-<td style="text-align:left">无空口令用户</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">/etc/login.defs</td>
@@ -564,8 +564,13 @@
 </tr>
 <tr>
 <td style="text-align:left">/etc/audit/audit.rules</td>
-<td style="text-align:left">安全审计配置文件</td>
+<td style="text-align:left">指定如何写入审查记录以及在哪里写入、日志超出可用磁盘空间后如何处理等</td>
 <td style="text-align:left">记录了文件和底层调用信息，记录的安全事件较为全面</td>
+</tr>
+<tr>
+<td style="text-align:left">/etc/audit/filesets.conf或filters.conf</td>
+<td style="text-align:left">指定内核用来判定系统调用是否要审查的规则</td>
+<td style="text-align:left">应启用“@priv-ops”“@mount-ops”“@system-ops”</td>
 </tr>
 </tbody>
 </table>
@@ -1127,17 +1132,17 @@
   </div>
   <div class="categories-list">
     
-      <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
-        <div class="categories-list-item">
-          渗透测试
-          <span class="categories-list-item-badge">9</span>
-        </div>
-      </a>
-    
       <a href="/categories/%E9%9A%8F%E8%AE%B0/">
         <div class="categories-list-item">
           随记
           <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+        <div class="categories-list-item">
+          渗透测试
+          <span class="categories-list-item-badge">9</span>
         </div>
       </a>
     
