@@ -49,7 +49,7 @@
         content="2021-12-06">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-08">
+        content="2021-12-09">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -321,7 +321,7 @@
     
     
       <span class="dot"></span>
-      <span>3.2k words</span>
+      <span>3.3k words</span>
     
   </div>
   
@@ -351,7 +351,7 @@
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">/etc/login.defs</td>
+<td style="text-align:left">/etc/login.defs 和 /etc/default/useradd</td>
 <td style="text-align:left">(默认)登陆程序的配置文件,可配置密码参数</td>
 <td style="text-align:left">存在密码的设置</td>
 </tr>
@@ -745,18 +745,28 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“FAILED_LOGIN_ATTEMPTS”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=”FAILED_LOGIN_ATTEMPTS”</td>
 <td style="text-align:left">登陆失败次数</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“FAILED_LOCK_TIME”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=”FAILED_LOCK_TIME”</td>
 <td style="text-align:left">登陆失败口令锁定时间</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“IDLE_TIME”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=”IDLE_TIME”</td>
 <td style="text-align:left">登陆超时退出时长</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+<tr>
+<td style="text-align:left">select limit from dba_profiles where profile=”DEFAULT” and resource-name=”CPU-PER-SESSION”</td>
+<td style="text-align:left">一个会话可以使用的CPU时间</td>
+<td style="text-align:left">不为UNLIMITED</td>
+</tr>
+<tr>
+<td style="text-align:left">select limit from dba-profiles where profile=”DEFAULT” and resource-name=”SESSION-PER-USERS”</td>
+<td style="text-align:left">每个用户所允许的并行会话数</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 </tbody>
