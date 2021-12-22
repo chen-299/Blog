@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="/img/logo.png">
-  <title>DVWA|FileInclusion</title>
+  <title>Vulnhub|Sumo</title>
   
     
       <meta 
         property="og:title" 
-        content="DVWA|FileInclusion">
+        content="Vulnhub|Sumo">
     
     
       <meta 
         property="og:url" 
-        content="https://cbeartalk.top/4d5d77bb.html">
+        content="https://cbeartalk.top/3a00fd33.html">
     
     
       <meta 
@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="文件包含">
+        content="难度：⭐⭐">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2021-12-21">
+        content="2021-12-22">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-21">
+        content="2021-12-22">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -57,11 +57,23 @@
         
           <meta 
             property="og:article:tag" 
-            content="DVWA">
+            content="Vulnhub">
         
           <meta 
             property="og:article:tag" 
-            content="FileInclusion">
+            content="提权">
+        
+          <meta 
+            property="og:article:tag" 
+            content="脏牛提权">
+        
+          <meta 
+            property="og:article:tag" 
+            content="Metasoploit">
+        
+          <meta 
+            property="og:article:tag" 
+            content="searchsploit">
         
       
     
@@ -306,16 +318,16 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      DVWA|FileInclusion
+      Vulnhub|Sumo
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-12-21T01:47:08.321Z">
+    <time datetime="2021-12-22T06:06:03.348Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2021-12-21</span>
+      <span>2021-12-22</span>
     </time>
     
       <span class="dot"></span>
@@ -329,7 +341,7 @@
     
     
       <span class="dot"></span>
-      <span>653 words</span>
+      <span>0 words</span>
     
   </div>
   
@@ -344,18 +356,45 @@
         
           
           <a 
-            href="/tags/DVWA/" 
+            href="/tags/Vulnhub/" 
             class="post-meta-link">
-            DVWA
+            Vulnhub
           </a>
         
           
             <span class="dot"></span>
           
           <a 
-            href="/tags/FileInclusion/" 
+            href="/tags/%E6%8F%90%E6%9D%83/" 
             class="post-meta-link">
-            FileInclusion
+            提权
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
+            class="post-meta-link">
+            脏牛提权
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/Metasoploit/" 
+            class="post-meta-link">
+            Metasoploit
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/searchsploit/" 
+            class="post-meta-link">
+            searchsploit
           </a>
         
       </div>
@@ -365,31 +404,7 @@
   <div 
     id="section" 
     class="post-content">
-    <h2 id="0-_u6F0F_u6D1E_u539F_u7406"><a href="#0-_u6F0F_u6D1E_u539F_u7406" class="headerlink" title="0.漏洞原理"></a>0.漏洞原理</h2><blockquote>
-<p><strong>File Inclusion</strong>：文件包含（漏洞），是指当服务器开启<strong>allow_url_include</strong>选项时，就可以通过php的某些特性函数（include()，require()和include_once()，require_once()）<strong>利用url去动态包含文件</strong>，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或者任意命令执行。服务器通过php的特性（函数）去包含任意文件时，由于要包含的这个文件来源过滤不严，从而可以去包含一个恶意文件，而我们可以构造这个恶意文件来达到自己的目的。  </p>
-<ul>
-<li><strong>服务器包含文件时，不管文件后缀是否是php，都会尝试当做php文件执行，如果文件内容确为php，则会正常执行并返回结果，如果不是，则会原封不动地打印文件内容，所以文件包含漏洞常常会导致任意文件读取与任意命令执行。</strong>  <blockquote>
-<p>该漏洞涉及到<strong>php</strong>常见包含文件函数包括：</p>
-<ul>
-<li><strong>include()</strong>：当使用该函数包含文件时，只有代码执行到<strong>include()</strong>函数时才将文件包含进来，发生错误时只给出一个警告，继续向下执行。  </li>
-<li><strong>include_once()</strong>：功能和include()相同，区别在于当重复调用同一文件时，程序只调用一次。  </li>
-<li><strong>require()</strong>：require()与include()的区别在于<strong>require()</strong>执行如果发生错误，函数会输出错误信息，并终止脚本的运行。使用require()函数包含文件时，只要程序一执行，立即调用文件，而include()只有程序执行到函数时才调用<strong>.require()在php程序执行前执行</strong>，会先读入<strong>require</strong>所指定引入的文件，使它变成PHP程序网页的一部分。  </li>
-<li><strong>require_once()</strong>：它的功能与require()相同，区别在于当重复调用同一文件时，程序只调用一次。  </li>
-</ul>
-</blockquote>
-</li>
-</ul>
-</blockquote>
-<h2 id="1-Low_level"><a href="#1-Low_level" class="headerlink" title="1.Low_level"></a>1.Low_level</h2><h3 id="1-1__u5C1D_u8BD5_u653B_u51FB"><a href="#1-1__u5C1D_u8BD5_u653B_u51FB" class="headerlink" title="1.1 尝试攻击"></a>1.1 尝试攻击</h3><blockquote>
-<p>当点击<strong>file1</strong>时，跳转的url为<a target="_blank" rel="noopener" href="http://localhost/DVWA-master/vulnerabilities/fi/?page=file1.php，将参数file1.php改为```../../```：">http://localhost/DVWA-master/vulnerabilities/fi/?page=file1.php，将参数file1.php改为```../../```：</a><br>![avatar][img1]<br>暴露了服务器文件的绝对路径<strong>F:\phpstudy_pro\WWW\DVWA-master\vulnerabilities\fi\index.php</strong>。<br>查看<strong>~/php.ini</strong>:<br>![avatar][img2]<br>成功获取服务器<strong>php.ini</strong>文件。</p>
-<blockquote>
-<p>可以看到<strong>magic_quote_gpc=off</strong>，<strong>PHP4.0</strong>及以上版本中，该选项默认开启；<strong>PHP5.4</strong>之后的版本已删除该选项。在小于<strong>PHP5.3.4</strong>的服务器中，<strong>magic_quote_gpc=off</strong>时，可以在文件名中使用<strong>%00截断（%00后的内容不会被识别，可借此绕过某些过滤规则）</strong>。  </p>
-</blockquote>
-<p>在远程服务器上传一个<strong>phpinfo.txt</strong>文件：<br><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">phpinfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></p>
-</blockquote>
-
+    
   </div>
   <div>
     
@@ -408,8 +423,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://cbeartalk.top/4d5d77bb.html">
-            https://cbeartalk.top/4d5d77bb.html
+            href="https://cbeartalk.top/3a00fd33.html">
+            https://cbeartalk.top/3a00fd33.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span><a target="_blank" rel="noopener">转载请注明出处！</a></p>
@@ -419,29 +434,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/9f3820f2.html" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">Prev</div>
-          
-            <div class="nav-title">Vulnhub|Lampiao </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/18030393.html" 
+        href="/9f3820f2.html" 
         class="nav-link">
         <div>
           <div class="nav-label">Next</div>
           
-            <div class="nav-title">DVWA|CSRF </div>
+            <div class="nav-title">Vulnhub|Lampiao </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -459,7 +460,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u6F0F_u6D1E_u539F_u7406"><span class="toc-text">0.漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Low_level"><span class="toc-text">1.Low_level</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1__u5C1D_u8BD5_u653B_u51FB"><span class="toc-text">1.1 尝试攻击</span></a></li></ol></li></ol>
+
 </div></main>
             <aside class="left-column">
               
@@ -523,7 +524,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u6F0F_u6D1E_u539F_u7406"><span class="toc-text">0.漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Low_level"><span class="toc-text">1.Low_level</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1__u5C1D_u8BD5_u653B_u51FB"><span class="toc-text">1.1 尝试攻击</span></a></li></ol></li></ol>
+
       </div>
     </article>
   
@@ -687,7 +688,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u6F0F_u6D1E_u539F_u7406"><span class="toc-text">0.漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Low_level"><span class="toc-text">1.Low_level</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1__u5C1D_u8BD5_u653B_u51FB"><span class="toc-text">1.1 尝试攻击</span></a></li></ol></li></ol>
+
     </article>
   
   
