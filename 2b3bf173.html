@@ -49,11 +49,15 @@
         content="2021-12-10">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-10">
+        content="2021-12-22">
       <meta 
         property="og:article:author" 
         content="CBear">
       
+        
+          <meta 
+            property="og:article:tag" 
+            content="Tools">
         
       
     
@@ -321,15 +325,44 @@
     
     
       <span class="dot"></span>
-      <span>630 words</span>
+      <span>1.6k words</span>
     
   </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/Tools/" 
+            class="post-meta-link">
+            Tools
+          </a>
+        
+      </div>
+    </div>
   
   </header>
   <div 
     id="section" 
     class="post-content">
-    <h2 id="SQLMAP"><a href="#SQLMAP" class="headerlink" title="SQLMAP"></a>SQLMAP</h2><blockquote>
+    <h2 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h2><blockquote>
+<h3 id="u5E38_u7528"><a href="#u5E38_u7528" class="headerlink" title="常用"></a>常用</h3><p><code>-A</code>依次扫描包含系统探测、版本探测、脚本扫描和跟踪扫描。<br><code>-p-</code>全端口扫描。<br><code>-p</code>只扫描指定的端口。<br><code>-h</code>输出帮助信息。<br><code>-Pn</code>将所有主机都默认为在线，跳过主机发现。<br><code>-iflist</code>查看本地路由与接口。  </p>
+<h3 id="u76EE_u6807_u8BF4_u660E"><a href="#u76EE_u6807_u8BF4_u660E" class="headerlink" title="目标说明"></a>目标说明</h3><p><code>-iL</code>从已有ip列表文件中读取并扫描。<br><code>-iR+</code>随机选择目标进行扫描。<br><code>--exclude+ip</code>排除此ip。  </p>
+<h3 id="u4E3B_u673A_u53D1_u73B0"><a href="#u4E3B_u673A_u53D1_u73B0" class="headerlink" title="主机发现"></a>主机发现</h3><p><code>-sL</code>列出要扫描的ip。<br><code>-sn</code>不进行端口扫描。<br><code>-Pn</code>叫所有的主机都默认为在线，跳过主机发现。（全面、较慢）<br><code>-PS/PA/PU/PY</code>使用TCP、SYN/ACK、UDP或SCTP协议去发现端口。<br><code>-PE/PP/PM</code>使用ICMP响应（echo）、时间戳或子网掩码请求来发现探测。<br><code>-PO</code>使用IP协议的ping。<br><code>-n</code>不做DNS解析。<br><code>-R</code>总是做DNS反向解析。<br><code>--dns-servers</code>指定自定义的DNS服务器。<br><code>--system-dns</code>使用操作系统的DNS。<br><code>--traceroute</code>追踪每台主机的跳转路径。  </p>
+<h3 id="u626B_u63CF_u6280_u672F"><a href="#u626B_u63CF_u6280_u672F" class="headerlink" title="扫描技术"></a>扫描技术</h3><p><code>-sS/sT/sA/sW/sM</code>使用SYN、TCP、全连接Connect()、ACK、Window、Maimon来进行扫描。<br><code>-sU</code>UDP扫描。<br><code>-sN/sF/sX</code>使用TCP Null(无flag)、FIN、Xmas（FIN+Push+Urgent）扫描。<br><code>--scanflags +flags</code>自定义TCP扫描的flags。<br><code>-sI</code>僵尸机扫描。<br><code>-sY/sZ</code>使用SCTP协议的INIT/COOKIE-ECHO扫描。<br><code>-sO</code>进行IP协议扫描。<br><code>-b &lt;FTP relay host&gt;</code>指定FTP中继主机进行FTP反弹扫描。<br><code>--send-eth</code>或<code>--send-ip</code>使用原始以太帧或IP数据包发送。  </p>
+<h3 id="u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><a href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219" class="headerlink" title="端口说明和扫描规则"></a>端口说明和扫描规则</h3><p><code>-p-</code>全端口扫描。<br><code>-p</code>只扫描指定的端口。<br><code>--exclude-ports</code>不对此端口进行扫描。<br><code>-F</code>快速模式，扫描比默认端口数量更少的端口。<br><code>-r</code>有序地扫描端口而不是随机地扫描。<br><code>--top-ports &lt;number&gt;</code>扫描排名指定的数字前几位的最常用的端口。<br><code>--port-ratio &lt;ratio&gt;</code>扫描比输入的比例更常用的端口。  </p>
+<h3 id="u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><a href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B" class="headerlink" title="服务、版本探测"></a>服务、版本探测</h3><p><code>-sV</code>探测开启的端口来获取服务、版本信息。<br><code>-V</code>输出版本号。<br><code>--version-intensity &lt;level&gt;</code>设置探测服务、版本信息的强度。<br><code>--version-light</code>强度为2的探测强度。<br><code>--version-all</code>强度为9的探测强度。<br><code>--version-trace</code>将扫描的具体过程显示出来。  </p>
+<h3 id="u811A_u672C_u626B_u63CF"><a href="#u811A_u672C_u626B_u63CF" class="headerlink" title="脚本扫描"></a>脚本扫描</h3><p><code>-sC</code>等同于<code>--script=default</code>。<br><code>--script=&lt;Lua scripts&gt;</code>指定使用Lua脚本进行扫描。<br><code>--script-args=&lt;n1=v1,[n2=v2,...]&gt;</code>指定脚本的参数。<br><code>--script-args-file=filename</code>指定提供脚本参数的文件。<br><code>--script-trace</code>显示全部发送和收到的数据。<br><code>--script-updatedb</code>更新脚本的数据库。<br><code>--script-help=&lt;Lua script&gt;</code>显示脚本的相关信息。  </p>
+<h3 id="u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><a href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97" class="headerlink" title="防火墙、IDS绕过和欺骗"></a>防火墙、IDS绕过和欺骗</h3><p><code>--proxies &lt;url1,[url2],...&gt;</code>指定代理服务器进行扫描。<br><code>--privileged</code>假设用户有全部权限。<br><code>--unprivileged</code>假设用户缺少原始套接字权限。<br><code>-f;--mtu &lt;val&gt;</code>设置MTU最大传输单元。<br><code>-D &lt;诱饵ip1,诱饵ip2,...&gt;&lt;目标ip&gt;</code>或<code>-D &lt;RND:number&gt;&lt;目标ip&gt;</code>指定多个诱饵IP或者使用RND随机生成number个诱饵IP，对目标主机进行IP欺骗。<br><code>-S &lt;ip&gt;</code>伪造源地址。<br><code>-e &lt;iface&gt;</code>使用指定的接口。<br><code>-g</code>或<code>--source-port &lt;portnum&gt;</code>使用指定的源端口。<br><code>--data &lt;hex string&gt;</code>在发送包的数据字段中追加自定义的十六进制字符串。<br><code>--data-string &lt;string&gt;</code>在发送报的数据字段中追加自定义的ASCII字符串。<br><code>--data-length &lt;num&gt;</code>在发送报的数据字段中追加随机的数据。<br><code>--ip-options &lt;options&gt;</code>使用指定的IP选项发送包。<br><code>ttl &lt;val&gt;</code>设置TTL值。<br><code>--spoof-mac &lt;mac address/prefix/vendor name&gt;</code>伪造源MAC地址。<br><code>--badsum</code>发送伪造TCP/UDP/SCTP校验和Checksum的数据包。  </p>
+</blockquote>
+<h2 id="SQLMAP"><a href="#SQLMAP" class="headerlink" title="SQLMAP"></a>SQLMAP</h2><blockquote>
 <h3 id="u7206_u6570_u636E_u5E93_u540D"><a href="#u7206_u6570_u636E_u5E93_u540D" class="headerlink" title="爆数据库名"></a>爆数据库名</h3><p><code>sqlmap -r E:\Brup_cap\1.txt --dbs --batch</code><br><code>sqlmap -u &lt;url&gt; --cookie=&quot;PHPSESSID=dwqedewfqfrfq;security=low&quot; --dbs //cookie为注入点</code>  </p>
 <h3 id="u7206_u8868_u540D"><a href="#u7206_u8868_u540D" class="headerlink" title="爆表名"></a>爆表名</h3><p><code>sqlmap -r 1.txt -D &lt;database_name&gt; --tables --batch</code>  </p>
 <h3 id="u7206_u5B57_u6BB5_u540D"><a href="#u7206_u5B57_u6BB5_u540D" class="headerlink" title="爆字段名"></a>爆字段名</h3><p><code>sqlmap -r 1.txt -D &lt;database_name&gt; -T &lt;table_name&gt; --columns --batch</code>  </p>
@@ -556,7 +589,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -575,7 +608,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>19</span>
+    <span>20</span>
     <span>Posts</span>
   </a>
   <a 
@@ -587,7 +620,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>17</span>
+    <span>20</span>
     <span>Tags</span>
   </a>
 </div>
@@ -620,7 +653,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -638,7 +671,7 @@
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">15</span>
+          <span class="categories-list-item-badge">16</span>
         </div>
       </a>
     
@@ -707,6 +740,12 @@
       </a>
     
       <a 
+        href="/tags/http-methods/" 
+        title="http-methods">
+        <div class="tags-list-item">http-methods</div>
+      </a>
+    
+      <a 
         href="/tags/ftp/" 
         title="ftp">
         <div class="tags-list-item">ftp</div>
@@ -722,12 +761,6 @@
         href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" 
         title="内网穿透">
         <div class="tags-list-item">内网穿透</div>
-      </a>
-    
-      <a 
-        href="/tags/http-methods/" 
-        title="http-methods">
-        <div class="tags-list-item">http-methods</div>
       </a>
     
       <a 
@@ -749,21 +782,21 @@
       </a>
     
       <a 
+        href="/tags/searchsploit/" 
+        title="searchsploit">
+        <div class="tags-list-item">searchsploit</div>
+      </a>
+    
+      <a 
+        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
+        title="脏牛提权">
+        <div class="tags-list-item">脏牛提权</div>
+      </a>
+    
+      <a 
         href="/tags/CSRF/" 
         title="CSRF">
         <div class="tags-list-item">CSRF</div>
-      </a>
-    
-      <a 
-        href="/tags/getshell/" 
-        title="getshell">
-        <div class="tags-list-item">getshell</div>
-      </a>
-    
-      <a 
-        href="/tags/FileInclusion/" 
-        title="FileInclusion">
-        <div class="tags-list-item">FileInclusion</div>
       </a>
     
   </div>
@@ -784,7 +817,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
     </article>
   
   
@@ -799,6 +832,11 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-22</div>
+        <a href="/9f3820f2.html"><div class="recent-posts-item-content">Vulnhub|Lampiao</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-21</div>
         <a href="/4d5d77bb.html"><div class="recent-posts-item-content">DVWA|FileInclusion</div></a>
       </div>
@@ -811,11 +849,6 @@
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-17</div>
         <a href="/b9aee5c3.html"><div class="recent-posts-item-content">DVWA|CommandInjection</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-10</div>
-        <a href="/2b3bf173.html"><div class="recent-posts-item-content">Tools</div></a>
       </div>
     
   </div>
