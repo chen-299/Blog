@@ -49,7 +49,7 @@
         content="2021-12-23">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-23">
+        content="2021-12-29">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>647 words</span>
+      <span>988 words</span>
     
   </div>
   
@@ -396,7 +396,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
 </blockquote>
 <blockquote>
 <h3 id="5-_u810F_u725B_u63D0_u6743"><a href="#5-_u810F_u725B_u63D0_u6743" class="headerlink" title="5.脏牛提权"></a>5.脏牛提权</h3><ul>
-<li>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/9f3820f2.html">Vulnhub|Lampiao</a>  </li>
+<li>使用实例：<a target="_blank" rel="noopener" href="https://chen-299.github.io/9f3820f2.html">Vulnhub|Lampiao</a>、<a target="_blank" rel="noopener" href="https://chen-299.github.io/3a00fd33">Vulnhub|Sumo</a>  </li>
 </ul>
 <p>把<a target="_blank" rel="noopener" href="https://github.com/aishee/scan-dirtycow">脏牛漏洞扫描器</a>，上传到靶机上。(ssh/wget)</p>
 <ul>
@@ -409,6 +409,15 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
 <blockquote>
 <p>编译源代码：<code>cat &lt;上传的脚本&gt; | grep g++</code>–找到编译语句，如<code>g++ -Wall -pedantic -O2 -std=c++11 -pthread -o dcow 40847.cpp -lutil</code>进行编译。<br>运行编译成的文件：如<code>./dcow</code>。  </p>
 </blockquote>
+</blockquote>
+<h3 id="6-_u52AB_u6301_u73AF_u5883_u53D8_u91CF_u63D0_u6743"><a href="#6-_u52AB_u6301_u73AF_u5883_u53D8_u91CF_u63D0_u6743" class="headerlink" title="6.劫持环境变量提权"></a>6.劫持环境变量提权</h3><blockquote>
+<ul>
+<li>使用实例：<a href="">Vulnhub|DarkHole1</a>  </li>
+</ul>
+<blockquote>
+<p><strong>概念：</strong>可通过<code>$PATH</code>查看当前系统下的环境变量，<strong>$PATH(一定是大写)</strong>这个变量的内容是由一堆目录所组成的，每个目录中间用冒号(:)来隔开，每个目录是有<strong>顺序</strong>的<strong>由左至右，优先级变低，新增的目录置于最左侧</strong>。<br><strong>条件：</strong>存在可执行文件为系统命令 <strong>(因为system函数是继承环境变量，通过替换环境变量可以达到执行任意命令)</strong>，且具有s权限 <strong>(s权限： 设置使文件在执行阶段具有文件所有者的权限，相当于临时拥有文件所有者的身份)</strong>，且uid为关键用户。  </p>
+</blockquote>
+<p><strong>操作：</strong>（以系统命令<strong>id</strong>为例）<br>创建一个id命令文件并赋权：<code>echo &quot;/bin/bash&quot;&gt;/tmp/id &amp;&amp; chmod 777 id</code><br>把当前目录/tmp增加到环境变量中：<code>export PATH=/tmp:$PATH</code><br>环境变量PATH设置后，执行id命令时会优先从/tmp下查找程序，故id命令会被劫持(即期望执行的是id，但实际执行的是id文件中的命令/bin/bash)。<br><strong>过程：</strong>其他用户执行可执行文件(./xxx)-执行系统命令(id)-以uid的身份执行恶意命令(/bin/bash)-获得uid身份的shell。  </p>
 </blockquote>
 
   </div>
@@ -440,15 +449,29 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
 </article>
 <div class="nav">
   
+    <div class="nav-item-prev">
+      <a 
+        href="/be97aa85.html" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">Prev</div>
+          
+            <div class="nav-title">概念题目 </div>
+          
+        </div>
+      </a>
+    </div>
+  
   
     <div class="nav-item-next">
       <a 
-        href="/3a00fd33.html" 
+        href="/e0b816a7.html" 
         class="nav-link">
         <div>
           <div class="nav-label">Next</div>
           
-            <div class="nav-title">Vulnhub|Sumo </div>
+            <div class="nav-title">“差异”题 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -466,7 +489,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743"><span class="toc-text">5.脏牛提权</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743"><span class="toc-text">5.脏牛提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-_u52AB_u6301_u73AF_u5883_u53D8_u91CF_u63D0_u6743"><span class="toc-text">6.劫持环境变量提权</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -485,7 +508,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>21</span>
+    <span>22</span>
     <span>Posts</span>
   </a>
   <a 
@@ -497,7 +520,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>20</span>
+    <span>22</span>
     <span>Tags</span>
   </a>
 </div>
@@ -530,7 +553,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743"><span class="toc-text">5.脏牛提权</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743"><span class="toc-text">5.脏牛提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-_u52AB_u6301_u73AF_u5883_u53D8_u91CF_u63D0_u6743"><span class="toc-text">6.劫持环境变量提权</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -548,7 +571,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">17</span>
+          <span class="categories-list-item-badge">18</span>
         </div>
       </a>
     
@@ -629,6 +652,18 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       </a>
     
       <a 
+        href="/tags/FileUpload/" 
+        title="FileUpload">
+        <div class="tags-list-item">FileUpload</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%8A%AB%E6%8C%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8F%90%E6%9D%83/" 
+        title="劫持环境变量提权">
+        <div class="tags-list-item">劫持环境变量提权</div>
+      </a>
+    
+      <a 
         href="/tags/ftp/" 
         title="ftp">
         <div class="tags-list-item">ftp</div>
@@ -664,18 +699,6 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
         <div class="tags-list-item">水平越权</div>
       </a>
     
-      <a 
-        href="/tags/weevely/" 
-        title="weevely">
-        <div class="tags-list-item">weevely</div>
-      </a>
-    
-      <a 
-        href="/tags/CSRF/" 
-        title="CSRF">
-        <div class="tags-list-item">CSRF</div>
-      </a>
-    
   </div>
 </div>
   </article>
@@ -694,7 +717,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743"><span class="toc-text">5.脏牛提权</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743_u9014_u5F84"><span class="toc-text">提权途径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_sudo"><span class="toc-text">1. sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_suid"><span class="toc-text">2. suid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><span class="toc-text">3. 通过在&#x2F;etc&#x2F;passwd添加一个root权限账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><span class="toc-text">4. 查看&#x2F;etc&#x2F;cron*下所含的所有文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u63D0_u6743"><span class="toc-text">提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_php"><span class="toc-text">1. php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_mysql"><span class="toc-text">2. mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_awk/mawk"><span class="toc-text">3. awk&#x2F;mawk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_python"><span class="toc-text">4. python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-_u810F_u725B_u63D0_u6743"><span class="toc-text">5.脏牛提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-_u52AB_u6301_u73AF_u5883_u53D8_u91CF_u63D0_u6743"><span class="toc-text">6.劫持环境变量提权</span></a></li></ol></li></ol>
     </article>
   
   
@@ -709,23 +732,23 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-29</div>
+        <a href="/480ec251.html"><div class="recent-posts-item-content">Vulnhub|DarkHole1</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-23</div>
+        <a href="/be97aa85.html"><div class="recent-posts-item-content">概念题目</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-23</div>
         <a href="/e2181504.html"><div class="recent-posts-item-content">提权</div></a>
       </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-23</div>
-        <a href="/3a00fd33.html"><div class="recent-posts-item-content">Vulnhub|Sumo</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-22</div>
-        <a href="/9f3820f2.html"><div class="recent-posts-item-content">Vulnhub|Lampiao</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-21</div>
-        <a href="/4d5d77bb.html"><div class="recent-posts-item-content">DVWA|FileInclusion</div></a>
+        <a href="/e0b816a7.html"><div class="recent-posts-item-content">“差异”题</div></a>
       </div>
     
   </div>
