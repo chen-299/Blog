@@ -411,7 +411,7 @@
 <blockquote>
 <p>错误的配置文件示例：<br><pre class="line-numbers language-php" data-language="php"><code class="language-php">location <span class="token operator">/</span>files <span class="token punctuation">&#123;</span>  
    alias <span class="token operator">/</span>home<span class="token operator">/</span><span class="token punctuation">;</span> <span class="token comment">//（原本的目的是为了让用户访问到/home/目录下的文件）  </span>
-<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>Nginx在配置别名（alias）的时候，如果头部忘记加<code>/</code>，将造成一个目录穿越漏洞。<br>payload <code>http://192.168.x.x:8081/files../</code>  </p>
+<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>Nginx在配置别名（alias）的时候，如果原名<strong>/files</strong>尾部忘记加<code>/</code>，将造成一个目录穿越漏洞。<br>payload <code>http://192.168.x.x:8081/files../</code>  </p>
 </blockquote>
 <p><strong>add_header失效</strong>  </p>
 <blockquote>
@@ -423,7 +423,7 @@ location <span class="token operator">=</span> <span class="token operator">/</s
 location <span class="token operator">=</span> <span class="token operator">/</span>test2 <span class="token punctuation">&#123;</span>  
    add_header <span class="token constant">X</span><span class="token operator">-</span>Content<span class="token operator">-</span>Type<span class="token operator">-</span>Options nosniff<span class="token punctuation">;</span> <span class="token comment">//但/test2的location中又有add_header设置了X-Content-Type-Options，导致父块add_header的设置被覆盖而失效  </span>
    rewrite <span class="token operator">^</span><span class="token punctuation">(</span><span class="token operator">.</span><span class="token operator">*</span><span class="token punctuation">)</span>$ <span class="token operator">/</span>xss<span class="token operator">.</span>html <span class="token keyword">break</span><span class="token punctuation">;</span>  
-<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>Nginx配置文件子块（server、location、if）中的<code>add_header</code>，将会覆盖父块中的<code>add_header</code>添加的HTTP头，造成一些安全隐患。</p>
+<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>Nginx配置文件子块（server、location、if）中的<code>add_header</code>，将会覆盖父块中的<code>add_header</code>添加的HTTP头，造成一些安全隐患。  </p>
 </blockquote>
 
   </div>
