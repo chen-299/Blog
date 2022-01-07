@@ -49,7 +49,7 @@
         content="2021-12-30">
       <meta 
         property="og:article:modified_time" 
-        content="2022-01-04">
+        content="2022-01-07">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -397,7 +397,7 @@
 <blockquote>
 <p>（a）<code>nikto -h 192.168.x.x -p 8080</code> 扫一下发现网站根目录下可以<strong>PUT</strong><br>（b）在根目录下刷新网站 – bp拦截 – 将请求改为<strong>PUT</strong>，写入jsp木马 – 重放<br>（c）这里请求包里PUT的文件名直接使用 <strong>/shell.jsp</strong> 不能成功上传，需在文件名后缀添加<code>/</code>、<code>::$DATA</code>、<code>%20</code>或<code>.</code>即可绕过 – 成功上传 – 蚁剑连接  </p>
 </blockquote>
-<h2 id="3-Aapache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><a href="#3-Aapache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09" class="headerlink" title="3.Aapache Tomcat AJP Arbitrary File Read / Include Vulnerability（CVE-2020-1938）"></a>3.Aapache Tomcat AJP Arbitrary File Read / Include Vulnerability（CVE-2020-1938）</h2><p><strong><font color=green>影响版本 : Apache Tomcat 6 / 7-7.0.100 / 8-8.5.51 / 9-9.0.31 </font></strong><br><strong><font color=green>Vul : 文件包含</font></strong><br><strong><font color=green>Path : tomcat/CVE-2020-1938</font></strong><br><strong>Breakthrough：</strong>  </p>
+<h2 id="3-Apache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><a href="#3-Apache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09" class="headerlink" title="3.Apache Tomcat AJP Arbitrary File Read / Include Vulnerability（CVE-2020-1938）"></a>3.Apache Tomcat AJP Arbitrary File Read / Include Vulnerability（CVE-2020-1938）</h2><p><strong><font color=green>影响版本 : Apache Tomcat 6 / 7-7.0.100 / 8-8.5.51 / 9-9.0.31 </font></strong><br><strong><font color=green>Vul : 文件包含</font></strong><br><strong><font color=green>Path : tomcat/CVE-2020-1938</font></strong><br><strong>Breakthrough：</strong>  </p>
 <blockquote>
 <p>这个不知道如何手动复现，直接利用了msf的<strong>ajp</strong>相关exp。  </p>
 </blockquote>
@@ -471,7 +471,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Tomcat7+_Weak_Password__26amp_3B_26amp_3B_Backend_Getshell_Vulnerability"><span class="toc-text">1.Tomcat7+ Weak Password &amp;&amp; Backend Getshell Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat_Arbitrary_Write-file_Vulnerability_through_PUT_Method__28CVE-2017-12615_29"><span class="toc-text">2.Tomcat Arbitrary Write-file Vulnerability through PUT Method (CVE-2017-12615)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Aapache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><span class="toc-text">3.Aapache Tomcat AJP Arbitrary File Read &#x2F; Include Vulnerability（CVE-2020-1938）</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Tomcat7+_Weak_Password__26amp_3B_26amp_3B_Backend_Getshell_Vulnerability"><span class="toc-text">1.Tomcat7+ Weak Password &amp;&amp; Backend Getshell Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat_Arbitrary_Write-file_Vulnerability_through_PUT_Method__28CVE-2017-12615_29"><span class="toc-text">2.Tomcat Arbitrary Write-file Vulnerability through PUT Method (CVE-2017-12615)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><span class="toc-text">3.Apache Tomcat AJP Arbitrary File Read &#x2F; Include Vulnerability（CVE-2020-1938）</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -535,7 +535,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Tomcat7+_Weak_Password__26amp_3B_26amp_3B_Backend_Getshell_Vulnerability"><span class="toc-text">1.Tomcat7+ Weak Password &amp;&amp; Backend Getshell Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat_Arbitrary_Write-file_Vulnerability_through_PUT_Method__28CVE-2017-12615_29"><span class="toc-text">2.Tomcat Arbitrary Write-file Vulnerability through PUT Method (CVE-2017-12615)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Aapache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><span class="toc-text">3.Aapache Tomcat AJP Arbitrary File Read &#x2F; Include Vulnerability（CVE-2020-1938）</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Tomcat7+_Weak_Password__26amp_3B_26amp_3B_Backend_Getshell_Vulnerability"><span class="toc-text">1.Tomcat7+ Weak Password &amp;&amp; Backend Getshell Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat_Arbitrary_Write-file_Vulnerability_through_PUT_Method__28CVE-2017-12615_29"><span class="toc-text">2.Tomcat Arbitrary Write-file Vulnerability through PUT Method (CVE-2017-12615)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><span class="toc-text">3.Apache Tomcat AJP Arbitrary File Read &#x2F; Include Vulnerability（CVE-2020-1938）</span></a></li></ol>
       </div>
     </article>
   
@@ -699,7 +699,7 @@
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Tomcat7+_Weak_Password__26amp_3B_26amp_3B_Backend_Getshell_Vulnerability"><span class="toc-text">1.Tomcat7+ Weak Password &amp;&amp; Backend Getshell Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat_Arbitrary_Write-file_Vulnerability_through_PUT_Method__28CVE-2017-12615_29"><span class="toc-text">2.Tomcat Arbitrary Write-file Vulnerability through PUT Method (CVE-2017-12615)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Aapache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><span class="toc-text">3.Aapache Tomcat AJP Arbitrary File Read &#x2F; Include Vulnerability（CVE-2020-1938）</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Tomcat7+_Weak_Password__26amp_3B_26amp_3B_Backend_Getshell_Vulnerability"><span class="toc-text">1.Tomcat7+ Weak Password &amp;&amp; Backend Getshell Vulnerability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Tomcat_Arbitrary_Write-file_Vulnerability_through_PUT_Method__28CVE-2017-12615_29"><span class="toc-text">2.Tomcat Arbitrary Write-file Vulnerability through PUT Method (CVE-2017-12615)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_Tomcat_AJP_Arbitrary_File_Read_/_Include_Vulnerability_uFF08CVE-2020-1938_uFF09"><span class="toc-text">3.Apache Tomcat AJP Arbitrary File Read &#x2F; Include Vulnerability（CVE-2020-1938）</span></a></li></ol>
     </article>
   
   
