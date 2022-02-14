@@ -49,7 +49,7 @@
         content="2021-12-15">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-30">
+        content="2022-02-14">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -321,7 +321,7 @@
     
     
       <span class="dot"></span>
-      <span>4.6k words</span>
+      <span>4.8k words</span>
     
   </div>
   
@@ -979,17 +979,17 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“PASSWORD_VERIFY_FUNCTION”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’PASSWORD_VERIFY_FUNCTION’</td>
 <td style="text-align:left">口令复杂度函数</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">utlpwdmg.sql文件的“–Check for the minimum length of the password”部分</td>
+<td style="text-align:left">utlpwdmg.sql文件的’–Check for the minimum length of the password’部分</td>
 <td style="text-align:left">口令最小长度规则</td>
-<td style="text-align:left">”length(password)&lt;”后的值≥8</td>
+<td style="text-align:left">‘length(password)&lt;’后的值≥8</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=“PASSWORD_LIFE_TIME”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’PASSWORD_LIFE_TIME”</td>
 <td style="text-align:left">口令过期时限</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
@@ -1006,33 +1006,33 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=”FAILED_LOGIN_ATTEMPTS”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’FAILED_LOGIN_ATTEMPTS’</td>
 <td style="text-align:left">登陆失败次数</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=”FAILED_LOCK_TIME”</td>
-<td style="text-align:left">登陆失败口令锁定时间</td>
+<td style="text-align:left">select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’PASSWORD_LOCK_TIME’</td>
+<td style="text-align:left">登陆失败锁定时长</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=“DEFAULT” and resource_name=”IDLE_TIME”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=’DEFAULT’ and resource_name=’IDLE_TIME’</td>
 <td style="text-align:left">登陆超时退出时长</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba_profiles where profile=”DEFAULT” and resource-name=”CPU-PER-SESSION”</td>
+<td style="text-align:left">select limit from dba_profiles where profile=’DEFAULT’ and resource-name=’CPU-PER-SESSION’</td>
 <td style="text-align:left">一个会话可以使用的CPU时间</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 <tr>
-<td style="text-align:left">select limit from dba-profiles where profile=”DEFAULT” and resource-name=”SESSION-PER-USERS”</td>
+<td style="text-align:left">select limit from dba-profiles where profile=’DEFAULT’ and resource-name=’SESSION-PER-USERS’</td>
 <td style="text-align:left">每个用户所允许的并行会话数</td>
 <td style="text-align:left">不为UNLIMITED</td>
 </tr>
 </tbody>
 </table>
-<p><strong>1.3 当进行远程管理时，应采取必要的措施防止鉴别信息在网络传输过程中被窃听。</strong>  </p>
+<p><strong>1.3 （默认符合）当进行远程管理时，应采取必要的措施防止鉴别信息在网络传输过程中被窃听。</strong>  </p>
 <table>
 <thead>
 <tr>
@@ -1077,9 +1077,9 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">select * from dba_users</td>
-<td style="text-align:left">dba_users策略</td>
-<td style="text-align:left">MGMT_UIEW、SYS、SYSTEM、DBSNMP、SYSMAN为启用状态，其他均为锁定状态</td>
+<td style="text-align:left">select username,account_status from dba_users</td>
+<td style="text-align:left">dba_users账户状态</td>
+<td style="text-align:left">超级管理员SYS、普通管理员SYSTEM、OEM工具集相关管理用户DBSNMP、SYSMAN、MGMT_VIEW均为启用状态，其他均为锁定状态</td>
 </tr>
 </tbody>
 </table>
@@ -1117,7 +1117,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>2.4 应授予管理用户所需的最小权限，实现管理用户的权限分离。</strong><br><strong>2.5 应由授权主题配置访问控制策略，访问控制策略规定主体对客体的访问控制规则。</strong><br><strong>2.6 访问控制的粒度应达到主体为用户级或进程级，客体为文件、数据库表级。</strong><br><strong>2.7 应对重要主体和客体设置安全标记，并控制主体对有安全标记信息资源的访问。</strong>  </p>
+<p><strong>2.4 应授予管理用户所需的最小权限，实现管理用户的权限分离。</strong><br><strong>2.5 （G3）应由授权主题配置访问控制策略，访问控制策略规定主体对客体的访问控制规则。</strong><br><strong>2.6 （G3）访问控制的粒度应达到主体为用户级或进程级，客体为文件、数据库表级。</strong><br><strong>2.7 （G3）应对重要主体和客体设置安全标记，并控制主体对有安全标记信息资源的访问。</strong>  </p>
 <table>
 <thead>
 <tr>
@@ -1167,9 +1167,9 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">select value from v$parameter where name=’audit_trail’</td>
+<td style="text-align:left">show parameter audit</td>
 <td style="text-align:left">查看是否开启审计功能</td>
-<td style="text-align:left">audit_trail 不为 none</td>
+<td style="text-align:left">audit_sys_operations=TRUE；audit_trail 不为 none</td>
 </tr>
 </tbody>
 </table>
@@ -1224,7 +1224,7 @@
 </table>
 </blockquote>
 <h4 id="4-_u5165_u4FB5_u9632_u8303-2"><a href="#4-_u5165_u4FB5_u9632_u8303-2" class="headerlink" title="4.入侵防范"></a>4.入侵防范</h4><blockquote>
-<p><strong>4.1 最小安装原则。</strong><br><strong>4.2 应通过设定终端接入方式或网络地址范围对通过网络进行管理的管理终端进行限制。</strong>   </p>
+<p><strong>（以实际情况为准）4.1 应遵循最小安装的原则，仅安装需要的组件和应用程序。</strong><br><strong>（不适用）4.2 应关闭不需要的系统服务、默认共享和高危端口。</strong><br><strong>4.3 应通过设定终端接入方式或网络地址范围对通过网络进行管理的管理终端进行限制。</strong>   </p>
 <table>
 <thead>
 <tr>
@@ -1241,7 +1241,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>4.3 应提供数据有效性校验功能，保证通过人机接口输入或通过通信接口输入的内容符合系统设定要求。</strong>   </p>
+<p><strong>（不适用）4.4 应提供数据有效性校验功能，保证通过人机接口输入或通过通信接口输入的内容符合系统设定要求。</strong><br><strong>（依据漏扫结果）4.5 应能发现可能存在的已知漏洞，并在经过充分测试评估后，及时修补漏洞。</strong></p>
 <table>
 <thead>
 <tr>
@@ -1258,6 +1258,7 @@
 </tr>
 </tbody>
 </table>
+<p><strong>（不适用）4.6 应能够检测到对重要节点进行入侵的行为，并在发生严重入侵事件时提供报警。</strong>  </p>
 </blockquote>
 
   </div>
@@ -1348,19 +1349,19 @@
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>25</span>
+    <span>29</span>
     <span>Posts</span>
   </a>
   <a 
     class="author-categories-count" 
     href="/categories">
-    <span>3</span>
+    <span>4</span>
     <span>Categories</span>
   </a>
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>26</span>
+    <span>30</span>
     <span>Tags</span>
   </a>
 </div>
@@ -1411,7 +1412,7 @@
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">21</span>
+          <span class="categories-list-item-badge">24</span>
         </div>
       </a>
     
@@ -1426,6 +1427,13 @@
         <div class="categories-list-item">
           等保测评-初级考试
           <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Linux/">
+        <div class="categories-list-item">
+          Linux
+          <span class="categories-list-item-badge">1</span>
         </div>
       </a>
     
@@ -1498,6 +1506,30 @@
       </a>
     
       <a 
+        href="/tags/Httpd/" 
+        title="Httpd">
+        <div class="tags-list-item">Httpd</div>
+      </a>
+    
+      <a 
+        href="/tags/Linux/" 
+        title="Linux">
+        <div class="tags-list-item">Linux</div>
+      </a>
+    
+      <a 
+        href="/tags/Fastjson/" 
+        title="Fastjson">
+        <div class="tags-list-item">Fastjson</div>
+      </a>
+    
+      <a 
+        href="/tags/Shiro/" 
+        title="Shiro">
+        <div class="tags-list-item">Shiro</div>
+      </a>
+    
+      <a 
         href="/tags/Nginx/" 
         title="Nginx">
         <div class="tags-list-item">Nginx</div>
@@ -1513,30 +1545,6 @@
         href="/tags/Tomcat/" 
         title="Tomcat">
         <div class="tags-list-item">Tomcat</div>
-      </a>
-    
-      <a 
-        href="/tags/FileUpload/" 
-        title="FileUpload">
-        <div class="tags-list-item">FileUpload</div>
-      </a>
-    
-      <a 
-        href="/tags/%E5%8A%AB%E6%8C%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8F%90%E6%9D%83/" 
-        title="劫持环境变量提权">
-        <div class="tags-list-item">劫持环境变量提权</div>
-      </a>
-    
-      <a 
-        href="/tags/ftp/" 
-        title="ftp">
-        <div class="tags-list-item">ftp</div>
-      </a>
-    
-      <a 
-        href="/tags/smb/" 
-        title="smb">
-        <div class="tags-list-item">smb</div>
       </a>
     
   </div>
@@ -1572,23 +1580,23 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-31</div>
-        <a href="/5821439b.html"><div class="recent-posts-item-content">Vulhub|Nginx集合</div></a>
+        <div class="recent-posts-item-title">2022-01-19</div>
+        <a href="/32c50423.html"><div class="recent-posts-item-content">Vulhub|HTTPD集合</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-30</div>
-        <a href="/338e3c98.html"><div class="recent-posts-item-content">Vulhub|Flink集合</div></a>
+        <div class="recent-posts-item-title">2022-01-19</div>
+        <a href="/88fdf392.html"><div class="recent-posts-item-content">Linux|命令集合</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-30</div>
-        <a href="/386f84ef.html"><div class="recent-posts-item-content">Vulhub|Tomcat集合</div></a>
+        <div class="recent-posts-item-title">2022-01-18</div>
+        <a href="/32c50423.html"><div class="recent-posts-item-content">Vulhub|Fastjson集合</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-12-29</div>
-        <a href="/480ec251.html"><div class="recent-posts-item-content">Vulnhub|DarkHole1</div></a>
+        <div class="recent-posts-item-title">2022-01-17</div>
+        <a href="/7d27907c.html"><div class="recent-posts-item-content">Vulhub|Shiro集合</div></a>
       </div>
     
   </div>
