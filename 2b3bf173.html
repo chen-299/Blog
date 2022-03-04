@@ -49,7 +49,7 @@
         content="2021-12-02">
       <meta 
         property="og:article:modified_time" 
-        content="2022-01-19">
+        content="2022-02-17">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -614,6 +614,9 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
 <li>POST请求中需要规定 <code>Content-Type: application/json</code>  </li>
 </ul>
 </blockquote>
+<h2 id="u626B_u76EE_u5F55"><a href="#u626B_u76EE_u5F55" class="headerlink" title="扫目录"></a>扫目录</h2><blockquote>
+<p>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u <a target="_blank" rel="noopener" href="http://192.168.228.131/">http://192.168.228.131/</a> -x php,html,txt<br>dirb <a target="_blank" rel="noopener" href="http://192.168.228.131">http://192.168.228.131</a><br>nikto -h 192.168.228.131  </p>
+</blockquote>
 
   </div>
   <div>
@@ -684,7 +687,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marshalsec_uFF08java_u53CD_u5E8F_u5217_u5316_u5DE5_u5177_uFF09"><span class="toc-text">marshalsec（java反序列化工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801"><span class="toc-text">反序列化代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F00_u542FRMI_u670D_u52A1"><span class="toc-text">开启RMI服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST_json_u5BF9_u8C61"><span class="toc-text">POST json对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u610F"><span class="toc-text">注意</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marshalsec_uFF08java_u53CD_u5E8F_u5217_u5316_u5DE5_u5177_uFF09"><span class="toc-text">marshalsec（java反序列化工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801"><span class="toc-text">反序列化代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F00_u542FRMI_u670D_u52A1"><span class="toc-text">开启RMI服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST_json_u5BF9_u8C61"><span class="toc-text">POST json对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u610F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u626B_u76EE_u5F55"><span class="toc-text">扫目录</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -748,7 +751,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marshalsec_uFF08java_u53CD_u5E8F_u5217_u5316_u5DE5_u5177_uFF09"><span class="toc-text">marshalsec（java反序列化工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801"><span class="toc-text">反序列化代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F00_u542FRMI_u670D_u52A1"><span class="toc-text">开启RMI服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST_json_u5BF9_u8C61"><span class="toc-text">POST json对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u610F"><span class="toc-text">注意</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marshalsec_uFF08java_u53CD_u5E8F_u5217_u5316_u5DE5_u5177_uFF09"><span class="toc-text">marshalsec（java反序列化工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801"><span class="toc-text">反序列化代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F00_u542FRMI_u670D_u52A1"><span class="toc-text">开启RMI服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST_json_u5BF9_u8C61"><span class="toc-text">POST json对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u610F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u626B_u76EE_u5F55"><span class="toc-text">扫目录</span></a></li></ol>
       </div>
     </article>
   
@@ -806,9 +809,27 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
   <div class="tags-list">
     
       <a 
-        href="/tags/%E6%8F%90%E6%9D%83/" 
-        title="提权">
-        <div class="tags-list-item">提权</div>
+        href="/tags/DVWA/" 
+        title="DVWA">
+        <div class="tags-list-item">DVWA</div>
+      </a>
+    
+      <a 
+        href="/tags/FileInclusion/" 
+        title="FileInclusion">
+        <div class="tags-list-item">FileInclusion</div>
+      </a>
+    
+      <a 
+        href="/tags/Tools/" 
+        title="Tools">
+        <div class="tags-list-item">Tools</div>
+      </a>
+    
+      <a 
+        href="/tags/CommandInjection/" 
+        title="CommandInjection">
+        <div class="tags-list-item">CommandInjection</div>
       </a>
     
       <a 
@@ -818,39 +839,21 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
       </a>
     
       <a 
-        href="/tags/Vulhub/" 
-        title="Vulhub">
-        <div class="tags-list-item">Vulhub</div>
+        href="/tags/%E6%8F%90%E6%9D%83/" 
+        title="提权">
+        <div class="tags-list-item">提权</div>
       </a>
     
       <a 
-        href="/tags/Metasoploit/" 
-        title="Metasoploit">
-        <div class="tags-list-item">Metasoploit</div>
+        href="/tags/getshell/" 
+        title="getshell">
+        <div class="tags-list-item">getshell</div>
       </a>
     
       <a 
-        href="/tags/Msfvenom/" 
-        title="Msfvenom">
-        <div class="tags-list-item">Msfvenom</div>
-      </a>
-    
-      <a 
-        href="/tags/%E5%8F%8D%E5%BC%B9shell/" 
-        title="反弹shell">
-        <div class="tags-list-item">反弹shell</div>
-      </a>
-    
-      <a 
-        href="/tags/DVWA/" 
-        title="DVWA">
-        <div class="tags-list-item">DVWA</div>
-      </a>
-    
-      <a 
-        href="/tags/searchsploit/" 
-        title="searchsploit">
-        <div class="tags-list-item">searchsploit</div>
+        href="/tags/CSRF/" 
+        title="CSRF">
+        <div class="tags-list-item">CSRF</div>
       </a>
     
       <a 
@@ -860,45 +863,45 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
       </a>
     
       <a 
-        href="/tags/MySQL/" 
-        title="MySQL">
-        <div class="tags-list-item">MySQL</div>
+        href="/tags/Metasoploit/" 
+        title="Metasoploit">
+        <div class="tags-list-item">Metasoploit</div>
       </a>
     
       <a 
-        href="/tags/HTTProxy/" 
-        title="HTTProxy">
-        <div class="tags-list-item">HTTProxy</div>
+        href="/tags/searchsploit/" 
+        title="searchsploit">
+        <div class="tags-list-item">searchsploit</div>
       </a>
     
       <a 
-        href="/tags/CGI/" 
-        title="CGI">
-        <div class="tags-list-item">CGI</div>
+        href="/tags/weevely/" 
+        title="weevely">
+        <div class="tags-list-item">weevely</div>
       </a>
     
       <a 
-        href="/tags/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/" 
-        title="目录穿越">
-        <div class="tags-list-item">目录穿越</div>
+        href="/tags/%E5%8F%8D%E5%BC%B9shell/" 
+        title="反弹shell">
+        <div class="tags-list-item">反弹shell</div>
       </a>
     
       <a 
-        href="/tags/SSRF/" 
-        title="SSRF">
-        <div class="tags-list-item">SSRF</div>
+        href="/tags/Msfvenom/" 
+        title="Msfvenom">
+        <div class="tags-list-item">Msfvenom</div>
       </a>
     
       <a 
-        href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
-        title="文件上传">
-        <div class="tags-list-item">文件上传</div>
+        href="/tags/%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83/" 
+        title="水平越权">
+        <div class="tags-list-item">水平越权</div>
       </a>
     
       <a 
-        href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" 
-        title="反序列化">
-        <div class="tags-list-item">反序列化</div>
+        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
+        title="SSH爆破">
+        <div class="tags-list-item">SSH爆破</div>
       </a>
     
   </div>
@@ -919,7 +922,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marshalsec_uFF08java_u53CD_u5E8F_u5217_u5316_u5DE5_u5177_uFF09"><span class="toc-text">marshalsec（java反序列化工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801"><span class="toc-text">反序列化代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F00_u542FRMI_u670D_u52A1"><span class="toc-text">开启RMI服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST_json_u5BF9_u8C61"><span class="toc-text">POST json对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u610F"><span class="toc-text">注意</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E38_u7528"><span class="toc-text">常用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76EE_u6807_u8BF4_u660E"><span class="toc-text">目标说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3B_u673A_u53D1_u73B0"><span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u626B_u63CF_u6280_u672F"><span class="toc-text">扫描技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7AEF_u53E3_u8BF4_u660E_u548C_u626B_u63CF_u89C4_u5219"><span class="toc-text">端口说明和扫描规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u670D_u52A1_u3001_u7248_u672C_u63A2_u6D4B"><span class="toc-text">服务、版本探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u811A_u672C_u626B_u63CF"><span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9632_u706B_u5899_u3001IDS_u7ED5_u8FC7_u548C_u6B3A_u9A97"><span class="toc-text">防火墙、IDS绕过和欺骗</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQLMAP"><span class="toc-text">SQLMAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u6570_u636E_u5E93_u540D"><span class="toc-text">爆数据库名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u8868_u540D"><span class="toc-text">爆表名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7206_u5B57_u6BB5_u540D"><span class="toc-text">爆字段名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5B57_u6BB5_u5185_u5BB9"><span class="toc-text">字段内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BD5_u63A2WAF"><span class="toc-text">试探WAF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tamper_u811A_u672C"><span class="toc-text">tamper脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msfvenom__u53CD_u5F39shell"><span class="toc-text">Msfvenom 反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PayLoads_List"><span class="toc-text">PayLoads List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Binaries_Payloads"><span class="toc-text">Binaries Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web_Payloads"><span class="toc-text">Web Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Scripting_Payloads"><span class="toc-text">Scripting Payloads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellCode_Payloads"><span class="toc-text">ShellCode Payloads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76D1_u542C-getshell"><span class="toc-text">监听-getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8681_u5251"><span class="toc-text">蚁剑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weevely"><span class="toc-text">weevely</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u751F_u6210_u540E_u95E8"><span class="toc-text">生成后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FDE_u63A5_u540E_u95E8"><span class="toc-text">连接后门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5Bcmd_5D"><span class="toc-text">[cmd]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#marshalsec_uFF08java_u53CD_u5E8F_u5217_u5316_u5DE5_u5177_uFF09"><span class="toc-text">marshalsec（java反序列化工具）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801"><span class="toc-text">反序列化代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5F00_u542FRMI_u670D_u52A1"><span class="toc-text">开启RMI服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST_json_u5BF9_u8C61"><span class="toc-text">POST json对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CE8_u610F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u626B_u76EE_u5F55"><span class="toc-text">扫目录</span></a></li></ol>
     </article>
   
   
@@ -940,7 +943,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-02-17</div>
-        <a href="/0.html"><div class="recent-posts-item-content">Vulhub|CGI集合</div></a>
+        <a href="/9f24c7bd.html"><div class="recent-posts-item-content">Vulhub|CGI集合</div></a>
       </div>
     
       <div class="recent-posts-item">
