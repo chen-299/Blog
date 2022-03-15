@@ -49,7 +49,7 @@
         content="2022-01-19">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-17">
+        content="2022-03-08">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>223 words</span>
+      <span>305 words</span>
     
   </div>
   
@@ -352,7 +352,10 @@
   <div 
     id="section" 
     class="post-content">
-    <h2 id="1-Docker"><a href="#1-Docker" class="headerlink" title="1.Docker"></a>1.Docker</h2><blockquote>
+    <h2 id="u7CFB_u7EDF_u547D_u4EE4"><a href="#u7CFB_u7EDF_u547D_u4EE4" class="headerlink" title="系统命令"></a>系统命令</h2><blockquote>
+<p><code>su</code> ： 仅切换身份。<br><code>su -</code> ： 身份与$PATH工作路径都切换。<br><code>su</code> 和 <code>su-</code> 最大的本质区别就是：前者只是切换了root身份，但Shell环境仍然是普通用户的Shell；而后者连用户和Shell环境一起切换成root身份了。（可通过<code>pwd</code> 和 <code>$PATH</code> 查看区别）</p>
+</blockquote>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><blockquote>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">// 查看 docker 守护进程运行状态  
 <span class="token function">service</span> docker status  
 
@@ -376,7 +379,7 @@ docker inspect <span class="token punctuation">[</span>docker_name 或 docker_id
 docker <span class="token builtin class-name">exec</span> -it <span class="token punctuation">[</span>docker_name 或 docker_id<span class="token punctuation">]</span> /bin/bash //创建tty终端，捕捉STDIN，在容器内启动一个交互式命令  
 docker <span class="token builtin class-name">exec</span> -d docker_name/docker_id <span class="token function">touch</span> /home/test.txt //-d表示后台进程，在指定容器中运行一个后台进程<span class="token string">'touch /home/test.txt'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </blockquote>
-<h2 id="2-Java"><a href="#2-Java" class="headerlink" title="2.Java"></a>2.Java</h2><blockquote>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><blockquote>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">// 切换java版本  
 update-alternatives --config java
 
@@ -453,7 +456,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Docker"><span class="toc-text">1.Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java"><span class="toc-text">2.Java</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7CFB_u7EDF_u547D_u4EE4"><span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-text">Java</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -517,7 +520,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Docker"><span class="toc-text">1.Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java"><span class="toc-text">2.Java</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7CFB_u7EDF_u547D_u4EE4"><span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-text">Java</span></a></li></ol>
       </div>
     </article>
   
@@ -695,7 +698,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Docker"><span class="toc-text">1.Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java"><span class="toc-text">2.Java</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7CFB_u7EDF_u547D_u4EE4"><span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-text">Java</span></a></li></ol>
     </article>
   
   
@@ -710,7 +713,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-07</div>
+        <div class="recent-posts-item-title">2022-03-14</div>
         <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
       </div>
     
