@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="/img/logo.png">
-  <title>Linux|命令集合</title>
+  <title>CBear.Blog</title>
   
     
       <meta 
         property="og:title" 
-        content="Linux|命令集合">
+        content="CBear.Blog">
     
     
       <meta 
         property="og:url" 
-        content="https://cbeartalk.top/88fdf392.html">
+        content="https://cbeartalk.top/0.html">
     
     
       <meta 
@@ -36,28 +36,20 @@
         content="/img/logo.png">
     
     
-      <meta 
-        property="og:img" 
-        content="Linux命令集合">
-    
     
       <meta 
         property="og:type" 
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2022-01-19">
+        content="2022-03-23">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-08">
+        content="2022-03-23">
       <meta 
         property="og:article:author" 
         content="CBear">
       
-        
-          <meta 
-            property="og:article:tag" 
-            content="Linux">
         
       
     
@@ -302,91 +294,29 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      Linux|命令集合
+      
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2022-01-19T01:24:07.469Z">
+    <time datetime="2022-03-23T01:47:03.704Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2022-01-19</span>
+      <span>2022-03-23</span>
     </time>
     
-      <span class="dot"></span>
-      
-        <a 
-          href="/categories/Linux/" 
-          class="post-meta-link">
-          Linux
-        </a>
-      
-    
     
       <span class="dot"></span>
-      <span>305 words</span>
+      <span>0 words</span>
     
   </div>
-  
-    <div 
-      class="post-meta post-show-meta" 
-      style="margin-top: -10px;">
-      <div style="display: flex; align-items: center;">
-        <i 
-          class="iconfont icon-biaoqian" 
-          style="margin-right: 2px; font-size: 1.15rem;">
-        </i>
-        
-          
-          <a 
-            href="/tags/Linux/" 
-            class="post-meta-link">
-            Linux
-          </a>
-        
-      </div>
-    </div>
   
   </header>
   <div 
     id="section" 
     class="post-content">
-    <h2 id="u7CFB_u7EDF_u547D_u4EE4"><a href="#u7CFB_u7EDF_u547D_u4EE4" class="headerlink" title="系统命令"></a>系统命令</h2><blockquote>
-<p><code>su</code> ： 仅切换身份。<br><code>su -</code> ： 身份与$PATH工作路径都切换。<br><code>su</code> 和 <code>su-</code> 最大的本质区别就是：前者只是切换了root身份，但Shell环境仍然是普通用户的Shell；而后者连用户和Shell环境一起切换成root身份了。（可通过<code>pwd</code> 和 <code>$PATH</code> 查看区别）</p>
-</blockquote>
-<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">// 查看 docker 守护进程运行状态  
-<span class="token function">service</span> docker status  
-
-// 启动/关闭/重启 docker 守护进程
-<span class="token function">service</span> docker start/stop/restart  
-
-// 返回所有容器和镜像的数量、docker使用的执行程序和存储驱动，以及docker的基本配置信息  
-docker info  
-
-// 显示正在运行的容器  
-docker <span class="token function">ps</span>  
-docker container <span class="token function">ls</span>  
-
-// 显示已安装的容器
-docker <span class="token function">ps</span> -a
-
-// 查看某容器所有状态信息<span class="token punctuation">(</span>ip<span class="token punctuation">..</span>.<span class="token punctuation">)</span>
-docker inspect <span class="token punctuation">[</span>docker_name 或 docker_id<span class="token punctuation">]</span>
-
-// 在已经启动的容器内部运行进程  
-docker <span class="token builtin class-name">exec</span> -it <span class="token punctuation">[</span>docker_name 或 docker_id<span class="token punctuation">]</span> /bin/bash //创建tty终端，捕捉STDIN，在容器内启动一个交互式命令  
-docker <span class="token builtin class-name">exec</span> -d docker_name/docker_id <span class="token function">touch</span> /home/test.txt //-d表示后台进程，在指定容器中运行一个后台进程<span class="token string">'touch /home/test.txt'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</blockquote>
-<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">// 切换java版本  
-update-alternatives --config java
-
-// 设置java版本优先级  
-update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bin/java <span class="token number">1110</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</blockquote>
-
+    
   </div>
   <div>
     
@@ -405,8 +335,8 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://cbeartalk.top/88fdf392.html">
-            https://cbeartalk.top/88fdf392.html
+            href="https://cbeartalk.top/0.html">
+            https://cbeartalk.top/0.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span><a target="_blank" rel="noopener">转载请注明出处！</a></p>
@@ -416,29 +346,15 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/2ba89e8d.html" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">Prev</div>
-          
-            <div class="nav-title">Vulhub|HTTPD集合 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/32c50423.html" 
+        href="/44cd77ef.html" 
         class="nav-link">
         <div>
           <div class="nav-label">Next</div>
           
-            <div class="nav-title">Vulhub|Fastjson集合 </div>
+            <div class="nav-title">Vulhub|PostgreSQL集合 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -456,7 +372,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7CFB_u7EDF_u547D_u4EE4"><span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-text">Java</span></a></li></ol>
+
 </div></main>
             <aside class="left-column">
               
@@ -520,7 +436,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7CFB_u7EDF_u547D_u4EE4"><span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-text">Java</span></a></li></ol>
+
       </div>
     </article>
   
@@ -698,7 +614,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7CFB_u7EDF_u547D_u4EE4"><span class="toc-text">系统命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-text">Java</span></a></li></ol>
+
     </article>
   
   
