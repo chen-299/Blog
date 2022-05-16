@@ -49,7 +49,7 @@
         content="2022-01-19">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-16">
+        content="2022-05-14">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -432,7 +432,7 @@ Accept-Language: en
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
 Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
-<h2 id="3-Apache_HTTP_Server__u8DEF_u5F84_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><a href="#3-Apache_HTTP_Server__u8DEF_u5F84_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09" class="headerlink" title="3.Apache HTTP Server 路径穿越漏洞（CVE-2021-41773、CVE-2021-42013）"></a>3.Apache HTTP Server 路径穿越漏洞（CVE-2021-41773、CVE-2021-42013）</h2><p><strong><font color=green>影响版本 : Apache HTTPD 2.4.49 - 2.4.50</font></strong><br><strong><font color=green>Path : httpd/CVE-2021-41773、CVE-2021-42013</font></strong><br><strong><font color=green>Vul : 目录穿越</font></strong><br><strong>Breakthrough：</strong>  </p>
+<h2 id="3-Apache_HTTP_Server__u76EE_u5F55_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><a href="#3-Apache_HTTP_Server__u76EE_u5F55_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09" class="headerlink" title="3.Apache HTTP Server 目录穿越漏洞（CVE-2021-41773、CVE-2021-42013）"></a>3.Apache HTTP Server 目录穿越漏洞（CVE-2021-41773、CVE-2021-42013）</h2><p><strong><font color=green>影响版本 : Apache HTTPD 2.4.49 - 2.4.50</font></strong><br><strong><font color=green>Path : httpd/CVE-2021-41773、CVE-2021-42013</font></strong><br><strong><font color=green>Vul : 目录穿越</font></strong><br><strong>Breakthrough：</strong>  </p>
 <blockquote>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">// /icons/必须是一个存在且可访问的目录
 <span class="token function">curl</span> -v --path-as-is http://your-ip:8080/icons/.%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
@@ -520,7 +520,7 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache_HTTPD__u6362_u884C_u89E3_u6790_u6F0F_u6D1E_uFF08CVE-2017-15715_uFF09"><span class="toc-text">1.Apache HTTPD 换行解析漏洞（CVE-2017-15715）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Apache_HTTP_Server_2-4-48_mod_proxy_SSRF_u6F0F_u6D1E_uFF08CVE-2021-40438_uFF09"><span class="toc-text">2.Apache HTTP Server 2.4.48 mod_proxy SSRF漏洞（CVE-2021-40438）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_HTTP_Server__u8DEF_u5F84_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><span class="toc-text">3.Apache HTTP Server 路径穿越漏洞（CVE-2021-41773、CVE-2021-42013）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Apache_HTTPD__u591A_u540E_u7F00_u89E3_u6790_u6F0F_u6D1E"><span class="toc-text">4.Apache HTTPD 多后缀解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Apache_SSI__u8FDC_u7A0B_u547D_u4EE4_u6267_u884C_u6F0F_u6D1E"><span class="toc-text">5.Apache SSI 远程命令执行漏洞</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache_HTTPD__u6362_u884C_u89E3_u6790_u6F0F_u6D1E_uFF08CVE-2017-15715_uFF09"><span class="toc-text">1.Apache HTTPD 换行解析漏洞（CVE-2017-15715）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Apache_HTTP_Server_2-4-48_mod_proxy_SSRF_u6F0F_u6D1E_uFF08CVE-2021-40438_uFF09"><span class="toc-text">2.Apache HTTP Server 2.4.48 mod_proxy SSRF漏洞（CVE-2021-40438）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_HTTP_Server__u76EE_u5F55_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><span class="toc-text">3.Apache HTTP Server 目录穿越漏洞（CVE-2021-41773、CVE-2021-42013）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Apache_HTTPD__u591A_u540E_u7F00_u89E3_u6790_u6F0F_u6D1E"><span class="toc-text">4.Apache HTTPD 多后缀解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Apache_SSI__u8FDC_u7A0B_u547D_u4EE4_u6267_u884C_u6F0F_u6D1E"><span class="toc-text">5.Apache SSI 远程命令执行漏洞</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -539,7 +539,7 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>36</span>
+    <span>37</span>
     <span>Posts</span>
   </a>
   <a 
@@ -551,7 +551,7 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>45</span>
+    <span>46</span>
     <span>Tags</span>
   </a>
 </div>
@@ -584,7 +584,7 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache_HTTPD__u6362_u884C_u89E3_u6790_u6F0F_u6D1E_uFF08CVE-2017-15715_uFF09"><span class="toc-text">1.Apache HTTPD 换行解析漏洞（CVE-2017-15715）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Apache_HTTP_Server_2-4-48_mod_proxy_SSRF_u6F0F_u6D1E_uFF08CVE-2021-40438_uFF09"><span class="toc-text">2.Apache HTTP Server 2.4.48 mod_proxy SSRF漏洞（CVE-2021-40438）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_HTTP_Server__u8DEF_u5F84_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><span class="toc-text">3.Apache HTTP Server 路径穿越漏洞（CVE-2021-41773、CVE-2021-42013）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Apache_HTTPD__u591A_u540E_u7F00_u89E3_u6790_u6F0F_u6D1E"><span class="toc-text">4.Apache HTTPD 多后缀解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Apache_SSI__u8FDC_u7A0B_u547D_u4EE4_u6267_u884C_u6F0F_u6D1E"><span class="toc-text">5.Apache SSI 远程命令执行漏洞</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache_HTTPD__u6362_u884C_u89E3_u6790_u6F0F_u6D1E_uFF08CVE-2017-15715_uFF09"><span class="toc-text">1.Apache HTTPD 换行解析漏洞（CVE-2017-15715）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Apache_HTTP_Server_2-4-48_mod_proxy_SSRF_u6F0F_u6D1E_uFF08CVE-2021-40438_uFF09"><span class="toc-text">2.Apache HTTP Server 2.4.48 mod_proxy SSRF漏洞（CVE-2021-40438）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_HTTP_Server__u76EE_u5F55_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><span class="toc-text">3.Apache HTTP Server 目录穿越漏洞（CVE-2021-41773、CVE-2021-42013）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Apache_HTTPD__u591A_u540E_u7F00_u89E3_u6790_u6F0F_u6D1E"><span class="toc-text">4.Apache HTTPD 多后缀解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Apache_SSI__u8FDC_u7A0B_u547D_u4EE4_u6267_u884C_u6F0F_u6D1E"><span class="toc-text">5.Apache SSI 远程命令执行漏洞</span></a></li></ol>
       </div>
     </article>
   
@@ -602,7 +602,7 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">30</span>
+          <span class="categories-list-item-badge">31</span>
         </div>
       </a>
     
@@ -715,6 +715,12 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
       </a>
     
       <a 
+        href="/tags/Nacos/" 
+        title="Nacos">
+        <div class="tags-list-item">Nacos</div>
+      </a>
+    
+      <a 
         href="/tags/SQL%E6%B3%A8%E5%85%A5/" 
         title="SQL注入">
         <div class="tags-list-item">SQL注入</div>
@@ -738,12 +744,6 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
         <div class="tags-list-item">XXE</div>
       </a>
     
-      <a 
-        href="/tags/Zabbix/" 
-        title="Zabbix">
-        <div class="tags-list-item">Zabbix</div>
-      </a>
-    
   </div>
 </div>
   </article>
@@ -762,7 +762,7 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache_HTTPD__u6362_u884C_u89E3_u6790_u6F0F_u6D1E_uFF08CVE-2017-15715_uFF09"><span class="toc-text">1.Apache HTTPD 换行解析漏洞（CVE-2017-15715）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Apache_HTTP_Server_2-4-48_mod_proxy_SSRF_u6F0F_u6D1E_uFF08CVE-2021-40438_uFF09"><span class="toc-text">2.Apache HTTP Server 2.4.48 mod_proxy SSRF漏洞（CVE-2021-40438）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_HTTP_Server__u8DEF_u5F84_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><span class="toc-text">3.Apache HTTP Server 路径穿越漏洞（CVE-2021-41773、CVE-2021-42013）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Apache_HTTPD__u591A_u540E_u7F00_u89E3_u6790_u6F0F_u6D1E"><span class="toc-text">4.Apache HTTPD 多后缀解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Apache_SSI__u8FDC_u7A0B_u547D_u4EE4_u6267_u884C_u6F0F_u6D1E"><span class="toc-text">5.Apache SSI 远程命令执行漏洞</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Apache_HTTPD__u6362_u884C_u89E3_u6790_u6F0F_u6D1E_uFF08CVE-2017-15715_uFF09"><span class="toc-text">1.Apache HTTPD 换行解析漏洞（CVE-2017-15715）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Apache_HTTP_Server_2-4-48_mod_proxy_SSRF_u6F0F_u6D1E_uFF08CVE-2021-40438_uFF09"><span class="toc-text">2.Apache HTTP Server 2.4.48 mod_proxy SSRF漏洞（CVE-2021-40438）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Apache_HTTP_Server__u76EE_u5F55_u7A7F_u8D8A_u6F0F_u6D1E_uFF08CVE-2021-41773_u3001CVE-2021-42013_uFF09"><span class="toc-text">3.Apache HTTP Server 目录穿越漏洞（CVE-2021-41773、CVE-2021-42013）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Apache_HTTPD__u591A_u540E_u7F00_u89E3_u6790_u6F0F_u6D1E"><span class="toc-text">4.Apache HTTPD 多后缀解析漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Apache_SSI__u8FDC_u7A0B_u547D_u4EE4_u6267_u884C_u6F0F_u6D1E"><span class="toc-text">5.Apache SSI 远程命令执行漏洞</span></a></li></ol>
     </article>
   
   
@@ -777,6 +777,11 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-05-07</div>
+        <a href="/36be6aa4.html"><div class="recent-posts-item-content">Vulhub|Nacos集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-20</div>
         <a href="/d0179d0c.html"><div class="recent-posts-item-content">Vulnhub|DarkHole2</div></a>
       </div>
@@ -789,11 +794,6 @@ Connection: close<span aria-hidden="true" class="line-numbers-rows"><span></span
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-23</div>
         <a href="/7293a273.html"><div class="recent-posts-item-content">Vulhub|Zabbix集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-14</div>
-        <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
       </div>
     
   </div>

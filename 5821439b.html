@@ -49,7 +49,7 @@
         content="2021-12-31">
       <meta 
         property="og:article:modified_time" 
-        content="2022-04-20">
+        content="2022-05-16">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -405,7 +405,7 @@
 <blockquote>
 <p>错误的配置文件示例：<br><pre class="line-numbers language-php" data-language="php"><code class="language-php">location <span class="token operator">/</span> <span class="token punctuation">&#123;</span>  
    <span class="token keyword">return</span> <span class="token number">302</span> https<span class="token punctuation">:</span><span class="token comment">//$host$uri; //（原本的目的是为了让http的请求跳转到https上）  </span>
-<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>Nginx会将<code>$uri</code>进行解码，导致传入<code>%0a%0d</code>即可引入换行符，造成CRLF注入漏洞。<br>（a）payload <code>http://192.168.x.x:8080/%0a%0dSet-Cookie:%20a=1</code> //注入Set-Cookie头，设置了一个SESSION，造成一个<strong>会话固定漏洞</strong><br>（b）payload <code>http://192.168.x.x:8080/%0a%0dX-XSS-Protection:%200%0a%0d%0a%0d&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;</code> //注入<strong>X-XSS-Protection:0</strong>绕过浏览器Fliter，进行xss注入  </p>
+<span class="token punctuation">&#125;</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>Nginx会将<code>$uri</code>进行解码，导致传入<code>%0a%0d</code>即可引入换行符，造成CRLF注入漏洞。<br>（a）payload <code>http://192.168.x.x:8080/%0a%0dSet-Cookie:%20a=1</code> //注入Set-Cookie头，设置了一个SESSION，造成一个<strong>会话固定漏洞</strong><br>（b）payload <code>http://192.168.x.x:8080/%0a%0dX-XSS-Protection:%200%0a%0d%0a%0d&lt;script&gt;alert(299)&lt;/script&gt;</code> //注入<strong>X-XSS-Protection:0</strong>绕过浏览器Fliter，进行xss注入  </p>
 </blockquote>
 <p><strong>目录穿越</strong>  </p>
 <blockquote>
@@ -514,7 +514,7 @@ location <span class="token operator">=</span> <span class="token operator">/</s
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>36</span>
+    <span>37</span>
     <span>Posts</span>
   </a>
   <a 
@@ -526,7 +526,7 @@ location <span class="token operator">=</span> <span class="token operator">/</s
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>45</span>
+    <span>46</span>
     <span>Tags</span>
   </a>
 </div>
@@ -577,7 +577,7 @@ location <span class="token operator">=</span> <span class="token operator">/</s
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">30</span>
+          <span class="categories-list-item-badge">31</span>
         </div>
       </a>
     
@@ -690,6 +690,12 @@ location <span class="token operator">=</span> <span class="token operator">/</s
       </a>
     
       <a 
+        href="/tags/Nacos/" 
+        title="Nacos">
+        <div class="tags-list-item">Nacos</div>
+      </a>
+    
+      <a 
         href="/tags/SQL%E6%B3%A8%E5%85%A5/" 
         title="SQL注入">
         <div class="tags-list-item">SQL注入</div>
@@ -711,12 +717,6 @@ location <span class="token operator">=</span> <span class="token operator">/</s
         href="/tags/XXE/" 
         title="XXE">
         <div class="tags-list-item">XXE</div>
-      </a>
-    
-      <a 
-        href="/tags/Zabbix/" 
-        title="Zabbix">
-        <div class="tags-list-item">Zabbix</div>
       </a>
     
   </div>
@@ -752,6 +752,11 @@ location <span class="token operator">=</span> <span class="token operator">/</s
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-05-07</div>
+        <a href="/36be6aa4.html"><div class="recent-posts-item-content">Vulhub|Nacos集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-20</div>
         <a href="/d0179d0c.html"><div class="recent-posts-item-content">Vulnhub|DarkHole2</div></a>
       </div>
@@ -764,11 +769,6 @@ location <span class="token operator">=</span> <span class="token operator">/</s
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-23</div>
         <a href="/7293a273.html"><div class="recent-posts-item-content">Vulhub|Zabbix集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-14</div>
-        <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
       </div>
     
   </div>

