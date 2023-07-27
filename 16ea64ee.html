@@ -14,7 +14,7 @@
     id="theme-color">
   <meta 
     name="description" 
-    content="CBear.Blog">
+    content="C6ear.Blog">
   <link 
     rel="icon" 
     href="/img/logo.png">
@@ -52,7 +52,7 @@
         content="2023-07-27">
       <meta 
         property="og:article:author" 
-        content="CBear">
+        content="C6ear">
       
         
           <meta 
@@ -228,7 +228,7 @@
           src="/img/logo.png" 
           alt="blog logo">
       
-      <span class="navbar-logo-dsc">CBear.Blog</span>
+      <span class="navbar-logo-dsc">C6ear.Blog</span>
     </span>
   </div>
   <div class="navbar-menu">
@@ -588,12 +588,13 @@ root@morpheus:/home/cypher<span class="token comment"># </span>
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 0             0x0             PNG image, 853 x 480, 8-bit&#x2F;color RGBA, non-interlaced
-138           0x8A            Zlib compressed data, best compression<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>!! cypher-neo.png 由两个文件（PNG_ZIP）组成，分离一下：<br><code>`</code>shell</p>
-</blockquote>
-<p>┌──(root㉿kali)-[~/test]<br>└─# binwalk -e cypher-neo.png –run-as=root </p>
-<h2 id="DECIMAL_HEXADECIMAL_DESCRIPTION"><a href="#DECIMAL_HEXADECIMAL_DESCRIPTION" class="headerlink" title="DECIMAL       HEXADECIMAL     DESCRIPTION"></a>DECIMAL       HEXADECIMAL     DESCRIPTION</h2><p>0             0x0             PNG image, 853 x 480, 8-bit/color RGBA, non-interlaced<br>138           0x8A            Zlib compressed data, best compression</p>
-<blockquote>
-<p>关注<strong>Zlib</strong>文件，相关链接：<code>https://www.cnblogs.com/ainsliaea/p/15780903.html</code></p>
+138           0x8A            Zlib compressed data, best compression<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>!cypher-neo.png 由两个文件（PNG_ZIP）组成，分离一下：<br><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/test<span class="token punctuation">]</span>
+└─<span class="token comment"># binwalk -e cypher-neo.png --run-as=root </span>
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+<span class="token number">0</span>             0x0             PNG image, <span class="token number">853</span> x <span class="token number">480</span>, <span class="token number">8</span>-bit/color RGBA, non-interlaced
+<span class="token number">138</span>           0x8A            Zlib compressed data, best compression<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>关注<strong>Zlib</strong>文件，相关链接：<code>https://www.cnblogs.com/ainsliaea/p/15780903.html</code></p>
 </blockquote>
 
   </div>
@@ -607,7 +608,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
             target="_blank" 
             rel="nofollow noopener noreferrer" 
             href="/about">
-            CBear
+            C6ear
           </a>
         </p>
         <p>
@@ -651,7 +652,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_u6D4B_u8BD5"><span class="toc-text">2.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_22_u7AEF_u53E3"><span class="toc-text">2.1 22端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_80_u7AEF_u53E3"><span class="toc-text">2.2 80端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_81_u7AEF_u53E3"><span class="toc-text">2.3 81端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4__u76EE_u5F55_u626B_u63CF"><span class="toc-text">2.4 目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u5F85_u89E3_u51B3_zlib_u89E3_u538B_u7F29"><span class="toc-text">3.待解决 zlib解压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DECIMAL_HEXADECIMAL_DESCRIPTION"><span class="toc-text">DECIMAL       HEXADECIMAL     DESCRIPTION</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_u6D4B_u8BD5"><span class="toc-text">2.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_22_u7AEF_u53E3"><span class="toc-text">2.1 22端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_80_u7AEF_u53E3"><span class="toc-text">2.2 80端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_81_u7AEF_u53E3"><span class="toc-text">2.3 81端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4__u76EE_u5F55_u626B_u63CF"><span class="toc-text">2.4 目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u5F85_u89E3_u51B3_zlib_u89E3_u538B_u7F29"><span class="toc-text">3.待解决 zlib解压缩</span></a></li></ol>
 </div></main>
             <aside class="left-column">
               
@@ -664,7 +665,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
     height="88"
     alt="author avatar">
 
-<p class="author-name">CBear</p>
+<p class="author-name">C6ear</p>
 <p class="author-description">Stay sharp, stay alone.</p>
 <div class="author-message">
   <a 
@@ -715,7 +716,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_u6D4B_u8BD5"><span class="toc-text">2.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_22_u7AEF_u53E3"><span class="toc-text">2.1 22端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_80_u7AEF_u53E3"><span class="toc-text">2.2 80端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_81_u7AEF_u53E3"><span class="toc-text">2.3 81端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4__u76EE_u5F55_u626B_u63CF"><span class="toc-text">2.4 目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u5F85_u89E3_u51B3_zlib_u89E3_u538B_u7F29"><span class="toc-text">3.待解决 zlib解压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DECIMAL_HEXADECIMAL_DESCRIPTION"><span class="toc-text">DECIMAL       HEXADECIMAL     DESCRIPTION</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_u6D4B_u8BD5"><span class="toc-text">2.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_22_u7AEF_u53E3"><span class="toc-text">2.1 22端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_80_u7AEF_u53E3"><span class="toc-text">2.2 80端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_81_u7AEF_u53E3"><span class="toc-text">2.3 81端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4__u76EE_u5F55_u626B_u63CF"><span class="toc-text">2.4 目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u5F85_u89E3_u51B3_zlib_u89E3_u538B_u7F29"><span class="toc-text">3.待解决 zlib解压缩</span></a></li></ol>
       </div>
     </article>
   
@@ -900,7 +901,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
     style="padding-right: 2px;">
   </i>TOC
 </div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_u6D4B_u8BD5"><span class="toc-text">2.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_22_u7AEF_u53E3"><span class="toc-text">2.1 22端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_80_u7AEF_u53E3"><span class="toc-text">2.2 80端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_81_u7AEF_u53E3"><span class="toc-text">2.3 81端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4__u76EE_u5F55_u626B_u63CF"><span class="toc-text">2.4 目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u5F85_u89E3_u51B3_zlib_u89E3_u538B_u7F29"><span class="toc-text">3.待解决 zlib解压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DECIMAL_HEXADECIMAL_DESCRIPTION"><span class="toc-text">DECIMAL       HEXADECIMAL     DESCRIPTION</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-_u9776_u673A_u5B89_u88C5"><span class="toc-text">0.靶机安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-_u4FE1_u606F_u6536_u96C6"><span class="toc-text">1.信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-_u6D4B_u8BD5"><span class="toc-text">2.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_22_u7AEF_u53E3"><span class="toc-text">2.1 22端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_80_u7AEF_u53E3"><span class="toc-text">2.2 80端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_81_u7AEF_u53E3"><span class="toc-text">2.3 81端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4__u76EE_u5F55_u626B_u63CF"><span class="toc-text">2.4 目录扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-_u5F85_u89E3_u51B3_zlib_u89E3_u538B_u7F29"><span class="toc-text">3.待解决 zlib解压缩</span></a></li></ol>
     </article>
   
   
@@ -959,7 +960,7 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
         <a 
           href="/" 
           class="footer-link">
-          CBear.Blog
+          C6ear.Blog
         </a>
       </div>
     </div>
