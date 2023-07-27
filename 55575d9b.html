@@ -369,25 +369,25 @@
 <p>不再赘述，可看之前的<strong>Vulnhub</strong>相关文章。  </p>
 </blockquote>
 <h2 id="1-_u4FE1_u606F_u6536_u96C6"><a href="#1-_u4FE1_u606F_u6536_u96C6" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──(root㉿kali)-[&#x2F;var&#x2F;logs]
-└─# nmap -A -p- 192.168.81.129        
-Starting Nmap 7.92 ( https:&#x2F;&#x2F;nmap.org ) at 2022-04-19 21:07 CDT
-Nmap scan report for 192.168.81.129
-Host is up (0.00052s latency).                                                                                    
-Not shown: 65533 closed tcp ports (reset)                                                                         
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">┌──<span class="token punctuation">(</span>root㉿kali<span class="token punctuation">)</span>-<span class="token punctuation">[</span>/var/logs<span class="token punctuation">]</span>
+└─<span class="token comment"># nmap -A -p- 192.168.81.129        </span>
+Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2022</span>-04-19 <span class="token number">21</span>:07 CDT
+Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.81.129
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00052s latency<span class="token punctuation">)</span>.                                                                                    
+Not shown: <span class="token number">65533</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>                                                                         
 PORT     STATE SERVICE VERSION                                                                                    
-80&#x2F;tcp   open  http    Apache httpd 2.4.27 ((Ubuntu))                                                             
-| http-robots.txt: 2 disallowed entries                                                                           
-|_&#x2F;xxe&#x2F;* &#x2F;admin.php                                                                                               
-|_http-title: Apache2 Ubuntu Default Page: It works                                                               
-|_http-server-header: Apache&#x2F;2.4.27 (Ubuntu)                                                                      
-5355&#x2F;tcp open  llmnr?                                                                                             
-MAC Address: 00:0C:29:55:D1:56 (VMware)                                                                           
+<span class="token number">80</span>/tcp   <span class="token function">open</span>  http    Apache httpd <span class="token number">2.4</span>.27 <span class="token variable"><span class="token punctuation">((</span>Ubuntu<span class="token punctuation">))</span></span>                                                             
+<span class="token operator">|</span> http-robots.txt: <span class="token number">2</span> disallowed entries                                                                           
+<span class="token operator">|</span>_/xxe/* /admin.php                                                                                               
+<span class="token operator">|</span>_http-title: Apache2 Ubuntu Default Page: It works                                                               
+<span class="token operator">|</span>_http-server-header: Apache/2.4.27 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>                                                                      
+<span class="token number">5355</span>/tcp <span class="token function">open</span>  llmnr?                                                                                             
+MAC Address: 00:0C:29:55:D1:56 <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span>                                                                           
 Device type: general purpose                                                                                      
-Running: Linux 3.X|4.X                                                                                            
-OS CPE: cpe:&#x2F;o:linux:linux_kernel:3 cpe:&#x2F;o:linux:linux_kernel:4                                                   
-OS details: Linux 3.2 - 4.9                                                                                       
-Network Distance: 1 hop                 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Running: Linux <span class="token number">3</span>.X<span class="token operator">|</span><span class="token number">4</span>.X                                                                                            
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4                                                   
+OS details: Linux <span class="token number">3.2</span> - <span class="token number">4.9</span>                                                                                       
+Network Distance: <span class="token number">1</span> hop                 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>robots.txt记录了两个路径：<code>/xxe/</code>和<code>/admin.php</code>。  </p>
 </blockquote>
 <h2 id="2-_u6D4B_u8BD5"><a href="#2-_u6D4B_u8BD5" class="headerlink" title="2.测试"></a>2.测试</h2><blockquote>
@@ -593,7 +593,7 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>40</span>
+    <span>41</span>
     <span>Posts</span>
   </a>
   <a 
@@ -605,7 +605,7 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>51</span>
+    <span>54</span>
     <span>Tags</span>
   </a>
 </div>
@@ -653,23 +653,23 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
   </div>
   <div class="categories-list">
     
+      <a href="/categories/Linux/">
+        <div class="categories-list-item">
+          Linux
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
       <a href="/categories/SQL/">
         <div class="categories-list-item">
           SQL
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/Linux/">
-        <div class="categories-list-item">
-          Linux
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
@@ -752,6 +752,24 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
       </a>
     
       <a 
+        href="/tags/searchsploit/" 
+        title="searchsploit">
+        <div class="tags-list-item">searchsploit</div>
+      </a>
+    
+      <a 
+        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
+        title="脏牛提权">
+        <div class="tags-list-item">脏牛提权</div>
+      </a>
+    
+      <a 
+        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
+        title="SSH爆破">
+        <div class="tags-list-item">SSH爆破</div>
+      </a>
+    
+      <a 
         href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" 
         title="代码审计">
         <div class="tags-list-item">代码审计</div>
@@ -770,39 +788,21 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
       </a>
     
       <a 
-        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
-        title="SSH爆破">
-        <div class="tags-list-item">SSH爆破</div>
+        href="/tags/ftp/" 
+        title="ftp">
+        <div class="tags-list-item">ftp</div>
       </a>
     
       <a 
-        href="/tags/searchsploit/" 
-        title="searchsploit">
-        <div class="tags-list-item">searchsploit</div>
+        href="/tags/smb/" 
+        title="smb">
+        <div class="tags-list-item">smb</div>
       </a>
     
       <a 
-        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
-        title="脏牛提权">
-        <div class="tags-list-item">脏牛提权</div>
-      </a>
-    
-      <a 
-        href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" 
-        title="内网渗透">
-        <div class="tags-list-item">内网渗透</div>
-      </a>
-    
-      <a 
-        href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA/" 
-        title="红日靶场">
-        <div class="tags-list-item">红日靶场</div>
-      </a>
-    
-      <a 
-        href="/tags/redis/" 
-        title="redis">
-        <div class="tags-list-item">redis</div>
+        href="/tags/http-methods/" 
+        title="http-methods">
+        <div class="tags-list-item">http-methods</div>
       </a>
     
   </div>
@@ -838,6 +838,11 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-07-27</div>
+        <a href="/16ea64ee.html"><div class="recent-posts-item-content">Vulnhub|MORPHEUS</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-11-29</div>
         <a href="/6fe81bcd.html"><div class="recent-posts-item-content">红日靶场1</div></a>
       </div>
@@ -850,11 +855,6 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-07-18</div>
         <a href="/5821439b.html"><div class="recent-posts-item-content">Vulhub|Nginx集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-07-18</div>
-        <a href="/386f84ef.html"><div class="recent-posts-item-content">Vulhub|Tomcat集合</div></a>
       </div>
     
   </div>
@@ -876,7 +876,7 @@ Catchable fatal error<span class="token punctuation">:</span> <span class="token
         <span>
           Copyright ©
           
-          2022
+          2023
         </span>
         &nbsp;
         <a 

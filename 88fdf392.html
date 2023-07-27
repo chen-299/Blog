@@ -49,7 +49,7 @@
         content="2022-01-19">
       <meta 
         property="og:article:modified_time" 
-        content="2022-03-08">
+        content="2022-07-21">
       <meta 
         property="og:article:author" 
         content="CBear">
@@ -325,7 +325,7 @@
     
     
       <span class="dot"></span>
-      <span>305 words</span>
+      <span>349 words</span>
     
   </div>
   
@@ -356,35 +356,35 @@
 <p><code>su</code> ： 仅切换身份。<br><code>su -</code> ： 身份与$PATH工作路径都切换。<br><code>su</code> 和 <code>su-</code> 最大的本质区别就是：前者只是切换了root身份，但Shell环境仍然是普通用户的Shell；而后者连用户和Shell环境一起切换成root身份了。（可通过<code>pwd</code> 和 <code>$PATH</code> 查看区别）</p>
 </blockquote>
 <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">// 查看 docker 守护进程运行状态  
-<span class="token function">service</span> docker status  
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&#x2F;&#x2F; 查看 docker 守护进程运行状态  
+service docker status  
 
-// 启动/关闭/重启 docker 守护进程
-<span class="token function">service</span> docker start/stop/restart  
+&#x2F;&#x2F; 启动&#x2F;关闭&#x2F;重启 docker 守护进程
+service docker start&#x2F;stop&#x2F;restart  
 
-// 返回所有容器和镜像的数量、docker使用的执行程序和存储驱动，以及docker的基本配置信息  
+&#x2F;&#x2F; 返回所有容器和镜像的数量、docker使用的执行程序和存储驱动，以及docker的基本配置信息  
 docker info  
 
-// 显示正在运行的容器  
-docker <span class="token function">ps</span>  
-docker container <span class="token function">ls</span>  
+&#x2F;&#x2F; 显示正在运行的容器  
+docker ps  
+docker container ls  
 
-// 显示已安装的容器
-docker <span class="token function">ps</span> -a
+&#x2F;&#x2F; 显示已安装的容器
+docker ps -a
 
-// 查看某容器所有状态信息<span class="token punctuation">(</span>ip<span class="token punctuation">..</span>.<span class="token punctuation">)</span>
-docker inspect <span class="token punctuation">[</span>docker_name 或 docker_id<span class="token punctuation">]</span>
+&#x2F;&#x2F; 查看某容器所有状态信息(ip...)
+docker inspect [docker_name 或 docker_id]
 
-// 在已经启动的容器内部运行进程  
-docker <span class="token builtin class-name">exec</span> -it <span class="token punctuation">[</span>docker_name 或 docker_id<span class="token punctuation">]</span> /bin/bash //创建tty终端，捕捉STDIN，在容器内启动一个交互式命令  
-docker <span class="token builtin class-name">exec</span> -d docker_name/docker_id <span class="token function">touch</span> /home/test.txt //-d表示后台进程，在指定容器中运行一个后台进程<span class="token string">'touch /home/test.txt'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#x2F;&#x2F; 在已经启动的容器内部运行进程  
+docker exec -it [docker_name 或 docker_id] &#x2F;bin&#x2F;bash &#x2F;&#x2F;创建tty终端，捕捉STDIN，在容器内启动一个交互式命令  
+docker exec -d docker_name&#x2F;docker_id touch &#x2F;home&#x2F;test.txt &#x2F;&#x2F;-d表示后台进程，在指定容器中运行一个后台进程&#39;touch &#x2F;home&#x2F;test.txt&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </blockquote>
 <h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">// 切换java版本  
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&#x2F;&#x2F; 切换java版本  
 update-alternatives --config java
 
-// 设置java版本优先级  
-update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bin/java <span class="token number">1110</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#x2F;&#x2F; 设置java版本优先级  
+update-alternatives --install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;local&#x2F;java&#x2F;jdk1.8.0_311&#x2F;bin&#x2F;java 1110    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </blockquote>
 
   </div>
@@ -475,7 +475,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
   <a 
     class="author-posts-count" 
     href="/archives">
-    <span>40</span>
+    <span>41</span>
     <span>Posts</span>
   </a>
   <a 
@@ -487,7 +487,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>51</span>
+    <span>54</span>
     <span>Tags</span>
   </a>
 </div>
@@ -535,23 +535,23 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
   </div>
   <div class="categories-list">
     
+      <a href="/categories/Linux/">
+        <div class="categories-list-item">
+          Linux
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
       <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">
         <div class="categories-list-item">
           渗透测试
-          <span class="categories-list-item-badge">33</span>
+          <span class="categories-list-item-badge">34</span>
         </div>
       </a>
     
       <a href="/categories/SQL/">
         <div class="categories-list-item">
           SQL
-          <span class="categories-list-item-badge">1</span>
-        </div>
-      </a>
-    
-      <a href="/categories/Linux/">
-        <div class="categories-list-item">
-          Linux
           <span class="categories-list-item-badge">1</span>
         </div>
       </a>
@@ -634,6 +634,24 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
       </a>
     
       <a 
+        href="/tags/searchsploit/" 
+        title="searchsploit">
+        <div class="tags-list-item">searchsploit</div>
+      </a>
+    
+      <a 
+        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
+        title="脏牛提权">
+        <div class="tags-list-item">脏牛提权</div>
+      </a>
+    
+      <a 
+        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
+        title="SSH爆破">
+        <div class="tags-list-item">SSH爆破</div>
+      </a>
+    
+      <a 
         href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" 
         title="代码审计">
         <div class="tags-list-item">代码审计</div>
@@ -652,39 +670,21 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
       </a>
     
       <a 
-        href="/tags/SSH%E7%88%86%E7%A0%B4/" 
-        title="SSH爆破">
-        <div class="tags-list-item">SSH爆破</div>
+        href="/tags/ftp/" 
+        title="ftp">
+        <div class="tags-list-item">ftp</div>
       </a>
     
       <a 
-        href="/tags/searchsploit/" 
-        title="searchsploit">
-        <div class="tags-list-item">searchsploit</div>
+        href="/tags/smb/" 
+        title="smb">
+        <div class="tags-list-item">smb</div>
       </a>
     
       <a 
-        href="/tags/%E8%84%8F%E7%89%9B%E6%8F%90%E6%9D%83/" 
-        title="脏牛提权">
-        <div class="tags-list-item">脏牛提权</div>
-      </a>
-    
-      <a 
-        href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" 
-        title="内网渗透">
-        <div class="tags-list-item">内网渗透</div>
-      </a>
-    
-      <a 
-        href="/tags/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA/" 
-        title="红日靶场">
-        <div class="tags-list-item">红日靶场</div>
-      </a>
-    
-      <a 
-        href="/tags/redis/" 
-        title="redis">
-        <div class="tags-list-item">redis</div>
+        href="/tags/http-methods/" 
+        title="http-methods">
+        <div class="tags-list-item">http-methods</div>
       </a>
     
   </div>
@@ -720,6 +720,11 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-07-27</div>
+        <a href="/16ea64ee.html"><div class="recent-posts-item-content">Vulnhub|MORPHEUS</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-11-29</div>
         <a href="/6fe81bcd.html"><div class="recent-posts-item-content">红日靶场1</div></a>
       </div>
@@ -732,11 +737,6 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-07-18</div>
         <a href="/5821439b.html"><div class="recent-posts-item-content">Vulhub|Nginx集合</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-07-18</div>
-        <a href="/386f84ef.html"><div class="recent-posts-item-content">Vulhub|Tomcat集合</div></a>
       </div>
     
   </div>
@@ -758,7 +758,7 @@ update-alternatives --install /usr/bin/java java /usr/local/java/jdk1.8.0_311/bi
         <span>
           Copyright ©
           
-          2022
+          2023
         </span>
         &nbsp;
         <a 
